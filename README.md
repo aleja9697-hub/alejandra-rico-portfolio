@@ -6,8 +6,7 @@ Static portfolio site for Alejandra Rico Gómez, graphic designer. Plain HTML, C
 
 - `site/` the complete, ready-to-publish website (this folder is what gets hosted)
 - `content/site.mjs` all text: bio, experience, projects, captions, links
-- `content/images.json` image sizes used for layout
-- `build.mjs` regenerates the HTML in `site/` from `content/site.mjs`
+- `build.mjs` regenerates the HTML in `site/` from `content/site.mjs` and reads image sizes automatically (Vercel runs it on every publish)
 - `site/assets/styles.css` all styling
 - `site/img/<project>/` project images (WebP)
 - `tools/prepare_images.py` one-time script used to extract images from the PDF portfolio (not needed for edits)
@@ -20,9 +19,9 @@ Static portfolio site for Alejandra Rico Gómez, graphic designer. Plain HTML, C
 
 ## Add or replace images
 
-Put WebP or JPG files in `site/img/<project-slug>/` named `01.webp`, `02.webp`, ... and update the width and height for that project in `content/images.json`. Then set the `gallery` rows in `content/site.mjs` and run `node build.mjs`.
+Put WebP, JPG or PNG files in `site/img/<project-slug>/` named `01`, `02`, ... (same names replace the old image; sizes are read automatically). To add or remove images, also update the `gallery` rows and `alts` for that project in `content/site.mjs`.
 
 ## Hosting
 
-- Vercel: `vercel.json` publishes the `site/` folder, no build step.
+- Vercel: `vercel.json` runs `node build.mjs` and publishes the `site/` folder. Every change pushed to GitHub publishes automatically.
 - Netlify, GitHub Pages, Cloudflare Pages or any web host: upload the contents of `site/`.

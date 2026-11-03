@@ -2,7 +2,7 @@
 //  ALEJANDRA RICO PORTFOLIO: ALL EDITABLE CONTENT LIVES IN THIS FILE
 //  After editing, run:  node build.mjs   (rebuilds the /site folder)
 //  Images live in /site/img/<project-slug>/ (01.webp, 02.webp, ...)
-//  Image sizes are listed in content/images.json (used for layout).
+//  Image sizes are read automatically from the files.
 // =====================================================================
 
 export const site = {
