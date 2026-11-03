@@ -29,6 +29,9 @@ const images = {};
 for (const d of readdirSync(IMG_DIR, { withFileTypes: true })) {
   if (!d.isDirectory()) continue;
   const files = readdirSync(new URL(d.name + '/', IMG_DIR)).filter((f) => /^(\d+|cover)\.(webp|jpe?g|png)$/i.test(f)).sort();
+  const stems = files.map((f) => f.replace(/\.[^.]+$/, ''));
+  const dup = stems.find((x, i) => stems.indexOf(x) !== i);
+  if (dup) throw new Error(`img/${d.name} has two files named ${dup} with different extensions. Delete the old one so only one ${dup} remains.`);
   images[d.name] = files.map((f) => {
     const size = imageSize(readFileSync(new URL(d.name + '/' + f, IMG_DIR)));
     if (!size) throw new Error(`Cannot read the size of img/${d.name}/${f}. Use a normal .webp, .jpg or .png file.`);
