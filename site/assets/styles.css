@@ -16,6 +16,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Obviously';
+  src: url('./fonts/fonnts.com-Obviously.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 :root {
   --forest: #1f543b;
   --forest-deep: #163f2c;
@@ -614,4 +621,22 @@ a { color: inherit; }
 
 @media (max-width: 360px) {
   .project-meta { grid-template-columns: 1fr; }
+}
+
+/* OBVIOUSLY REGULAR - TEXTOS INFERIORES */
+
+.hero-copy-box,
+.hero-info-box {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  color: #F3E5D7;
+}
+
+.hero-copy-box .hero-statement,
+.hero-info-box .fact-card dt,
+.hero-info-box .fact-card dd,
+.hero-info-box .fact-card a {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  color: #F3E5D7;
 }
