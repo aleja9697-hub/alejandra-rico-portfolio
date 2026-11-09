@@ -917,3 +917,17 @@ a { color: inherit; }
 .hero .hero-name-box .hero-name {
   font-size: calc(100cqi / 12.5);
 }
+
+/* BANNER GRAFICO ENTRE HERO Y WORK */
+
+.hero-band {
+  width: 100%;
+  background: #1F543B;
+  overflow: hidden;
+}
+
+.hero-band img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
