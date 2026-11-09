@@ -659,22 +659,12 @@ a { color: inherit; }
 
 /* Cuadricula solamente detras del nombre */
 .hero-name-box {
-  background-color: #194B38;
-  background-image:
-    linear-gradient(
-      rgba(243, 229, 215, 0.14) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(243, 229, 215, 0.14) 1px,
-      transparent 1px
-    );
-  background-size: 38px 38px;
-  border: 2px solid #1AAA71;
-  border-radius: 26px;
-  padding: clamp(10px, 1.5vw, 20px);
-  overflow: hidden;
+  background: none;
+  background-image: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
 }
 
 /* Mantener Stretch Pro dentro del recuadro */
