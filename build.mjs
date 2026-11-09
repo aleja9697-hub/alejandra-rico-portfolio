@@ -162,19 +162,38 @@ ${row
     .join('\n');
 
   const portrait = images.about[0];
-  const body = `<section class="hero" id="top">
+
+const body = `<section class="hero" id="top">
   <div class="wrap">
-    <h1 class="hero-name" aria-label="Alejandra Rico"><span class="line"><span aria-hidden="true">ALEJANNDRA</span></span><span class="line"><span aria-hidden="true">RICCO</span>${spark}</span></h1>
+    <div class="hero-name-box">
+      <h1 class="hero-name" aria-label="Alejandra Rico"><span class="line"><span aria-hidden="true">ALLEJANNDRA</span></span><span class="line"><span aria-hidden="true">RICCO</span>${spark}</span></h1>
+    </div>
+
     <div class="hero-foot">
-      <p class="hero-statement">${esc(site.heroStatement)}</p>
-      <dl class="hero-facts">
-        <div><dt>Focus</dt><dd>Identity, editorial, social, web</dd></div>
-        <div><dt>Based in</dt><dd>${esc(site.location)}</dd></div>
-        <div><dt>Contact</dt><dd><a href="mailto:${esc(site.email)}">${esc(site.email)}</a></dd></div>
-      </dl>
+      <div class="hero-copy-box">
+        <p class="hero-statement">${esc(site.heroStatement)}</p>
+      </div>
+
+      <div class="hero-info-box">
+        <dl class="hero-facts">
+          <div class="fact-card fact-focus">
+            <dt>Focus</dt>
+            <dd>Identity, editorial, social, web</dd>
+          </div>
+          <div class="fact-card fact-based">
+            <dt>Based in</dt>
+            <dd>${esc(site.location)}</dd>
+          </div>
+          <div class="fact-card fact-contact">
+            <dt>Contact</dt>
+            <dd><a href="mailto:${esc(site.email)}">${esc(site.email)}</a></dd>
+          </div>
+        </dl>
+      </div>
     </div>
   </div>
 </section>
+
 
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
