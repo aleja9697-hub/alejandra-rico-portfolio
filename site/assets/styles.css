@@ -867,3 +867,47 @@ a { color: inherit; }
     gap: 24px;
   }
 }
+
+
+/* AJUSTE DE LINEAS Y DESCRIPCION */
+
+/* Linea vertical entre descripcion e informacion */
+.hero-foot {
+  position: relative;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  column-gap: 0;
+  align-items: start;
+}
+
+.hero-copy-box {
+  padding-right: 36px;
+  border-right: 1px solid rgba(243, 229, 215, 0.22);
+}
+
+.hero-info-box {
+  padding-left: 36px;
+}
+
+/* Descripcion ligeramente mas pequena */
+.hero-copy-box .hero-statement {
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+  color: #F3E5D7;
+}
+
+/* En celular, eliminar la linea vertical */
+@media (max-width: 760px) {
+  .hero-foot {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .hero-copy-box {
+    padding-right: 0;
+    border-right: none;
+  }
+
+  .hero-info-box {
+    padding-left: 0;
+  }
+}
