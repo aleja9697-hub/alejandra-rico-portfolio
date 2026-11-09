@@ -604,7 +604,7 @@ a { color: inherit; }
 
 .is-home .header-inner {
   background: #1AAA71;
-  color: #82264F;
+  color: #1F543B;
   font-family: 'Obviously', sans-serif;
   font-weight: 900;
   border-radius: 16px;
@@ -614,7 +614,7 @@ a { color: inherit; }
 
 .is-home .brand,
 .is-home .nav a {
-  color: #82264F;
+  color: #1F543B;
   font-family: 'Obviously', sans-serif;
   font-weight: 900;
 }
@@ -639,4 +639,11 @@ a { color: inherit; }
   font-family: 'Obviously', sans-serif;
   font-weight: 400;
   color: #F3E5D7;
+}
+
+/* OCULTAR ESTRELLAS EN LA PORTADA */
+
+.is-home .brand .spark,
+.hero-name .spark {
+  display: none;
 }
