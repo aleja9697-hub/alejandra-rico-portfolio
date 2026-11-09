@@ -948,9 +948,8 @@ a { color: inherit; }
 .hero-band img {
   display: block;
   width: 100%;
-  height: clamp(90px, 8vw, 145px);
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
 }
 
 @media (max-width: 760px) {
@@ -959,7 +958,4 @@ a { color: inherit; }
     padding-bottom: 24px;
   }
 
-  .hero-band img {
-    height: 90px;
-  }
 }
