@@ -9,6 +9,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Obviously';
+  src: url('./fonts/fonnts.com-Obviously_Blck.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 :root {
   --forest: #1f543b;
   --forest-deep: #163f2c;
@@ -580,6 +587,29 @@ a { color: inherit; }
   .nav { gap: 0; }
   .nav a { font-size: 0.9rem; }
   .brand span { font-size: 0.95rem; }
+}
+/* MENU SUPERIOR - OBVIOUSLY */
+
+.is-home .site-header {
+  background: var(--forest);
+  padding-top: 12px;
+}
+
+.is-home .header-inner {
+  background: #1AAA71;
+  color: #82264F;
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
+  border-radius: 16px;
+  padding-inline: 24px;
+  min-height: 66px;
+}
+
+.is-home .brand,
+.is-home .nav a {
+  color: #82264F;
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
 }
 
 @media (max-width: 360px) {
