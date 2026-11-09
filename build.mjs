@@ -194,6 +194,9 @@ const body = `<section class="hero" id="top">
   </div>
 </section>
 
+<div class="hero-band">
+  <img src="/img/Banner%201.svg" alt="Graphic design portfolio banner" />
+</div>
 
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
