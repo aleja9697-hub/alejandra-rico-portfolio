@@ -585,3 +585,21 @@ a { color: inherit; }
 @media (max-width: 360px) {
   .project-meta { grid-template-columns: 1fr; }
 }
+
+/* GRID BACKGROUND - HERO */
+
+.hero {
+  background-color: var(--forest);
+  background-image:
+    linear-gradient(
+      rgba(243, 229, 215, 0.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(243, 229, 215, 0.12) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+  background-position: center top;
+}
