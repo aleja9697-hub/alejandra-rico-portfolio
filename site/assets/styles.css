@@ -158,7 +158,7 @@ a { color: inherit; }
   font-stretch: normal;
   font-weight: 400;
   text-transform: uppercase;
-  font-size: calc(100cqi / 10.5);
+  font-size: calc(100cqi / 12.5);
   line-height: 0.95;
   letter-spacing: 0;
   color: var(--on-forest);
