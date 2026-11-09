@@ -164,7 +164,7 @@ ${row
   const portrait = images.about[0];
   const body = `<section class="hero" id="top">
   <div class="wrap">
-    <h1 class="hero-name" aria-label="Alejandra Rico"><span class="line"><span aria-hidden="true">ALLEJANNDRA</span></span><span class="line"><span aria-hidden="true">RICCO</span>${spark}</span></h1>
+    <h1 class="hero-name" aria-label="Alejandra Rico"><span class="line"><span aria-hidden="true">ALEJANNDRA</span></span><span class="line"><span aria-hidden="true">RICCO</span>${spark}</span></h1>
     <div class="hero-foot">
       <p class="hero-statement">${esc(site.heroStatement)}</p>
       <dl class="hero-facts">
