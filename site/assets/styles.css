@@ -911,3 +911,19 @@ a { color: inherit; }
     padding-left: 0;
   }
 }
+
+/* ELIMINAR CUADRICULA Y RECUADRO DEL NOMBRE */
+
+.hero .hero-name-box {
+  background: transparent;
+  background-image: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+/* Recuperar el tamaño original de Stretch Pro */
+.hero .hero-name-box .hero-name {
+  font-size: calc(100cqi / 12.5);
+}
