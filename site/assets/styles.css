@@ -931,3 +931,35 @@ a { color: inherit; }
   width: 100%;
   height: auto;
 }
+
+/* AJUSTE RESPONSIVE DE PORTADA Y BANNER */
+
+.hero {
+  padding-top: clamp(24px, 3vw, 48px);
+  padding-bottom: clamp(24px, 3vw, 48px);
+}
+
+.hero-band {
+  width: 100%;
+  overflow: hidden;
+  background: #1AAA71;
+}
+
+.hero-band img {
+  display: block;
+  width: 100%;
+  height: clamp(90px, 8vw, 145px);
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .hero-band img {
+    height: 90px;
+  }
+}
