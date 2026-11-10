@@ -1060,3 +1060,13 @@ a { color: inherit; }
   object-fit: contain;
   flex-shrink: 0;
 }
+
+/* AJUSTE FINAL DE BOTONES SELECTED WORK */
+
+.work .work-badge-img {
+  height: 20px !important;
+  width: auto !important;
+  max-width: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
