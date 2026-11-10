@@ -959,3 +959,23 @@ a { color: inherit; }
   }
 
 }
+
+/* NUEVA PORTADA CON IMAGEN */
+
+.hero.hero-image-section {
+  background: #1F543B;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
