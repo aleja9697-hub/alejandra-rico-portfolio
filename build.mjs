@@ -176,7 +176,7 @@ src="/img/Home1.png"
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="work-title" class="section-title">Selected work</h2>
+      <h2 id="work-title" class="section-title work-custom-title">SEELECTED WOORK</h2>
       <p class="section-note">${count} projects in visual identity, editorial, social media and web, 2024 to 2026.</p>
     </div>
 ${rows}
