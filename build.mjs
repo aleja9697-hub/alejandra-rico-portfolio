@@ -167,7 +167,7 @@ ${row
 const body = `<section class="hero hero-image-section" id="top">
   <div class="hero-image">
     <img
-      src="/img/Sin%20t%C3%ADtulo-1.png"
+src="/img/Home1.png"
       alt="Alejandra Rico — Graphic Designer. Visual identity, editorial and social media design."
     />
   </div>
