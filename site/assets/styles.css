@@ -979,3 +979,36 @@ a { color: inherit; }
   width: 100%;
   height: auto;
 }
+
+
+/* SELECTED WORK - NUEVA TIPOGRAFIA */
+
+.work .work-custom-title {
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  color: #1F543B;
+  font-size: clamp(2rem, 5vw, 5.5rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  max-width: 100%;
+}
+
+/* Descripcion de los 10 proyectos */
+
+.work .section-note {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  color: #1F543B;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  line-height: 1.5;
+}
+
+/* Adaptacion a celulares */
+
+@media (max-width: 760px) {
+  .work .work-custom-title {
+    font-size: clamp(1.5rem, 6vw, 3rem);
+  }
+}
