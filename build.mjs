@@ -139,6 +139,11 @@ function picture(im, alt, { sizes = '100vw', eager = false, cls = '', style = ''
 function home() {
   const root = '';
   const count = projects.length;
+  const badgeMap = {
+  'al-centro': '/img/btn-visual-identity-2024.svg',
+  'mandato-centro': '/img/btn-editorial-design-2024.svg'
+};
+
   const rows = homeRows
     .map(
       (row) => `<div class="work-row">
@@ -147,12 +152,18 @@ ${row
     const p = bySlug[slug];
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
     const c = coverOf(p);
+    const badgeSrc = badgeMap[slug];
     const alt = p.coverImage ? `${p.title}: a selection of posts` : (p.alts?.[(p.cover || 1) - 1] || p.title);
     return `  <a class="work-item span-${span}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
     <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}</span>
     <span class="work-caption">
-      <span class="work-title">${esc(p.shortTitle || p.title)}</span>
-      <span class="work-meta"><span>${esc(p.discipline)}</span><span>${esc(p.year)}</span></span>
+      <span class="work-title">${esc(p.shortTitle || p.title)}</span>   
+<span class="work-meta">
+  ${badgeSrc
+    ? `<img class="work-badge-img" src="${badgeSrc}" alt="${esc(p.discipline)} - ${esc(p.year)}">`
+    : `<span>${esc(p.discipline)}</span><span>${esc(p.year)}</span>`
+  }
+</span>
     </span>
   </a>`;
   })
