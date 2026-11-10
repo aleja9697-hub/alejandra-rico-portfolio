@@ -1012,3 +1012,14 @@ a { color: inherit; }
     font-size: clamp(1.5rem, 6vw, 3rem);
   }
 }
+
+
+/* SELECTED WORK - TITULOS DE PROYECTOS */
+
+.work .work-title {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
+  color: #1F543B;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  line-height: 1.25;
+}
