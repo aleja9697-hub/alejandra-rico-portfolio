@@ -117,6 +117,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ABOUT: contar resultados cuando aparecen por primera vez.
+  const impactValues = [...document.querySelectorAll(".about .impact-value")];
+  const animateNumber = (element) => {
+    if (element.dataset.counted === "true") return;
+    element.dataset.counted = "true";
+    const original = element.textContent.trim();
+    const match = original.match(/^([\d,]+)(.*)$/);
+    if (!match) return;
+    const target = Number(match[1].replaceAll(",", ""));
+    const suffix = match[2];
+    if (!Number.isFinite(target) || reduceMotion) return;
+
+    const started = performance.now();
+    const duration = 1500;
+    const formatter = new Intl.NumberFormat("en-US");
+    const tick = (now) => {
+      const progress = Math.min((now - started) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = formatter.format(Math.round(target * eased)) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+      else element.textContent = original;
+    };
+    requestAnimationFrame(tick);
+  };
+
+  // ABOUT: los cargos reciben un barrido verde, como Selected Work.
+  const roleTitles = [...document.querySelectorAll(".about .exp-role")];
+  if (reduceMotion || !supportsObserver) {
+    roleTitles.forEach(el => el.classList.add("is-highlighted"));
+  } else {
+    const aboutObserver = new IntersectionObserver((entries, observer) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        if (entry.target.matches(".impact-value")) animateNumber(entry.target);
+        else entry.target.classList.add("is-highlighted");
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.35, rootMargin: "0px 0px -8% 0px" });
+    [...impactValues, ...roleTitles].forEach(el => aboutObserver.observe(el));
+  }
+
   const items = [...document.querySelectorAll(".work .work-item")];
   if (reduceMotion || !supportsObserver || items.length === 0) return;
 
