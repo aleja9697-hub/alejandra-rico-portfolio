@@ -3,52 +3,67 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const supportsObserver = "IntersectionObserver" in window;
 
-  // Mostrar el menu cuando se sube; ocultarlo al bajar.
+  // Barra fija que aparece al subir y desaparece al bajar.
   const header = document.querySelector(".site-header");
   if (header) {
-    let lastY = Math.max(0, window.scrollY);
-    let movement = 0;
-    let direction = 0;
-    let pending = false;
+    const spacer = document.createElement("div");
+    spacer.className = "site-header-spacer";
+    spacer.setAttribute("aria-hidden", "true");
+    header.insertAdjacentElement("afterend", spacer);
 
-    const updateHeader = () => {
-      pending = false;
-      const y = Math.max(0, window.scrollY);
-      const delta = y - lastY;
-      lastY = y;
+    const syncHeaderHeight = () => {
+      spacer.style.height = header.getBoundingClientRect().height + "px";
+    };
+    syncHeaderHeight();
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(syncHeaderHeight).observe(header);
+    } else {
+      window.addEventListener("resize", syncHeaderHeight, { passive: true });
+    }
 
-      if (y <= 8) {
+    let previousY = Math.max(0, window.scrollY);
+    let distance = 0;
+    let previousDirection = 0;
+    let queued = false;
+
+    const handleScroll = () => {
+      queued = false;
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - previousY;
+      previousY = currentY;
+
+      if (currentY <= 10) {
         header.classList.remove("is-header-hidden");
-        movement = 0;
-        direction = 0;
+        previousDirection = 0;
+        distance = 0;
         return;
       }
-
-      // Ignorar oscilaciones minimas de trackpads y pantallas tactiles.
       if (Math.abs(delta) < 1) return;
-      const nextDirection = delta > 0 ? 1 : -1;
-      if (direction !== nextDirection) {
-        direction = nextDirection;
-        movement = 0;
+      const direction = delta > 0 ? 1 : -1;
+      if (direction !== previousDirection) {
+        previousDirection = direction;
+        distance = 0;
       }
-      movement += Math.abs(delta);
+      distance += Math.abs(delta);
+      if (distance < 6) return;
+      distance = 0;
 
-      if (movement < 8) return;
-      if (nextDirection > 0 && y > header.offsetHeight) {
+      if (direction > 0 && currentY > header.offsetHeight) {
         header.classList.add("is-header-hidden");
-      } else if (nextDirection < 0) {
+      } else if (direction < 0) {
         header.classList.remove("is-header-hidden");
       }
-      movement = 0;
     };
-
     window.addEventListener("scroll", () => {
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(updateHeader);
-      }
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(handleScroll);
     }, { passive: true });
-    window.addEventListener("pageshow", updateHeader);
+    window.addEventListener("pageshow", () => {
+      previousY = Math.max(0, window.scrollY);
+      header.classList.toggle("is-header-hidden", previousY > header.offsetHeight);
+      syncHeaderHeight();
+    });
   }
 
   // Conservar el titulo en una sola linea.
