@@ -155,7 +155,7 @@ ${row
     const badgeSrc = badgeMap[slug];
     const alt = p.coverImage ? `${p.title}: a selection of posts` : (p.alts?.[(p.cover || 1) - 1] || p.title);
     return `  <a class="work-item span-${span}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
-    <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}</span>
+    <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, eager: slug === 'al-centro' || slug === 'mandato-centro', style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}</span>
     <span class="work-caption">
       <span class="work-title">${esc(p.shortTitle || p.title)}</span>   
 <span class="work-meta">
