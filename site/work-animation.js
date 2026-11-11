@@ -98,6 +98,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Lente de hover: revelar una imagen distinta siguiendo el cursor.
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    for (const media of document.querySelectorAll(".work .work-media:has(.work-lens-image)")) {
+      const setPosition = (event) => {
+        const bounds = media.getBoundingClientRect();
+        media.style.setProperty("--lens-x", (event.clientX - bounds.left) + "px");
+        media.style.setProperty("--lens-y", (event.clientY - bounds.top) + "px");
+      };
+      media.addEventListener("pointerenter", (event) => {
+        setPosition(event);
+        media.classList.add("is-lens-active");
+      });
+      media.addEventListener("pointermove", setPosition);
+      media.addEventListener("pointerleave", () => {
+        media.classList.remove("is-lens-active");
+      });
+    }
+  }
+
   const items = [...document.querySelectorAll(".work .work-item")];
   if (reduceMotion || !supportsObserver || items.length === 0) return;
 
