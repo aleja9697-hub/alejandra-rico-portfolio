@@ -1222,3 +1222,34 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transition: none; }
 }
+
+/* Lente circular: revela una segunda fotografia sin ampliar la portada. */
+.work .work-media:has(.work-lens-image) {
+  position: relative;
+}
+.work .work-lens-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: none !important;
+  clip-path: circle(0px at var(--lens-x, 50%) var(--lens-y, 50%));
+  transition: clip-path 180ms ease-out;
+  pointer-events: none;
+  will-change: clip-path;
+}
+@media (hover: hover) and (pointer: fine) {
+  .work .work-media:has(.work-lens-image) > img:first-child {
+    transform: none;
+  }
+  .work .work-media.is-lens-active .work-lens-image {
+    clip-path: circle(min(115px, 26%) at var(--lens-x, 50%) var(--lens-y, 50%));
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .work .work-lens-image { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work .work-lens-image { transition: none; }
+}
