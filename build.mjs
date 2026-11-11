@@ -152,10 +152,13 @@ ${row
     const p = bySlug[slug];
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
     const c = coverOf(p);
+    // Mostrar otra imagen real del mismo proyecto dentro de la lente.
+    const alternateNumber = p.gallery?.flat().find((n) => n !== (p.cover || 1));
+    const alternate = alternateNumber ? img(p.slug, alternateNumber) : null;
     const badgeSrc = badgeMap[slug];
     const alt = p.coverImage ? `${p.title}: a selection of posts` : (p.alts?.[(p.cover || 1) - 1] || p.title);
     return `  <a class="work-item span-${span}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
-    <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, eager: slug === 'al-centro' || slug === 'mandato-centro', style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}</span>
+    <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, eager: slug === 'al-centro' || slug === 'mandato-centro', style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}${alternate ? `<img class="work-lens-image" src="${alternate.src}" width="${alternate.w}" height="${alternate.h}" alt="" aria-hidden="true" loading="lazy" decoding="async">` : ''}</span>
     <span class="work-caption">
       <span class="work-title">${esc(p.shortTitle || p.title)}</span>   
 <span class="work-meta">
