@@ -86,7 +86,7 @@ function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
 <link rel="stylesheet" href="${root}assets/styles.css">
-</head>
+<script src="${root}work-animation.js" defer></script></head>
 <body class="${bodyClass}">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
