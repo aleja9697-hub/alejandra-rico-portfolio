@@ -1200,17 +1200,25 @@ a { color: inherit; }
   .work .work-highlight-reveal { transition: none; }
 }
 
-/* Barra superior: visible al subir, oculta al bajar */
+/* Barra superior fija: visible al subir, oculta al bajar */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: transform 0.28s ease;
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  z-index: 1000;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
   will-change: transform;
 }
 .site-header.is-header-hidden {
-  transform: translateY(-100%);
+  transform: translateY(-105%);
 }
+/* El espacio del menu conserva el lugar de la portada y los proyectos. */
+.site-header-spacer {
+  height: 68px;
+  pointer-events: none;
+}
+.is-home .site-header-spacer { height: 90px; }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transition: none; }
 }
