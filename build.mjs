@@ -95,7 +95,7 @@ function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
     <nav aria-label="Main">
       <ul class="nav">
         <li><a href="${root}#work">Work</a></li>
-        <li><a href="${root}#about">About</a></li>
+        <li><a href="${root}about/">About</a></li>
         <li><a href="${root}#contact">Contact</a></li>
       </ul>
     </nav>
@@ -197,65 +197,42 @@ ${rows}
   </div>
 </section>
 
-<section class="about" id="about" aria-labelledby="about-title">
+<section class="about about-teaser" id="about" aria-labelledby="about-title">
   <div class="wrap about-grid">
     <figure class="about-portrait">
       ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 80vw, 30vw' })}
     </figure>
     <div class="about-body">
       <h2 id="about-title" class="section-title">About</h2>
-      ${site.about.map((p, i) => `<p${i === 0 ? ' class="lede"' : ''}>${esc(p)}</p>`).join('\n      ')}
+      <p class="lede">${esc(site.about[0])}</p>
+      <a class="about-cta" href="about/">Get to know me <span aria-hidden="true">↗</span></a>
     </div>
-  </div>
-
-  <div class="wrap impact-wrap">
-    <h3 class="cv-title">Results</h3>
-    <dl class="impact">
-      ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
-    </dl>
-  </div>
-
-  <div class="wrap cv">
-    <div class="cv-block cv-experience">
-      <h3 class="cv-title">Experience</h3>
-      <ol class="exp-list">
-        ${site.experience
-          .map(
-            (e) => `<li class="exp">
-          <p class="exp-role"><span class="exp-role-base">${esc(e.role)}</span><span class="exp-role-highlight" aria-hidden="true">${esc(e.role)}</span></p>
-          <p class="exp-org">${esc(e.org)}, ${esc(e.place)}</p>
-          <ul>${e.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>
-        </li>`
-          )
-          .join('\n        ')}
-      </ol>
-    </div>
-    <div class="cv-side">
-      <div class="cv-block">
-        <h3 class="cv-title">Education</h3>
-        <ul class="plain-list">
-          ${site.education.map((e) => `<li><span class="strong">${esc(e.title)}</span><span>${esc(e.org)}${e.note ? `, ${esc(e.note)}` : ''}</span></li>`).join('\n          ')}
-        </ul>
-      </div>
-      <div class="cv-block">
-        <h3 class="cv-title">Tools</h3>
-        <p class="tool-line">${site.tools.map(esc).join(', ')}</p>
-      </div>
-      <div class="cv-block">
-        <h3 class="cv-title">Languages</h3>
-        <p class="tool-line">${site.languages.map(esc).join('<br>')}</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap capabilities">
-    <h3 class="cv-title">What I do</h3>
-    <dl class="cap-list">
-      ${site.capabilities.map((c) => `<div class="cap"><dt>${esc(c.title)}</dt><dd>${esc(c.text)}</dd></div>`).join('\n      ')}
-    </dl>
   </div>
 </section>`;
   return layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
+}
+
+// ---------------- About page ----------------
+function aboutPage() {
+  const root = '../';
+  const portrait = images.about[0];
+  const body = `<section class="about about-detail" id="about" aria-labelledby="about-title">
+    <div class="wrap about-detail-intro">
+      <a class="about-back" href="../#about">← Back to home</a>
+      <span class="about-eyebrow">The person behind the work</span>
+      <h1 id="about-title" class="section-title">More about me</h1>
+      <div class="about-detail-lead">
+        <figure class="about-portrait">
+          ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 85vw, 32vw', eager: true })}
+        </figure>
+        <div class="about-detail-copy">
+          ${site.about.slice(1).map(p => `<p>${esc(p)}</p>`).join('\n          ')}
+        </div>
+      </div>
+    </div>
+${rest}
+  </section>`;
+  return layout({ title: 'About', description: site.about.join(' '), root, body, bodyClass: 'is-about' }).replaceAll('{ROOT}', root);
 }
 
 // ---------------- Project page ----------------
@@ -369,11 +346,12 @@ const write = (rel, html) => {
 };
 if (existsSync(new URL('work/', OUT))) rmSync(new URL('work/', OUT), { recursive: true });
 write('index.html', home());
+write('about/index.html', aboutPage());
 projects.forEach((p, i) => write(`work/${p.slug}/index.html`, projectPage(p, i)));
 write('404.html', notFound());
 write(
   'sitemap.xml',
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${site.url}/</loc></url>\n${projects
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${site.url}/</loc></url>\n<url><loc>${site.url}/about/</loc></url>\n${projects
     .map((p) => `<url><loc>${site.url}/work/${p.slug}/</loc></url>`)
     .join('\n')}\n</urlset>\n`
 );
