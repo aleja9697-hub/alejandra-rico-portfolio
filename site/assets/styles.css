@@ -1128,17 +1128,19 @@ a { color: inherit; }
   .work .wrap {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 24px;
+    column-gap: clamp(44px, 5vw, 90px);
+    row-gap: clamp(48px, 5vw, 72px);
   }
 
   .work .section-head {
     grid-column: 1 / -1;
+    margin-bottom: 0;
   }
 
   .work-item {
     grid-column: auto !important;
     min-width: 0;
-    margin-bottom: 48px;
+    margin-bottom: 0;
   }
 
   .work-media,
