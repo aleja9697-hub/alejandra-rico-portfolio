@@ -1108,3 +1108,50 @@ a { color: inherit; }
     transition: none;
   }
 }
+
+
+/* SELECTED WORK - ANIMACIONES DE FOTOGRAFIAS */
+
+/* Aparicion suave al hacer scroll */
+.work .work-item {
+  opacity: 1;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.work .work-item.reveal-ready {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.work .work-item.reveal-ready.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Zoom al pasar el cursor */
+.work .work-media {
+  overflow: hidden;
+}
+
+.work .work-media img {
+  transition: transform 0.65s ease;
+}
+
+@media (hover: hover) {
+  .work .work-item:hover .work-media img {
+    transform: scale(1.045);
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .work .work-item,
+  .work .work-media img {
+    transition: none;
+  }
+
+  .work .work-item.reveal-ready {
+    opacity: 1;
+    transform: none;
+  }
+}
