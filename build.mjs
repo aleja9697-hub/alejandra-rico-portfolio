@@ -230,7 +230,53 @@ function aboutPage() {
         </div>
       </div>
     </div>
-${rest}
+  <div class="wrap impact-wrap">
+    <h3 class="cv-title">Results</h3>
+    <dl class="impact">
+      ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
+    </dl>
+  </div>
+
+  <div class="wrap cv">
+    <div class="cv-block cv-experience">
+      <h3 class="cv-title">Experience</h3>
+      <ol class="exp-list">
+        ${site.experience
+          .map(
+            (e) => `<li class="exp">
+          <p class="exp-role">${esc(e.role)}</p>
+          <p class="exp-org">${esc(e.org)}, ${esc(e.place)}</p>
+          <ul>${e.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>
+        </li>`
+          )
+          .join('\n        ')}
+      </ol>
+    </div>
+    <div class="cv-side">
+      <div class="cv-block">
+        <h3 class="cv-title">Education</h3>
+        <ul class="plain-list">
+          ${site.education.map((e) => `<li><span class="strong">${esc(e.title)}</span><span>${esc(e.org)}${e.note ? `, ${esc(e.note)}` : ''}</span></li>`).join('\n          ')}
+        </ul>
+      </div>
+      <div class="cv-block">
+        <h3 class="cv-title">Tools</h3>
+        <p class="tool-line">${site.tools.map(esc).join(', ')}</p>
+      </div>
+      <div class="cv-block">
+        <h3 class="cv-title">Languages</h3>
+        <p class="tool-line">${site.languages.map(esc).join('<br>')}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap capabilities">
+    <h3 class="cv-title">What I do</h3>
+    <dl class="cap-list">
+      ${site.capabilities.map((c) => `<div class="cap"><dt>${esc(c.title)}</dt><dd>${esc(c.text)}</dd></div>`).join('\n      ')}
+    </dl>
+  </div>
+
   </section>`;
   return layout({ title: 'About', description: site.about.join(' '), root, body, bodyClass: 'is-about' }).replaceAll('{ROOT}', root);
 }
