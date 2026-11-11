@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const supportsObserver = "IntersectionObserver" in window;
 
-  // Mantener la tipografia Stretch Pro en una linea sin recortarla.
+  // Conservar el titulo en una sola linea.
   if (title) {
     const fitTitle = () => {
       title.style.fontSize = "";
@@ -35,24 +35,70 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Preparar tarjetas que aun no han entrado en el viewport.
-  const items = document.querySelectorAll(".work .work-item");
-  if (reduceMotion || !supportsObserver) return;
+  const items = [...document.querySelectorAll(".work .work-item")];
+  if (reduceMotion || !supportsObserver || items.length === 0) return;
 
-  const imageObserver = new IntersectionObserver((entries) => {
+  // Esperar a que las portadas prioritarias esten listas para mostrarlas juntas.
+  const imageReady = (img) => {
+    if (!img) return Promise.resolve();
+    if (img.complete) {
+      return typeof img.decode === "function" ? img.decode().catch(() => {}) : Promise.resolve();
+    }
+    return new Promise((resolve) => {
+      img.addEventListener("load", resolve, { once: true });
+      img.addEventListener("error", resolve, { once: true });
+    }).then(() => typeof img.decode === "function" ? img.decode().catch(() => {}) : undefined);
+  };
+
+  const firstPair = items.slice(0, 2);
+  const readyFirstPair = Promise.all(firstPair.map((item) => imageReady(item.querySelector(".work-media img"))));
+  let firstPairEntered = false;
+  let firstPairRevealed = false;
+  const entered = new Set();
+
+  const reveal = (item) => {
+    item.classList.add("is-visible");
+    observer.unobserve(item);
+  };
+
+  const maybeReveal = () => {
+    if (!firstPairEntered || firstPairRevealed) return;
+    readyFirstPair.then(() => {
+      if (firstPairRevealed) return;
+      firstPairRevealed = true;
+      firstPair.forEach(reveal);
+      // Permitir el resto solo despues de las dos primeras fotografias.
+      for (const item of entered) {
+        if (!firstPair.includes(item)) reveal(item);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      entry.target.classList.add("is-visible");
-      imageObserver.unobserve(entry.target);
+      const item = entry.target;
+      entered.add(item);
+      if (firstPair.includes(item)) firstPairEntered = true;
+      // Si se salta directamente mas abajo, la primera fila ya paso.
+      if (!firstPairEntered && firstPair.every((first) => first.getBoundingClientRect().bottom <= 0)) {
+        firstPairEntered = true;
+      }
+      if (firstPairRevealed && !firstPair.includes(item)) reveal(item);
     }
+    maybeReveal();
   }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
 
   for (const item of items) {
     const rect = item.getBoundingClientRect();
-    // No ocultar las tarjetas que ya estan visiblemente en pantalla.
-    if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) continue;
-    if (rect.bottom <= 0) continue;
+    if (rect.bottom <= 0 || (rect.top < window.innerHeight * 0.75 && rect.bottom > 0)) {
+      // Si la primera fila esta visible al cargar, no ocultarla.
+      if (firstPair.includes(item)) firstPairEntered = true;
+      continue;
+    }
     item.classList.add("reveal-ready");
-    imageObserver.observe(item);
+    observer.observe(item);
   }
+
+  if (firstPairEntered) maybeReveal();
 });
