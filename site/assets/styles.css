@@ -1155,3 +1155,40 @@ a { color: inherit; }
     transform: none;
   }
 }
+
+
+/* SELECTED WORK - CUADRICULA UNIFORME */
+
+@media (min-width: 1025px) {
+  .work-row {
+    display: contents;
+  }
+
+  .work .wrap {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+
+  .work .section-head {
+    grid-column: 1 / -1;
+  }
+
+  .work-item {
+    grid-column: auto !important;
+    min-width: 0;
+    margin-bottom: 48px;
+  }
+
+  .work-media,
+  .work-row:has(.span-4) .work-media {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .work-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
