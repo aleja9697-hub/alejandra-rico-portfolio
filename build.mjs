@@ -244,7 +244,7 @@ function aboutPage() {
         ${site.experience
           .map(
             (e) => `<li class="exp">
-          <p class="exp-role">${esc(e.role)}</p>
+          <p class="exp-role"><span class="exp-role-base">${esc(e.role)}</span><span class="exp-role-highlight" aria-hidden="true">${esc(e.role)}</span></p>
           <p class="exp-org">${esc(e.org)}, ${esc(e.place)}</p>
           <ul>${e.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>
         </li>`
