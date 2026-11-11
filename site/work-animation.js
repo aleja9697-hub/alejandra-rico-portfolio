@@ -3,6 +3,54 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const supportsObserver = "IntersectionObserver" in window;
 
+  // Mostrar el menu cuando se sube; ocultarlo al bajar.
+  const header = document.querySelector(".site-header");
+  if (header) {
+    let lastY = Math.max(0, window.scrollY);
+    let movement = 0;
+    let direction = 0;
+    let pending = false;
+
+    const updateHeader = () => {
+      pending = false;
+      const y = Math.max(0, window.scrollY);
+      const delta = y - lastY;
+      lastY = y;
+
+      if (y <= 8) {
+        header.classList.remove("is-header-hidden");
+        movement = 0;
+        direction = 0;
+        return;
+      }
+
+      // Ignorar oscilaciones minimas de trackpads y pantallas tactiles.
+      if (Math.abs(delta) < 1) return;
+      const nextDirection = delta > 0 ? 1 : -1;
+      if (direction !== nextDirection) {
+        direction = nextDirection;
+        movement = 0;
+      }
+      movement += Math.abs(delta);
+
+      if (movement < 8) return;
+      if (nextDirection > 0 && y > header.offsetHeight) {
+        header.classList.add("is-header-hidden");
+      } else if (nextDirection < 0) {
+        header.classList.remove("is-header-hidden");
+      }
+      movement = 0;
+    };
+
+    window.addEventListener("scroll", () => {
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(updateHeader);
+      }
+    }, { passive: true });
+    window.addEventListener("pageshow", updateHeader);
+  }
+
   // Conservar el titulo en una sola linea.
   if (title) {
     const fitTitle = () => {
