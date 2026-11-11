@@ -1228,3 +1228,18 @@ a { color: inherit; }
     transition: none;
   }
 }
+
+
+/* SELECTED WORK - TITULO EN UNA SOLA LINEA */
+
+@media (min-width: 1025px) {
+  .work .work-custom-title {
+    display: inline-block;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    font-size: clamp(28px, 4vw, 76px);
+    line-height: 1.05;
+    padding: 0;
+  }
+}
