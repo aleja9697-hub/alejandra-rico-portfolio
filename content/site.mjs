@@ -94,7 +94,7 @@ export const homeRows = [
   [['energizar', 4], ['jca', 4], ['fornatta', 4]],
   [['accountability-report-2025', 5], ['music-film-events', 7]],
   [['social-media', 7], ['accountability-report-2024', 5]],
-  [['cali-film-commission', 12]],
+  [['cali-film-commission', 4]],
 ];
 
 // ---------------------------------------------------------------------
