@@ -162,6 +162,7 @@ function contactBlock() {
   <img class="contact-side-star contact-side-star--right" src="/assets/img/star-side-right.svg" alt="" aria-hidden="true" width="802" height="1100">
   <div class="wrap">
     <h2 class="contact-title" id="contact-title">LET’S WOORK TOGETHEER</h2>
+    <img class="contact-accent-star" src="/assets/img/estrella-marquee.svg" alt="" aria-hidden="true" width="140" height="140" loading="lazy" decoding="async">
     <p class="contact-lede">Open to graphic design, multimedia and content design roles in the Greater Toronto Area.</p>
     <a class="contact-email" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
     <ul class="contact-links">
