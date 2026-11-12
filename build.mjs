@@ -354,16 +354,16 @@ function aboutPage() {
     <h2 class="cv-title" id="tools-showcase-title">Tools</h2>
     <div class="tools-showcase-grid">
       ${[
-        { name: 'Adobe Illustrator', mark: 'Ai', length: 86 },
-        { name: 'Adobe Premiere Pro', mark: 'Pr', length: 78 },
-        { name: 'Adobe After Effects', mark: 'Ae', length: 70 },
-        { name: 'Adobe Photoshop', mark: 'Ps', length: 84 },
-        { name: 'Adobe Lightroom', mark: 'Lr', length: 72 },
-        { name: 'Office Suites', mark: '✦', length: 80 },
-        { name: 'CapCut', mark: '✂', length: 77 },
-        { name: 'Canva', mark: 'C', length: 88 },
+        { name: 'Adobe Illustrator', icon: 'illustrator', mark: 'Ai', length: 86 },
+        { name: 'Adobe Premiere Pro', icon: 'premierepro', mark: 'Pr', length: 78 },
+        { name: 'Adobe After Effects', icon: 'aftereffects', mark: 'Ae', length: 70 },
+        { name: 'Adobe Photoshop', icon: 'photoshop', mark: 'Ps', length: 84 },
+        { name: 'Adobe Lightroom', icon: 'lightroom', mark: 'Lr', length: 72 },
+        { name: 'Office Suites', icon: 'microsoft365', mark: '✦', length: 80 },
+        { name: 'CapCut', icon: 'capcut', mark: '✂', length: 77 },
+        { name: 'Canva', icon: 'canva', mark: 'C', length: 88 },
       ].map((tool) => `<div class="tool-skill">
-        <span class="tool-skill-icon" aria-hidden="true">${tool.name === 'CapCut' ? '<svg class="tool-capcut-logo" viewBox="0 0 25 24" fill="currentColor" fill-rule="evenodd" focusable="false"><path d="M24.189 6.442V2.671l-4.535 2.383V4.91c.002-1.505-1.078-2.411-2.638-2.411H2.64C.993 2.5 0 3.407 0 4.91V8.72L6.354 12 0 15.316v3.8C0 20.595 1 21.5 2.64 21.5h14.373c1.56 0 2.639-.907 2.639-2.382v-.197l4.536 2.409v-3.828L13.64 12 24.19 6.443zM9.982 13.873l7.797 4.083H2.157l7.825-4.083zm7.741-7.828l-7.742 4.057-7.825-4.057h15.567z"/></svg>' : esc(tool.mark)}</span>
+        <span class="tool-skill-icon" aria-hidden="true"><img class="tool-brand-logo" src="/assets/icons/tools/${esc(tool.icon)}.svg" alt="" loading="lazy" decoding="async"></span>
         <div class="tool-skill-info">
           <span class="tool-skill-name">${esc(tool.name)}</span>
           <span class="tool-skill-track" aria-hidden="true"><span class="tool-skill-fill" style="--fill-width:${tool.length}%"></span></span>
