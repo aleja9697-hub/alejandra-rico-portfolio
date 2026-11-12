@@ -3166,3 +3166,84 @@ a { color: inherit; }
     bottom: 8%;
   }
 }
+
+/* Mobile About: the green arch finishes at the same baseline as the portrait. */
+@media (max-width: 760px) {
+  .about-teaser .about-portrait--animated {
+    margin-bottom: -28px;
+  }
+  .about-teaser .about-portrait--animated::before {
+    bottom: 8%;
+  }
+  .about-teaser .about-portrait--animated .about-portrait-star--second {
+    bottom: 15%;
+  }
+}
+
+/* Mobile services: editorial, vertically stacked, colorful feature cards. */
+@media (max-width: 760px) {
+  .services-section {
+    background: #1F543B;
+    color: #F3E5D7;
+    padding-block: clamp(3.2rem, 9vw, 4.75rem);
+  }
+  .services-section .services-heading {
+    border-top-color: rgba(243, 229, 215, .5);
+    margin-bottom: clamp(1.75rem, 5vw, 2.5rem);
+  }
+  .services-section .services-eyebrow,
+  .services-section #services-title {
+    color: #F3E5D7;
+  }
+  .services-section #services-title .about-underline path {
+    stroke: #F3E5D7;
+  }
+  .services-section .services-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(14px, 3vw, 22px);
+  }
+  .services-section .service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    min-height: clamp(335px, 103vw, 440px);
+    padding: clamp(24px, 5.4vw, 38px);
+    border-radius: 20px;
+    color: #281B16;
+    background: #FFAD19;
+  }
+  .services-section .service-card--1 { background: #54281F; color: #F3E5D7; }
+  .services-section .service-card--2 { background: #FFF45A; color: #281B16; }
+  .services-section .service-card--3 { background: #B8F3DA; color: #1F543B; }
+  .services-section .service-card--4 { background: #F3E5D7; color: #1F543B; }
+  .services-section .service-card--5 { background: #1AAA71; color: #122E21; }
+  .services-section .service-number,
+  .services-section .service-name,
+  .services-section .service-description,
+  .services-section .service-art {
+    color: inherit;
+  }
+  .services-section .service-number {
+    font-size: clamp(.9rem, 3.6vw, 1.05rem);
+  }
+  .services-section .service-art {
+    width: clamp(80px, 19vw, 112px);
+    height: clamp(80px, 19vw, 112px);
+    margin-block: clamp(30px, 8vw, 48px);
+  }
+  .services-section .service-content {
+    width: 100%;
+    margin-top: auto;
+  }
+  .services-section .service-name {
+    font-size: clamp(1.6rem, 5.9vw, 2.05rem);
+    line-height: 1.16;
+    margin-bottom: clamp(15px, 3vw, 22px);
+  }
+  .services-section .service-description {
+    max-width: 36ch;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.48;
+  }
+}
