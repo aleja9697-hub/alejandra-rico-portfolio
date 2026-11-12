@@ -2170,3 +2170,31 @@ a { color: inherit; }
     animation: none;
   }
 }
+
+/* Hero: restore both green corner stars without removing the Contact stars */
+.hero-custom-grid .hero-side-star { position: absolute; z-index: 0; display: block; height: auto; object-fit: contain; pointer-events: none; user-select: none; }
+.hero-custom-grid .hero-side-star--left { top: -3%; left: -4%; width: clamp(130px, 15vw, 290px); }
+.hero-custom-grid .hero-side-star--right { right: -3%; bottom: -5%; width: clamp(130px, 14vw, 280px); }
+.hero-custom-grid .hero-grid-content { z-index: 1; position: relative; }
+
+/* Use the supplied graphic panels as unchanged image assets (not rebuilt HTML). */
+.hero-custom-grid .hero-grid-details--images {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, .95fr);
+  gap: clamp(16px, 2.3vw, 38px);
+  align-items: center;
+  padding-inline: clamp(0px, 3vw, 50px);
+}
+.hero-custom-grid .hero-detail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  min-width: 0;
+  max-width: 100%;
+}
+@media(max-width:760px){
+  .hero-custom-grid .hero-grid-details--images {grid-template-columns:1fr;gap:16px;padding-inline:0;}
+  .hero-custom-grid .hero-side-star--left {width:clamp(90px,21vw,160px);left:-4%;}
+  .hero-custom-grid .hero-side-star--right {width:clamp(90px,19vw,145px);right:-4%;}
+}
