@@ -95,7 +95,7 @@ function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
     <nav aria-label="Main">
       <ul class="nav">
         <li><a href="${root}#work">Work</a></li>
-        <li><a href="${root}#about">About</a></li>
+        <li><a href="${root}about/">About</a></li>
         <li><a href="${root}#contact">Contact</a></li>
       </ul>
     </nav>
@@ -116,10 +116,40 @@ ${contactBlock()}
 `;
 }
 
+// Original line icons for capabilities, with a loose hand-drawn character.
+const capabilityArt = [
+  '<path d="M11 33 12 12 32 8 51 13 49 35 31 41 11 33Z"/><path d="m13 14 17 10 19-11M30 24l1 15"/><path d="m47 46 4 3m-6 0 3-7"/>',
+  '<path d="m13 11 39 0-1 42-38-1z"/><path d="M20 21q12-5 24 0M20 29h23M20 37h12"/><path d="M38 34q8 2 7 12l-9-2z"/>',
+  '<path d="M14 20q4-9 17-10t17 11q8 11-5 21t-23 2q-11-7-6-24Z"/><path d="M20 26q11-11 22 0M19 33q12 10 25-1"/><path d="m11 47 8-5m31-27 5-5"/>',
+  '<rect x="13" y="18" width="40" height="28" rx="3"/><path d="m19 18 4-8h18l5 8M23 46l8 8 8-8"/><circle cx="33" cy="32" r="8"/><path d="m50 12 5-3M9 31l-5 2"/>',
+  '<path d="M12 13h40v34H12z"/><path d="m13 22 14 10 12-12 13 9M18 41l9-4 12 5"/><path d="M23 12q10-8 19 0M31 49l2 6"/>',
+  '<rect x="10" y="12" width="44" height="37" rx="3"/><path d="M10 22h44M20 17h1M27 17h1M21 36l7-7m-7 7 7 7m15-14-7 14"/><path d="m14 52 3 3m33-4-2 4"/>'
+];
+const selectedServiceIcons = [
+  'visual-identity',
+  'editorial-design',
+  'social-media',
+  'video-and-motion',
+  'print-and-pop',
+  'web-and-ux',
+];
+function capabilityIcon(index) {
+  const stem = selectedServiceIcons[index];
+  // Los archivos descargados de Flaticon se pueden anadir posteriormente con sus licencias.
+  for (const ext of ['svg', 'png']) {
+    const relative = `assets/icons/services/${stem}.${ext}`;
+    if (existsSync(new URL('./site/' + relative, import.meta.url))) {
+      return `<img class="service-art service-art-file" src="/${relative}" alt="" aria-hidden="true" loading="lazy">`;
+    }
+  }
+  const drawing = capabilityArt[index % capabilityArt.length];
+  return `<svg class="service-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${drawing}</svg>`;
+}
+
 function contactBlock() {
   return `<section class="contact" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
-    <h2 class="contact-title" id="contact-title">Let’s work together</h2>
+    <h2 class="contact-title" id="contact-title">LET’S WOORK TOGETHEER</h2>
     <p class="contact-lede">Open to graphic design, multimedia and content design roles in the Greater Toronto Area.</p>
     <a class="contact-email" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
     <ul class="contact-links">
@@ -152,10 +182,13 @@ ${row
     const p = bySlug[slug];
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
     const c = coverOf(p);
+    // Mostrar otra imagen real del mismo proyecto dentro de la lente.
+    const alternateNumber = p.gallery?.flat().find((n) => n !== (p.cover || 1));
+    const alternate = alternateNumber ? img(p.slug, alternateNumber) : null;
     const badgeSrc = badgeMap[slug];
     const alt = p.coverImage ? `${p.title}: a selection of posts` : (p.alts?.[(p.cover || 1) - 1] || p.title);
     return `  <a class="work-item span-${span}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
-    <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}</span>
+    <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, eager: slug === 'al-centro' || slug === 'mandato-centro', style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}${alternate ? `<img class="work-lens-image" src="${alternate.src}" width="${alternate.w}" height="${alternate.h}" alt="" aria-hidden="true" loading="lazy" decoding="async">` : ''}</span>
     <span class="work-caption">
       <span class="work-title">${esc(p.shortTitle || p.title)}</span>   
 <span class="work-meta">
@@ -187,31 +220,73 @@ src="/img/Home1.png"
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="work-title" class="section-title work-custom-title">SEELECTED WOORK</h2>
+      <h2 id="work-title" class="section-title work-custom-title"><span class="work-highlight-base">SEELECTED WOORK</span><span class="work-highlight-reveal" aria-hidden="true">SEELECTED WOORK</span></h2>
       <p class="section-note">${count} projects in visual identity, editorial, social media and web, 2024 to 2026.</p>
     </div>
 ${rows}
   </div>
 </section>
 
-<section class="about" id="about" aria-labelledby="about-title">
+<section class="about results-section" id="results" aria-labelledby="results-title">
+  <div class="wrap impact-wrap">
+    <h2 class="cv-title" id="results-title">Results</h2>
+    <dl class="impact">
+      ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
+    </dl>
+  </div>
+</section>
+
+<section class="about about-teaser" id="about" aria-labelledby="about-title">
   <div class="wrap about-grid">
     <figure class="about-portrait">
       ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 80vw, 30vw' })}
     </figure>
     <div class="about-body">
-      <h2 id="about-title" class="section-title">About</h2>
-      ${site.about.map((p, i) => `<p${i === 0 ? ' class="lede"' : ''}>${esc(p)}</p>`).join('\n      ')}
+      <h2 id="about-title" class="section-title about-drawn-title"><span>ABOOUT</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
+      <p class="lede">${esc(site.about[0])}</p>
+      <a class="about-cta" href="about/">Get to know me <span aria-hidden="true">↗</span></a>
     </div>
   </div>
-
-  <div class="wrap impact-wrap">
-    <h3 class="cv-title">Results</h3>
-    <dl class="impact">
-      ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
-    </dl>
+</section>
+<section class="services-section" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="services-heading">
+      <span class="services-eyebrow">What I bring to every project</span>
+      <h2 class="services-title" id="services-title">WHATT I DOO</h2>
+    </div>
+    <div class="services-grid">
+      ${site.capabilities.map((capability, i) => `<article class="service-card service-card--${i % 6}">
+        <span class="service-number">${String(i + 1).padStart(2, '0')}</span>
+        ${capabilityIcon(i)}
+        <div class="service-content">
+          <h3 class="service-name">${esc(capability.title)}</h3>
+          <p class="service-description">${esc(capability.text)}</p>
+        </div>
+      </article>`).join('\n      ')}
+    </div>
   </div>
+</section>`;
+  return layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
+}
 
+// ---------------- About page ----------------
+function aboutPage() {
+  const root = '../';
+  const portrait = images.about[0];
+  const body = `<section class="about about-detail" id="about" aria-labelledby="about-title">
+    <div class="wrap about-detail-intro">
+      <a class="about-back" href="../#about">← Back to home</a>
+      <span class="about-eyebrow">The person behind the work</span>
+      <h1 id="about-title" class="section-title about-drawn-title"><span>MORE ABOOUT ME</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h1>
+      <div class="about-detail-lead">
+        <figure class="about-portrait">
+          ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 85vw, 32vw', eager: true })}
+        </figure>
+        <div class="about-detail-copy">
+          ${site.about.slice(1).map(p => `<p>${esc(p)}</p>`).join('\n          ')}
+        </div>
+      </div>
+    </div>
   <div class="wrap cv">
     <div class="cv-block cv-experience">
       <h3 class="cv-title">Experience</h3>
@@ -219,7 +294,7 @@ ${rows}
         ${site.experience
           .map(
             (e) => `<li class="exp">
-          <p class="exp-role">${esc(e.role)}</p>
+          <p class="exp-role"><span class="exp-role-base">${esc(e.role)}</span><span class="exp-role-highlight" aria-hidden="true">${esc(e.role)}</span></p>
           <p class="exp-org">${esc(e.org)}, ${esc(e.place)}</p>
           <ul>${e.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul>
         </li>`
@@ -235,24 +310,36 @@ ${rows}
         </ul>
       </div>
       <div class="cv-block">
-        <h3 class="cv-title">Tools</h3>
-        <p class="tool-line">${site.tools.map(esc).join(', ')}</p>
-      </div>
-      <div class="cv-block">
         <h3 class="cv-title">Languages</h3>
         <p class="tool-line">${site.languages.map(esc).join('<br>')}</p>
       </div>
     </div>
   </div>
 
-  <div class="wrap capabilities">
-    <h3 class="cv-title">What I do</h3>
-    <dl class="cap-list">
-      ${site.capabilities.map((c) => `<div class="cap"><dt>${esc(c.title)}</dt><dd>${esc(c.text)}</dd></div>`).join('\n      ')}
-    </dl>
-  </div>
-</section>`;
-  return layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
+  <section class="tools-showcase wrap" aria-labelledby="tools-showcase-title">
+    <h2 class="cv-title" id="tools-showcase-title">Tools</h2>
+    <div class="tools-showcase-grid">
+      ${[
+        { name: 'Adobe Illustrator', mark: 'Ai', length: 86 },
+        { name: 'Adobe Premiere Pro', mark: 'Pr', length: 78 },
+        { name: 'Adobe After Effects', mark: 'Ae', length: 70 },
+        { name: 'Adobe Photoshop', mark: 'Ps', length: 84 },
+        { name: 'Adobe Lightroom', mark: 'Lr', length: 72 },
+        { name: 'Office Suites', mark: '✦', length: 80 },
+        { name: 'CapCut', mark: '✂', length: 77 },
+        { name: 'Canva', mark: 'C', length: 88 },
+      ].map((tool) => `<div class="tool-skill">
+        <span class="tool-skill-icon" aria-hidden="true">${esc(tool.mark)}</span>
+        <div class="tool-skill-info">
+          <span class="tool-skill-name">${esc(tool.name)}</span>
+          <span class="tool-skill-track" aria-hidden="true"><span class="tool-skill-fill" style="--fill-width:${tool.length}%"></span></span>
+        </div>
+      </div>`).join('\n      ')}
+    </div>
+  </section>
+
+  </section>`;
+  return layout({ title: 'About', description: site.about.join(' '), root, body, bodyClass: 'is-about' }).replaceAll('{ROOT}', root);
 }
 
 // ---------------- Project page ----------------
@@ -366,11 +453,12 @@ const write = (rel, html) => {
 };
 if (existsSync(new URL('work/', OUT))) rmSync(new URL('work/', OUT), { recursive: true });
 write('index.html', home());
+write('about/index.html', aboutPage());
 projects.forEach((p, i) => write(`work/${p.slug}/index.html`, projectPage(p, i)));
 write('404.html', notFound());
 write(
   'sitemap.xml',
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${site.url}/</loc></url>\n${projects
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${site.url}/</loc></url>\n<url><loc>${site.url}/about/</loc></url>\n${projects
     .map((p) => `<url><loc>${site.url}/work/${p.slug}/</loc></url>`)
     .join('\n')}\n</urlset>\n`
 );
