@@ -2570,8 +2570,8 @@ a { color: inherit; }
     align-self: stretch;
   }
   .hero-custom-grid .hero-bio-card {
-    display: flex;
-    justify-content: center;
+    display: block;
+    align-content: center;
     padding: 13px clamp(17px, 1.2vw, 23px);
     border-radius: 15px;
     font-family: 'Obviously', sans-serif;
