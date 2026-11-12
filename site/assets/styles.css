@@ -2484,3 +2484,47 @@ a { color: inherit; }
     opacity: 1 !important;
   }
 }
+
+/* Desktop-only polish of homepage hero (keep the mobile layout unchanged). */
+@media (min-width: 1025px) {
+  /* Keep the bio and all three facts within the same vertical band. */
+  .hero-custom-grid .hero-grid-details--html {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, .95fr);
+    gap: clamp(24px, 2.5vw, 44px);
+    align-items: stretch;
+    padding-inline: clamp(0px, 2.4vw, 40px);
+  }
+  .hero-custom-grid .hero-bio-card {
+    box-sizing: border-box;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(18px, 1.35vw, 26px) clamp(20px, 1.55vw, 30px);
+    font-family: 'Obviously', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.45vw, 1.45rem);
+    line-height: 1.35;
+  }
+  .hero-custom-grid .hero-info-card {
+    display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: clamp(7px, .7vw, 11px);
+    height: 100%;
+    align-self: stretch;
+  }
+  .hero-custom-grid .hero-info-pill {
+    box-sizing: border-box;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    padding-block: 4px;
+    font-size: clamp(.98rem, 1.1vw, 1.12rem);
+    line-height: 1.25;
+  }
+  .hero-custom-grid .hero-pill-icon {
+    width: clamp(40px, 3.2vw, 52px);
+    height: clamp(40px, 3.2vw, 52px);
+  }
+}
