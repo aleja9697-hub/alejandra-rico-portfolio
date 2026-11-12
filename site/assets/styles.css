@@ -2469,3 +2469,18 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .work .work-lens-image { transition: none; }
 }
+
+/* Mobile circular reveal: progressive mask following scroll, like the supplied reference. */
+@media (max-width: 760px) and (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  .work .work-media .work-lens-image {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: circle(var(--mobile-reveal-radius, 0%) at 50% 50%) !important;
+    transition: none !important;
+    will-change: clip-path;
+  }
+  .work .work-media.is-mobile-alt-visible .work-lens-image {
+    opacity: 1 !important;
+  }
+}
