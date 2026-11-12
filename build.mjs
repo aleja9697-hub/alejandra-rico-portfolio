@@ -316,6 +316,28 @@ function aboutPage() {
     </div>
   </div>
 
+  <section class="tools-showcase wrap" aria-labelledby="tools-showcase-title">
+    <h2 class="cv-title" id="tools-showcase-title">Tools</h2>
+    <div class="tools-showcase-grid">
+      ${[
+        { name: 'Adobe Illustrator', mark: 'Ai', length: 86 },
+        { name: 'Adobe Premiere Pro', mark: 'Pr', length: 78 },
+        { name: 'Adobe After Effects', mark: 'Ae', length: 70 },
+        { name: 'Adobe Photoshop', mark: 'Ps', length: 84 },
+        { name: 'Adobe Lightroom', mark: 'Lr', length: 72 },
+        { name: 'Office Suites', mark: '✦', length: 80 },
+        { name: 'CapCut', mark: '✂', length: 77 },
+        { name: 'Canva', mark: 'C', length: 88 },
+      ].map((tool) => `<div class="tool-skill">
+        <span class="tool-skill-icon" aria-hidden="true">${esc(tool.mark)}</span>
+        <div class="tool-skill-info">
+          <span class="tool-skill-name">${esc(tool.name)}</span>
+          <span class="tool-skill-track" aria-hidden="true"><span class="tool-skill-fill" style="--fill-width:${tool.length}%"></span></span>
+        </div>
+      </div>`).join('\n      ')}
+    </div>
+  </section>
+
   </section>`;
   return layout({ title: 'About', description: site.about.join(' '), root, body, bodyClass: 'is-about' }).replaceAll('{ROOT}', root);
 }
