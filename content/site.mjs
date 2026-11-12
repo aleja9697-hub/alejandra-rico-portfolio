@@ -258,6 +258,7 @@ export const projects = [
       ['Result', 'Together with the 2025 edition, about 2,000 copies distributed in downtown Cali.'],
     ],
     cover: 7,
+    reveal: 8,
     coverPosition: '50% 50%',
     gallery: [[1], [2, 3], [4, 5, 6]],
     alts: [
@@ -268,6 +269,7 @@ export const projects = [
       'Two men reading the newspaper at a market stall',
       'Vendor reading the newspaper on the street',
       'Man reading Edison Giraldo accountability report in a downtown shop',
+      'Alternative accountability report photograph for desktop reveal',
     ],
   },
   {
