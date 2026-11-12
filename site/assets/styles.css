@@ -1962,3 +1962,45 @@ a { color: inherit; }
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+/* Clean, vector-sharp grid with two independent corner stars */
+.hero-custom-grid .hero-grid-art {
+  background-image: url('/assets/img/fondo-grid-clean.svg');
+  background-color: #246042;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-custom-grid .hero-side-star {
+  position: absolute;
+  display: block;
+  z-index: 0;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+.hero-custom-grid .hero-side-star--left {
+  top: 0;
+  left: 0;
+  width: clamp(135px, 15vw, 285px);
+  transform: translate(-3%, -3%);
+}
+.hero-custom-grid .hero-side-star--right {
+  bottom: 0;
+  right: 0;
+  width: clamp(118px, 12vw, 235px);
+  transform: translate(3%, 4%);
+}
+.hero-custom-grid .hero-grid-content {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 760px) {
+  .hero-custom-grid .hero-side-star--left {
+    width: clamp(90px, 21vw, 160px);
+  }
+  .hero-custom-grid .hero-side-star--right {
+    width: clamp(90px, 19vw, 145px);
+  }
+}
