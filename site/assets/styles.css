@@ -3002,3 +3002,59 @@ a { color: inherit; }
     width: clamp(56px, 18vw, 88px);
   }
 }
+
+/* Creative marquee between ABOUT and WHATT I DOO: left-to-right, seamless. */
+.quote-motion-section {
+  background: #F3E5D7;
+  padding: clamp(10px, 1.6vw, 24px) 0;
+  overflow: hidden;
+}
+.quote-motion-band {
+  background: #1F543B;
+  color: #F3E5D7;
+  border-radius: 0;
+  overflow: hidden;
+  padding: clamp(12px, 1.3vw, 20px) 0;
+}
+.quote-motion-track {
+  display: flex;
+  width: max-content;
+  animation: quote-motion-ltr 27s linear infinite;
+  will-change: transform;
+}
+.quote-motion-group {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+.quote-motion-item {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: clamp(15px, 1.45vw, 24px);
+  padding-inline: clamp(16px, 1.8vw, 30px);
+  white-space: nowrap;
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.6vw, 2.75rem);
+  line-height: 1.12;
+}
+.quote-motion-item img {
+  display: block;
+  flex: none;
+  width: clamp(22px, 2.1vw, 36px);
+  height: auto;
+}
+@keyframes quote-motion-ltr {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@media (max-width: 760px) {
+  .quote-motion-section { padding-block: 12px; }
+  .quote-motion-band { padding-block: 12px; }
+  .quote-motion-item { font-size: clamp(1.05rem, 4.6vw, 1.5rem); gap: 12px; padding-inline: 13px; }
+  .quote-motion-item img { width: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote-motion-track { animation: none; transform: translateX(0); will-change: auto; }
+}
