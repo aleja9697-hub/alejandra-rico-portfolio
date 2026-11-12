@@ -208,12 +208,13 @@ ${row
   const portrait = images.about[0];
 
 
-const body = `<section class="hero hero-image-section" id="top">
-  <div class="hero-image">
-    <img
-src="/img/Home1.png"
-      alt="Alejandra Rico — Graphic Designer. Visual identity, editorial and social media design."
-    />
+const body = `<section class="hero hero-image-section hero-custom-grid" id="top" aria-labelledby="hero-custom-title">
+  <div class="hero-grid-art" aria-hidden="true"></div>
+  <div class="hero-grid-content">
+    <h1 class="hero-grid-title" id="hero-custom-title">
+      <span class="hero-grid-line hero-grid-line--first">ALLEJANNDRA</span>
+      <span class="hero-grid-line hero-grid-line--second"><span>RICCO</span><img class="hero-grid-star" src="/assets/img/estrella-marquee.svg" width="128" height="128" alt="" aria-hidden="true"></span>
+    </h1>
   </div>
 </section>
 
