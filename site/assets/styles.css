@@ -1401,13 +1401,13 @@ a { color: inherit; }
   align-items: stretch;
   width: fit-content;
   max-width: 100%;
-  padding-bottom: 0.12em;
+  padding-bottom: 0.19em;
 }
 .about .about-underline {
   display: block;
   width: 100%;
   height: clamp(11px, 1.5vw, 20px);
-  margin-top: -0.03em;
+  margin-top: 0.14em;
   overflow: visible;
   fill: none;
 }
@@ -1419,7 +1419,7 @@ a { color: inherit; }
   stroke-linejoin: round;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  transition: stroke-dashoffset 1.15s cubic-bezier(0.25, 0.65, 0.2, 1);
+  transition: stroke-dashoffset 2.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .about .about-drawn-title.is-drawn .about-underline path {
   stroke-dashoffset: 0;
