@@ -197,7 +197,7 @@ ${row
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
     const c = coverOf(p);
     // Mostrar otra imagen real del mismo proyecto dentro de la lente.
-    const alternateNumber = p.gallery?.flat().find((n) => n !== (p.cover || 1));
+    const alternateNumber = p.reveal ?? p.gallery?.flat().find((n) => n !== (p.cover || 1));
     const alternate = alternateNumber ? img(p.slug, alternateNumber) : null;
     const alt = p.coverImage ? `${p.title}: a selection of posts` : (p.alts?.[(p.cover || 1) - 1] || p.title);
     return `  <a class="work-item span-${span}${slug === 'cali-film-commission' ? ' is-featured-wide' : ''}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
