@@ -222,20 +222,16 @@ ${row
 
 const body = `<section class="hero hero-image-section hero-custom-grid" id="top" aria-labelledby="hero-custom-title">
   <div class="hero-grid-art" aria-hidden="true"></div>
+  <img class="hero-side-star hero-side-star--left" src="/assets/img/star-side-left.svg" alt="" aria-hidden="true" width="1203" height="955">
+  <img class="hero-side-star hero-side-star--right" src="/assets/img/star-side-right.svg" alt="" aria-hidden="true" width="802" height="1100">
   <div class="hero-grid-content">
     <h1 class="hero-grid-title" id="hero-custom-title">
       <span class="hero-grid-line hero-grid-line--first">ALLEJANNDRA</span>
       <span class="hero-grid-line hero-grid-line--second"><span>RICCO</span><img class="hero-grid-star" src="/assets/img/estrella-marquee.svg" width="128" height="128" alt="" aria-hidden="true"></span>
     </h1>
-    <div class="hero-grid-details">
-      <div class="hero-bio-card hero-enter hero-enter--bio">
-        Graphic designer for visual identity, editorial and social content. Five years shaping public, institutional and political communication in Cali, Colombia. <span class="hero-bio-emphasis">Now based in the Greater Toronto Area.</span>
-      </div>
-      <div class="hero-info-card hero-enter hero-enter--facts" aria-label="Professional details">
-        <div class="hero-info-pill"><span class="hero-pill-icon"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M12 33 V23 C12 12 19 7 22 7 C25 7 32 12 32 23 V33 M14 20 L22 31 L30 20 M17 35 H27 M17 39 H27 M10 7 L13 7 M22 3 V7 M31 7 L34 7"/><circle cx="12" cy="7" r="2"/><circle cx="22" cy="3" r="2"/><circle cx="32" cy="7" r="2"/></svg></span><span>Identity, editorial, social, web</span></div>
-        <div class="hero-info-pill"><span class="hero-pill-icon"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 36 C20 33 10 24 10 18 A12 12 0 1 1 34 18 C34 24 24 34 22 36 Z"/><circle cx="22" cy="18" r="4"/><path d="M13 34 C4 37 12 41 22 41 C32 41 40 37 31 34"/></svg></span><span>Toronto, Ontario</span></div>
-        <a class="hero-info-pill" href="mailto:aleja.9697@gmail.com"><span class="hero-pill-icon"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="6" y="11" width="32" height="23" rx="3"/><path d="M7 13 L22 25 L37 13"/></svg></span><span>aleja.9697@gmail.com</span></a>
-      </div>
+    <div class="hero-grid-details hero-grid-details--images">
+      <img class="hero-detail-image hero-detail-image--bio hero-enter hero-enter--bio" src="/assets/img/informacion-07.webp" alt="Graphic designer for visual identity, editorial and social content. Five years shaping public, institutional and political communication in Cali, Colombia. Now based in the Greater Toronto Area." width="950" height="148" loading="eager" decoding="async">
+      <img class="hero-detail-image hero-detail-image--facts hero-enter hero-enter--facts" src="/assets/img/informacion-06.webp" alt="Identity, editorial, social, web. Toronto, Ontario. aleja.9697@gmail.com." width="700" height="249" loading="eager" decoding="async">
     </div>
   </div>
 </section>
