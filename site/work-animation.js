@@ -98,23 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Highlight the inter-section design statement as it enters the viewport.
-  const statementTitle = document.querySelector(".statement-title");
-  if (statementTitle) {
-    if (reduceMotion || !supportsObserver) {
-      statementTitle.classList.add("is-highlighted");
-    } else {
-      const statementObserver = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add("is-highlighted");
-          statementObserver.unobserve(entry.target);
-        }
-      }, { threshold: 0.3, rootMargin: "0px 0px -8% 0px" });
-      statementObserver.observe(statementTitle);
-    }
-  }
-
   // Dibujar el subrayado ondulado tanto en About como en More About Me.
   const aboutTitles = document.querySelectorAll(".about .about-drawn-title, .services-section .about-drawn-title");
   if (aboutTitles.length) {
