@@ -98,6 +98,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ABOUT: dibujar una linea irregular bajo el titulo al aparecer.
+  const aboutTitle = document.querySelector(".about-teaser .about-drawn-title");
+  if (aboutTitle) {
+    if (reduceMotion || !supportsObserver) {
+      aboutTitle.classList.add("is-drawn");
+    } else {
+      const underlineObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-drawn");
+          underlineObserver.unobserve(entry.target);
+        }
+      }, { threshold: 0.45, rootMargin: "0px 0px -8% 0px" });
+      underlineObserver.observe(aboutTitle);
+    }
+  }
+
   // Lente de hover: revelar una imagen distinta siguiendo el cursor.
   if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     for (const media of document.querySelectorAll(".work .work-media:has(.work-lens-image)")) {
