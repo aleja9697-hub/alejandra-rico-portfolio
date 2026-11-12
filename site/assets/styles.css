@@ -3454,3 +3454,23 @@ a { color: inherit; }
     transform: rotate(5deg);
   }
 }
+
+/* Mobile-only: swap the whole photograph instead of a circular lens.
+   This overrides the legacy circular-reveal rules; desktop hover stays intact. */
+@media (max-width: 760px) and (pointer: coarse) {
+  .work .work-media .work-lens-image {
+    display: block !important;
+    clip-path: none !important;
+    opacity: 0 !important;
+    transform: none !important;
+    transition: opacity .5s ease-in-out !important;
+    will-change: opacity;
+  }
+  .work .work-media.is-mobile-alt-visible .work-lens-image {
+    clip-path: none !important;
+    opacity: 1 !important;
+  }
+}
+@media (max-width: 760px) and (pointer: coarse) and (prefers-reduced-motion: reduce) {
+  .work .work-media .work-lens-image { transition: none !important; }
+}
