@@ -3160,6 +3160,9 @@ a { color: inherit; }
     left: -2%;
   }
   .about-teaser .about-portrait--animated .about-portrait-star--second {
-    right: -1%;
+    left: auto;
+    top: auto;
+    right: -2%;
+    bottom: 8%;
   }
 }
