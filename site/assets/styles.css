@@ -1613,3 +1613,38 @@ a { color: inherit; }
   object-fit: contain;
   transform: none;
 }
+
+/* WHAT I DO - cream background, forest-green cards, Stretch Pro title */
+.services-section {
+  background: #F3E5D7;
+  color: #1F543B;
+}
+.services-heading {
+  border-top-color: rgba(31, 84, 59, 0.35);
+}
+.services-eyebrow { color: #1F543B; }
+.services-title {
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1.08;
+  font-size: clamp(2rem, 5vw, 5rem);
+  color: #1F543B;
+}
+.service-card,
+.service-card--1,
+.service-card--2,
+.service-card--3,
+.service-card--4,
+.service-card--5 {
+  background: #1F543B;
+  color: #F3E5D7;
+}
+.service-number,
+.service-name,
+.service-description,
+.service-art {
+  color: #F3E5D7;
+}
