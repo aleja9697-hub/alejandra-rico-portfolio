@@ -152,33 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Mobile: full-card crossfade when the project reaches the reading area.
-  // The desktop circular hover lens is preserved unchanged.
-  const mobilePhotoView = window.matchMedia("(max-width: 760px) and (pointer: coarse)");
-  const mobilePhotoMedia = [...document.querySelectorAll(".work .work-media:has(.work-lens-image)")];
-  if (mobilePhotoMedia.length) {
-    let photoUpdateQueued = false;
-    const updateMobilePhotos = () => {
-      photoUpdateQueued = false;
-      if (!mobilePhotoView.matches) return;
-      const revealLine = window.innerHeight * 0.42;
-      for (const media of mobilePhotoMedia) {
-        const bounds = media.getBoundingClientRect();
-        media.classList.toggle("is-mobile-alt-visible", bounds.top <= revealLine);
-      }
-    };
-    const requestMobilePhotoUpdate = () => {
-      if (photoUpdateQueued || !mobilePhotoView.matches) return;
-      photoUpdateQueued = true;
-      window.requestAnimationFrame(updateMobilePhotos);
-    };
-    window.addEventListener("scroll", requestMobilePhotoUpdate, { passive: true });
-    window.addEventListener("resize", requestMobilePhotoUpdate, { passive: true });
-    if (typeof mobilePhotoView.addEventListener === "function") {
-      mobilePhotoView.addEventListener("change", requestMobilePhotoUpdate);
-    }
-    requestMobilePhotoUpdate();
-  }
+  // Mobile shows only the primary project photograph. Desktop retains its hover lens.
 
   // Animar las barras decorativas de las herramientas al aparecer.
   const toolsShowcase = document.querySelector(".tools-showcase");
