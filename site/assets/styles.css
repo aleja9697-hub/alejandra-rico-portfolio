@@ -3249,7 +3249,7 @@ a { color: inherit; }
 }
 
 /* Refined mobile services palette: forest green remains the anchor.
-   Secondary colors are warm, muted and editorial, rather than neon. */
+   Secondary colors are vivid and energetic, with accessible foreground contrast. */
 @media (max-width: 760px) {
   .services-section .services-grid {
     gap: 13px;
@@ -3259,28 +3259,28 @@ a { color: inherit; }
     height: auto;
     padding: clamp(19px, 4.5vw, 26px);
     border-radius: 17px;
-    background: #F3E5D7;
-    color: #1F543B;
+    background: #FF8000;
+    color: #1F2F23;
   }
   .services-section .service-card--1 {
-    background: #D9A18C;
-    color: #30241F;
+    background: #FF7966;
+    color: #27201C;
   }
   .services-section .service-card--2 {
-    background: #BFD6B5;
-    color: #1F543B;
+    background: #8BDA69;
+    color: #173D2B;
   }
   .services-section .service-card--3 {
-    background: #E9C878;
-    color: #30271A;
+    background: #FFD447;
+    color: #27201C;
   }
   .services-section .service-card--4 {
-    background: #6D3B4F;
-    color: #F3E5D7;
+    background: #A52D60;
+    color: #FFFFFF;
   }
   .services-section .service-card--5 {
-    background: #C8E3D2;
-    color: #1F543B;
+    background: #36D9A1;
+    color: #173D2B;
   }
   .services-section .service-art {
     width: clamp(56px, 14vw, 72px);
