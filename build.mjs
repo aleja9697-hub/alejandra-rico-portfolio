@@ -212,6 +212,7 @@ ${row
 
 
 const body = `<section class="hero hero-image-section hero-custom-grid" id="top" aria-labelledby="hero-custom-title">
+  <div class="hero-intro-overlay" aria-hidden="true"><img class="hero-intro-star" src="/assets/img/estrella-marquee.svg" width="220" height="220" alt="" fetchpriority="high"></div>
   <div class="hero-grid-art" aria-hidden="true"></div>
   <img class="hero-side-star hero-side-star--left" src="/assets/img/star-side-left.svg" alt="" aria-hidden="true" width="1203" height="955">
   <img class="hero-side-star hero-side-star--right" src="/assets/img/star-side-right.svg" alt="" aria-hidden="true" width="802" height="1100">
