@@ -3296,3 +3296,69 @@ a { color: inherit; }
     line-height: 1.42;
   }
 }
+
+/* MORE ABOUT ME: echo the two orange floating stars from the home portrait. */
+.about-detail .about-portrait--detail-stars {
+  position: relative;
+  isolation: isolate;
+}
+.about-detail .about-portrait--detail-stars > img:not(.detail-portrait-star) {
+  position: relative;
+  z-index: 1;
+}
+.about-detail .about-portrait--detail-stars .detail-portrait-star {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  width: clamp(52px, 7vw, 100px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: center;
+}
+.about-detail .detail-portrait-star--first {
+  left: -2%;
+  top: 19%;
+}
+.about-detail .detail-portrait-star--second {
+  right: -2%;
+  bottom: 11%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .about-detail .detail-portrait-star--first {
+    animation: about-detail-star-one 4.2s ease-in-out infinite alternate;
+  }
+  .about-detail .detail-portrait-star--second {
+    animation: about-detail-star-two 4.8s ease-in-out .5s infinite alternate;
+  }
+  @keyframes about-detail-star-one {
+    from { transform: translateY(0) rotate(-8deg); }
+    to { transform: translateY(-10px) rotate(9deg); }
+  }
+  @keyframes about-detail-star-two {
+    from { transform: translateY(3px) rotate(9deg); }
+    to { transform: translateY(-9px) rotate(-8deg); }
+  }
+}
+@media (max-width: 760px) {
+  .about-detail .about-portrait--detail-stars .detail-portrait-star {
+    width: clamp(55px, 16vw, 83px);
+  }
+  .about-detail .detail-portrait-star--first { left: -2%; top: 22%; }
+  .about-detail .detail-portrait-star--second { right: -2%; bottom: 10%; }
+
+  /* TOOLS: compact orange icon tiles, original green progress bars unchanged. */
+  .about-detail .tool-skill {
+    gap: 12px;
+  }
+  .about-detail .tool-skill-icon {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #FF8000;
+    color: #173D2B;
+    font-size: 1.1rem;
+  }
+  .about-detail .tool-skill-info { min-width: 0; }
+}
