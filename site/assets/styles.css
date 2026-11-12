@@ -1825,3 +1825,23 @@ a { color: inherit; }
   .skills-marquee-track { animation: none; }
   .skills-marquee { overflow-x: auto; }
 }
+
+/* Compact skills ribbon with original uploaded star and Obviously Black labels */
+.skills-marquee {
+  padding-block: clamp(7px, 1vw, 11px);
+}
+.skills-marquee-item {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
+  font-size: clamp(.9rem, 1.35vw, 1.22rem);
+  gap: clamp(12px, 1.3vw, 20px);
+  padding-right: clamp(20px, 2vw, 34px);
+  line-height: 1.2;
+}
+.skills-marquee-star {
+  display: block;
+  flex: none;
+  width: clamp(17px, 1.6vw, 23px);
+  height: clamp(18px, 1.7vw, 24px);
+  object-fit: contain;
+}
