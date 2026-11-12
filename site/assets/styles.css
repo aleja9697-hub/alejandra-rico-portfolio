@@ -3003,7 +3003,7 @@ a { color: inherit; }
   }
 }
 
-/* Creative marquee between ABOUT and WHATT I DOO: left-to-right, seamless. */
+/* Creative marquee between ABOUT and WHATT I DOO: right-to-left, seamless. */
 .quote-motion-section {
   background: #F3E5D7;
   padding: clamp(10px, 1.6vw, 24px) 0;
@@ -3019,7 +3019,7 @@ a { color: inherit; }
 .quote-motion-track {
   display: flex;
   width: max-content;
-  animation: quote-motion-ltr 27s linear infinite;
+  animation: quote-motion-rtl 27s linear infinite;
   will-change: transform;
 }
 .quote-motion-group {
@@ -3045,9 +3045,9 @@ a { color: inherit; }
   width: clamp(22px, 2.1vw, 36px);
   height: auto;
 }
-@keyframes quote-motion-ltr {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+@keyframes quote-motion-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 @media (max-width: 760px) {
   .quote-motion-section { padding-block: 12px; }
