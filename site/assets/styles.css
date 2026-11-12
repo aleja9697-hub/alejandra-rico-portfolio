@@ -2677,3 +2677,93 @@ a { color: inherit; }
 @media (max-width: 760px) {
   .work .work-tag { font-size: .7rem; }
 }
+
+/* Selected Work: center the labels inside each green pill without text overflow. */
+.work .work-caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: center;
+  column-gap: clamp(10px, 1vw, 22px);
+  min-width: 0;
+}
+.work .work-title {
+  min-width: 0;
+  align-self: center;
+}
+.work .work-meta {
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.work .work-tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: .48em;
+  width: max-content;
+  max-width: none;
+  padding: .48em 1em;
+  white-space: nowrap;
+  line-height: 1.25;
+  text-align: center;
+  font-size: clamp(.68rem, .76vw, .88rem);
+}
+.work .work-tag-discipline,
+.work .work-tag-year {
+  display: inline-block;
+  width: auto;
+  flex: none;
+  white-space: nowrap;
+}
+.work .work-tag-year {
+  padding-left: .48em;
+}
+/* Last featured work occupies the full three-column grid on desktop. */
+@media (min-width: 1025px) {
+  .work .work-item.is-featured-wide {
+    grid-column: 1 / -1 !important;
+    width: 100%;
+  }
+  .work .work-item.is-featured-wide .work-media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 7;
+  }
+  .work .work-item.is-featured-wide .work-media img:first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .work .work-item.is-featured-wide .work-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+/* Respect the mobile's stacked project cards. */
+@media (max-width: 760px) {
+  .work .work-caption {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .45rem;
+  }
+  .work .work-meta { justify-content: flex-start; }
+  .work .work-tag { font-size: .7rem; }
+}
+/* Match the existing elongated Stretch Pro section headlines. */
+.results-section #results-title {
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  font-size: clamp(2rem, 5.8vw, 5.7rem);
+  line-height: 1.1;
+  max-width: 100%;
+}
