@@ -311,8 +311,10 @@ function aboutPage() {
       <span class="about-eyebrow">The person behind the work</span>
       <h1 id="about-title" class="section-title about-drawn-title"><span>MORE ABOOUT ME</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h1>
       <div class="about-detail-lead">
-        <figure class="about-portrait">
+        <figure class="about-portrait about-portrait--detail-stars">
           ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 85vw, 32vw', eager: true })}
+          <img class="detail-portrait-star detail-portrait-star--first" src="/assets/img/estrella-marquee.svg" alt="" aria-hidden="true" width="130" height="130" loading="eager" decoding="async">
+          <img class="detail-portrait-star detail-portrait-star--second" src="/assets/img/estrella-marquee.svg" alt="" aria-hidden="true" width="130" height="130" loading="eager" decoding="async">
         </figure>
         <div class="about-detail-copy">
           ${site.about.slice(1).map(p => `<p>${esc(p)}</p>`).join('\n          ')}
