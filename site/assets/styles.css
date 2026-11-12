@@ -1392,3 +1392,38 @@ a { color: inherit; }
 .results-section + .about-teaser {
   border-top: 1px solid var(--rule);
 }
+
+/* ABOUT: subrayado organico que se dibuja al entrar en pantalla */
+.about-teaser .about-drawn-title {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+  padding-bottom: 0.12em;
+}
+.about-teaser .about-underline {
+  display: block;
+  width: 100%;
+  height: clamp(11px, 1.5vw, 20px);
+  margin-top: -0.03em;
+  overflow: visible;
+  fill: none;
+}
+.about-teaser .about-underline path {
+  fill: none;
+  stroke: #1F543B;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 1.15s cubic-bezier(0.25, 0.65, 0.2, 1);
+}
+.about-teaser .about-drawn-title.is-drawn .about-underline path {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-teaser .about-underline path { stroke-dashoffset: 0; transition: none; }
+}
