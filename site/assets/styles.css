@@ -3087,3 +3087,32 @@ a { color: inherit; }
     width: 100%;
   }
 }
+
+/* Orange signature star beside the contact headline. */
+.contact .contact-accent-star {
+  position: absolute;
+  top: clamp(25px, 5vw, 72px);
+  right: clamp(30px, 9vw, 180px);
+  width: clamp(65px, 7.5vw, 126px);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .contact .contact-accent-star {
+    animation: contact-accent-float 5s ease-in-out infinite alternate;
+  }
+  @keyframes contact-accent-float {
+    from { transform: translateY(0) rotate(-9deg); }
+    to { transform: translateY(-14px) rotate(10deg); }
+  }
+}
+@media (max-width: 760px) {
+  .contact .contact-accent-star {
+    top: 3%;
+    right: 3%;
+    width: clamp(35px, 9vw, 60px);
+  }
+}
