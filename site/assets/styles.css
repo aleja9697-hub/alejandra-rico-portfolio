@@ -1427,3 +1427,37 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .about .about-underline path { stroke-dashoffset: 0; transition: none; }
 }
+
+/* CONTACT: Stretch Pro title and Obviously Regular text */
+.contact .contact-title {
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  font-size: clamp(2rem, 6vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+  max-width: 100%;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: #F3E5D7;
+}
+.contact .contact-lede,
+.contact .contact-email,
+.contact .contact-links,
+.contact .contact-links a,
+.contact .contact-place {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  letter-spacing: 0;
+  color: #F3E5D7;
+}
+.contact .contact-email {
+  font-size: clamp(1.2rem, 3.6vw, 3rem);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .contact .contact-title {
+    font-size: clamp(1.65rem, 7vw, 3.5rem);
+  }
+}
