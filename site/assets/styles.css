@@ -2253,3 +2253,44 @@ a { color: inherit; }
   .hero-custom-grid .hero-info-pill { font-size: clamp(.86rem, 2.9vw, 1rem); }
   .work .work-tag { font-size: .74rem; }
 }
+
+/* Opening sequence: the supplied orange star is first on screen. */
+.hero-custom-grid .hero-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  background: #1F543B;
+  pointer-events: none;
+  animation: hero-intro-dismiss 650ms ease-in-out 1250ms both;
+}
+.hero-custom-grid .hero-intro-star {
+  width: clamp(105px, 16vw, 225px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  animation: hero-intro-pop 1450ms cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes hero-intro-pop {
+  0% { opacity: 0; transform: scale(.45) rotate(-35deg); }
+  40% { opacity: 1; transform: scale(1.07) rotate(8deg); }
+  72% { opacity: 1; transform: scale(1) rotate(0); }
+  100% { opacity: 1; transform: scale(1.08) rotate(6deg); }
+}
+@keyframes hero-intro-dismiss {
+  0% { opacity: 1; visibility: visible; }
+  99% { opacity: 0; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+/* The name and its two information blocks arrive once the star has been shown. */
+.hero-custom-grid .hero-grid-line--first { animation-delay: 1.50s; }
+.hero-custom-grid .hero-grid-line--second { animation-delay: 1.68s; }
+.hero-custom-grid .hero-enter--bio { animation-delay: 1.95s; }
+.hero-custom-grid .hero-enter--facts { animation-delay: 2.15s; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-custom-grid .hero-intro-overlay { display: none; animation: none; }
+  .hero-custom-grid .hero-intro-star { animation: none; }
+  .hero-custom-grid .hero-grid-line { opacity: 1; animation: none; }
+  .hero-custom-grid .hero-enter { opacity: 1; animation: none; }
+}
