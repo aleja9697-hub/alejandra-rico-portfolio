@@ -125,7 +125,23 @@ const capabilityArt = [
   '<path d="M12 13h40v34H12z"/><path d="m13 22 14 10 12-12 13 9M18 41l9-4 12 5"/><path d="M23 12q10-8 19 0M31 49l2 6"/>',
   '<rect x="10" y="12" width="44" height="37" rx="3"/><path d="M10 22h44M20 17h1M27 17h1M21 36l7-7m-7 7 7 7m15-14-7 14"/><path d="m14 52 3 3m33-4-2 4"/>'
 ];
+const selectedServiceIcons = [
+  'visual-identity',
+  'editorial-design',
+  'social-media',
+  'video-and-motion',
+  'print-and-pop',
+  'web-and-ux',
+];
 function capabilityIcon(index) {
+  const stem = selectedServiceIcons[index];
+  // Los archivos descargados de Flaticon se pueden anadir posteriormente con sus licencias.
+  for (const ext of ['svg', 'png']) {
+    const relative = `assets/icons/services/${stem}.${ext}`;
+    if (existsSync(new URL('./site/' + relative, import.meta.url))) {
+      return `<img class="service-art service-art-file" src="/${relative}" alt="" aria-hidden="true" loading="lazy">`;
+    }
+  }
   const drawing = capabilityArt[index % capabilityArt.length];
   return `<svg class="service-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${drawing}</svg>`;
 }
