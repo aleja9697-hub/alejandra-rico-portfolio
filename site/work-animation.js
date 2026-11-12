@@ -134,6 +134,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Mobile: touch a project photo to crossfade to its second real gallery image.
+  // The title/caption remains a direct link to the full project.
+  const touchPhotos = window.matchMedia("(hover: none), (pointer: coarse)");
+  if (touchPhotos.matches) {
+    for (const media of document.querySelectorAll(".work .work-media:has(.work-lens-image)")) {
+      media.addEventListener("click", (event) => {
+        if (!event.isTrusted) return;
+        event.preventDefault();
+        media.classList.toggle("is-mobile-alt-visible");
+        const hint = media.querySelector(".work-mobile-photo-hint");
+        if (hint) hint.textContent = media.classList.contains("is-mobile-alt-visible")
+          ? "Toca para volver" : "Toca para cambiar foto";
+      });
+    }
+  }
+
   // Animar las barras decorativas de las herramientas al aparecer.
   const toolsShowcase = document.querySelector(".tools-showcase");
   if (toolsShowcase) {
