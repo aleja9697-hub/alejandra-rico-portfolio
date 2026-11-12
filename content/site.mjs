@@ -146,7 +146,7 @@ export const projects = [
       ['Result', 'A cleaner, more modern brand that communicates better on social media and holds up on site, from hard hats and uniforms to buildings and flags.'],
     ],
     palette: ['#018087', '#63BBB5', '#C9FFEB', '#D3D3D3'],
-    cover: 5,
+    cover: 6,
     reveal: 3,
     coverPosition: '50% 55%',
     gallery: [[1, 2, 3], [4, 5]],
@@ -156,6 +156,7 @@ export const projects = [
       'Worker in a teal uniform and hard hat seen from behind',
       'Energizar signage on an industrial building',
       'Energizar flags against a blue sky',
+      'Four Energizar rebrand flags against a bright blue sky',
     ],
   },
   {
