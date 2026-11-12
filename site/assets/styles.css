@@ -2294,3 +2294,145 @@ a { color: inherit; }
   .hero-custom-grid .hero-grid-line { opacity: 1; animation: none; }
   .hero-custom-grid .hero-enter { opacity: 1; animation: none; }
 }
+
+/* Mobile-first portfolio refinements: common image ratios and stronger hero hierarchy */
+.work .work-mobile-photo-hint { display: none; }
+@media (max-width: 760px) {
+  /* The two-line name should lead, not the biography or the status pills. */
+  .hero.hero-image-section.hero-custom-grid {
+    min-height: 0;
+    padding: clamp(54px, 12vw, 76px) 18px 44px;
+  }
+  .hero-custom-grid .hero-grid-content {
+    width: 100%;
+    gap: clamp(26px, 6vw, 38px);
+  }
+  .hero-custom-grid .hero-grid-title {
+    width: 100%;
+    max-width: none;
+    font-size: clamp(2.65rem, 11.4vw, 5.1rem);
+    line-height: 1.12;
+    gap: 2px;
+  }
+  .hero-custom-grid .hero-grid-line {
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+  .hero-custom-grid .hero-grid-line--first {
+    font-size: 1em;
+  }
+  .hero-custom-grid .hero-grid-line--first .hero-name-fit {
+    display: inline-block;
+    width: max-content;
+    transform: scaleX(.50);
+    transform-origin: left center;
+  }
+  .hero-custom-grid .hero-grid-line--second .hero-name-fit {
+    display: inline-block;
+    width: auto;
+  }
+  .hero-custom-grid .hero-grid-star {
+    width: clamp(47px, 12vw, 78px);
+  }
+  .hero-custom-grid .hero-grid-details--html {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-inline: 0;
+  }
+  .hero-custom-grid .hero-bio-card {
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: clamp(.83rem, 3.15vw, .97rem);
+    line-height: 1.48;
+  }
+  .hero-custom-grid .hero-info-card {
+    gap: 7px;
+  }
+  .hero-custom-grid .hero-info-pill {
+    font-size: clamp(.76rem, 2.9vw, .9rem);
+    padding-block: 3px;
+  }
+  .hero-custom-grid .hero-pill-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* The same portrait frame for ALL ten projects, irrespective of the source image. */
+  .work .work-row { display: block; margin: 0; }
+  .work .work-item { width: 100%; margin-bottom: 2.1rem; }
+  .work .work-media,
+  .work .work-row:has(.span-4) .work-media,
+  .work .work-item.span-7 .work-media,
+  .work .work-item.span-12 .work-media {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .work .work-media > img:first-child {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .work .work-item.is-contain .work-media > img:first-child {
+    object-fit: contain;
+  }
+  .work .work-caption {
+    align-items: flex-start;
+    gap: .45rem;
+    padding-top: .75rem;
+  }
+  .work .work-title {
+    font-size: clamp(1.05rem, 4.3vw, 1.25rem);
+    line-height: 1.28;
+  }
+  .work .work-meta { justify-content: flex-start; }
+  .work .work-lens-image {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: none !important;
+    opacity: 0;
+    transform: none !important;
+    transition: opacity .45s ease;
+    pointer-events: none;
+  }
+  .work .work-media.is-mobile-alt-visible .work-lens-image {
+    opacity: 1;
+  }
+  .work .work-mobile-photo-hint {
+    display: block;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    padding: 7px 10px;
+    background: rgba(31,84,59,.92);
+    color: #F3E5D7;
+    border-radius: 999px;
+    font-family: 'Obviously', sans-serif;
+    font-weight: 400;
+    font-size: .7rem;
+    line-height: 1.1;
+    pointer-events: none;
+  }
+  .work .work-media.is-mobile-alt-visible .work-mobile-photo-hint {
+    background: rgba(243,229,215,.95);
+    color: #1F543B;
+  }
+}
+@media (max-width: 390px) {
+  .hero-custom-grid .hero-grid-title { font-size: 11.25vw; }
+  .hero-custom-grid .hero-grid-line--first .hero-name-fit { transform: scaleX(.49); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work .work-lens-image { transition: none; }
+}
