@@ -257,8 +257,9 @@ ${rows}
 
 <section class="about about-teaser" id="about" aria-labelledby="about-title">
   <div class="wrap about-grid">
-    <figure class="about-portrait">
+    <figure class="about-portrait about-portrait--animated">
       ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 80vw, 30vw' })}
+      <img class="about-portrait-star" src="/assets/img/estrella-marquee.svg" alt="" aria-hidden="true" width="130" height="130" loading="lazy" decoding="async">
     </figure>
     <div class="about-body">
       <h2 id="about-title" class="section-title about-drawn-title"><span>ABOOUT</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
