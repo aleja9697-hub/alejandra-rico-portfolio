@@ -1845,3 +1845,94 @@ a { color: inherit; }
   height: clamp(18px, 1.7vw, 24px);
   object-fit: contain;
 }
+
+/* Homepage: uploaded grid artwork, layered animated Stretch Pro title */
+.hero.hero-image-section.hero-custom-grid {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(420px, 41.65vw, 870px);
+  padding: clamp(35px, 6vw, 100px) clamp(24px, 7.5vw, 150px);
+  overflow: hidden;
+  background-color: #1F543B;
+}
+.hero-grid-art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url('/assets/img/fondo-grid-hero.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.hero-grid-content {
+  width: 100%;
+  position: relative;
+}
+.hero-grid-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  color: #F3E5D7;
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  font-size: clamp(2.65rem, 8.1vw, 10rem);
+  line-height: 1.13;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.hero-grid-line {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  max-width: 100%;
+  opacity: 0;
+  animation: hero-grid-rise 1s cubic-bezier(.2,.75,.2,1) forwards;
+}
+.hero-grid-line--first { animation-delay: .08s; }
+.hero-grid-line--second {
+  gap: clamp(.7rem, 2vw, 2.4rem);
+  animation-delay: .3s;
+}
+.hero-grid-star {
+  display: block;
+  flex: none;
+  width: clamp(45px, 7vw, 130px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  transform-origin: 50% 50%;
+  animation: hero-grid-star-float 5.8s ease-in-out infinite;
+}
+@keyframes hero-grid-rise {
+  from { opacity: 0; transform: translateY(36px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-grid-star-float {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-11px) rotate(7deg); }
+}
+@media (max-width: 760px) {
+  .hero.hero-image-section.hero-custom-grid {
+    min-height: clamp(410px, 85vw, 620px);
+    padding: 48px clamp(16px, 5vw, 36px);
+  }
+  .hero-grid-title {
+    font-size: clamp(1.8rem, 8.0vw, 4.7rem);
+  }
+  .hero-grid-star {
+    width: clamp(35px, 9vw, 70px);
+  }
+  .hero-grid-line--second { gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid-line {
+    opacity: 1;
+    animation: none;
+  }
+  .hero-grid-star { animation: none; }
+}
