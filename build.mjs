@@ -198,7 +198,7 @@ ${row
     <span class="work-caption">
       <span class="work-title">${esc(p.shortTitle || p.title)}</span>   
 <span class="work-meta">
-  <span class="work-tag"><span class="work-tag-discipline">${esc(p.discipline)}</span><span class="work-tag-year">${esc(p.year)}</span></span>
+  <span class="work-tag"><span class="work-tag-discipline">${esc(p.discipline)}</span>${slug === 'accountability-report-2025' || slug === 'accountability-report-2024' ? '' : `<span class="work-tag-year">${esc(p.year)}</span>`}</span>
 </span>
     </span>
   </a>`;
