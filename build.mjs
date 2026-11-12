@@ -119,7 +119,7 @@ ${contactBlock()}
 function contactBlock() {
   return `<section class="contact" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
-    <h2 class="contact-title" id="contact-title">Let’s work together</h2>
+    <h2 class="contact-title" id="contact-title">LET’S WOORK TOGETHEER</h2>
     <p class="contact-lede">Open to graphic design, multimedia and content design roles in the Greater Toronto Area.</p>
     <a class="contact-email" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
     <ul class="contact-links">
