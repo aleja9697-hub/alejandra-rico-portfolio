@@ -3058,3 +3058,32 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .quote-motion-track { animation: none; transform: translateX(0); will-change: auto; }
 }
+
+/* Desktop hero: center the bio and three fact pills together inside the grid.
+   Both columns now share symmetrical outer margins and exactly matching heights. */
+@media (min-width: 1025px) {
+  .hero-custom-grid .hero-grid-details--html {
+    box-sizing: border-box;
+    width: min(100%, 1450px);
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: 0;
+    grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+    column-gap: clamp(24px, 2.1vw, 34px);
+    align-items: stretch;
+  }
+  .hero-custom-grid .hero-grid-details--html > .hero-bio-card,
+  .hero-custom-grid .hero-grid-details--html > .hero-info-card {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    justify-self: stretch;
+    align-self: stretch;
+  }
+  .hero-custom-grid .hero-grid-details--html > .hero-info-card {
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
+  .hero-custom-grid .hero-grid-details--html .hero-info-pill {
+    width: 100%;
+  }
+}
