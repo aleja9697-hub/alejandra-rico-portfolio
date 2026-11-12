@@ -98,11 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ABOUT: dibujar una linea irregular bajo el titulo al aparecer.
-  const aboutTitle = document.querySelector(".about-teaser .about-drawn-title");
-  if (aboutTitle) {
+  // Dibujar el subrayado ondulado tanto en About como en More About Me.
+  const aboutTitles = document.querySelectorAll(".about .about-drawn-title");
+  if (aboutTitles.length) {
     if (reduceMotion || !supportsObserver) {
-      aboutTitle.classList.add("is-drawn");
+      aboutTitles.forEach((heading) => heading.classList.add("is-drawn"));
     } else {
       const underlineObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
           underlineObserver.unobserve(entry.target);
         }
       }, { threshold: 0.45, rootMargin: "0px 0px -8% 0px" });
-      underlineObserver.observe(aboutTitle);
+      aboutTitles.forEach((heading) => underlineObserver.observe(heading));
     }
   }
 
