@@ -1748,3 +1748,80 @@ a { color: inherit; }
   letter-spacing: 0;
   max-width: 100%;
 }
+
+/* Full-bleed rectangular navigation; preserve scroll-hide behavior */
+.site-header,
+.is-home .site-header {
+  background: #1AAA71;
+  padding-top: 0;
+}
+.site-header .header-inner,
+.is-home .header-inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-inline: clamp(18px, 4.2vw, 80px);
+  min-height: 78px;
+  background: #1AAA71;
+  color: #1F543B;
+  border-radius: 0;
+}
+.site-header .brand,
+.site-header .nav a {
+  color: #1F543B;
+}
+@media (max-width: 760px) {
+  .site-header .header-inner,
+  .is-home .header-inner {
+    min-height: 66px;
+    padding-inline: 16px;
+  }
+}
+
+/* Animated skills ribbon below the hero, always full bleed */
+.skills-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #163F2C;
+  color: #F3E5D7;
+  padding-block: clamp(16px, 2vw, 23px);
+}
+.skills-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: skills-marquee-move 32s linear infinite;
+}
+.skills-marquee-set {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+.skills-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: clamp(18px, 2vw, 34px);
+  padding-right: clamp(28px, 3vw, 54px);
+  white-space: nowrap;
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.7vw, 1.5rem);
+  line-height: 1.25;
+}
+.skills-marquee-star {
+  font-size: 1.3em;
+  line-height: 1;
+  color: #F4A23A;
+}
+@keyframes skills-marquee-move {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (hover: hover) {
+  .skills-marquee:hover .skills-marquee-track { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee-track { animation: none; }
+  .skills-marquee { overflow-x: auto; }
+}
