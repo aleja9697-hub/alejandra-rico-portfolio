@@ -134,20 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Mobile: touch a project photo to crossfade to its second real gallery image.
-  // The title/caption remains a direct link to the full project.
-  const touchPhotos = window.matchMedia("(hover: none), (pointer: coarse)");
-  if (touchPhotos.matches) {
-    for (const media of document.querySelectorAll(".work .work-media:has(.work-lens-image)")) {
-      media.addEventListener("click", (event) => {
-        if (!event.isTrusted) return;
-        event.preventDefault();
-        media.classList.toggle("is-mobile-alt-visible");
-        const hint = media.querySelector(".work-mobile-photo-hint");
-        if (hint) hint.textContent = media.classList.contains("is-mobile-alt-visible")
-          ? "Toca para volver" : "Toca para cambiar foto";
-      });
-    }
+  // Mobile: reveal each project's alternate photograph as it passes through
+  // the middle of the viewport while scrolling. Tapping always opens the project.
+  const mobilePhotoView = window.matchMedia("(max-width: 760px) and (pointer: coarse)");
+  const mobilePhotoMedia = [...document.querySelectorAll(".work .work-media:has(.work-lens-image)")];
+  if (mobilePhotoView.matches && mobilePhotoMedia.length && supportsObserver && !reduceMotion) {
+    const photoObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        entry.target.classList.toggle("is-mobile-alt-visible", entry.isIntersecting);
+      }
+    }, { rootMargin: "-33% 0px -33% 0px", threshold: 0 });
+    mobilePhotoMedia.forEach(media => photoObserver.observe(media));
   }
 
   // Animar las barras decorativas de las herramientas al aparecer.
