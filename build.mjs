@@ -354,15 +354,15 @@ function aboutPage() {
     <h2 class="cv-title" id="tools-showcase-title">Tools</h2>
     <div class="tools-showcase-grid">
       ${[
-        { name: 'Adobe Illustrator', icon: 'illustrator', mark: 'Ai', length: 86 },
-        { name: 'Adobe Premiere Pro', icon: 'premierepro', mark: 'Pr', length: 78 },
-        { name: 'Adobe After Effects', icon: 'aftereffects', mark: 'Ae', length: 70 },
-        { name: 'Adobe Photoshop', icon: 'photoshop', mark: 'Ps', length: 84 },
-        { name: 'Adobe Lightroom', icon: 'lightroom', mark: 'Lr', length: 72 },
-        { name: 'Office Suites', icon: 'microsoft365', mark: '✦', length: 80 },
-        { name: 'CapCut', icon: 'capcut', mark: '✂', length: 77 },
-        { name: 'Canva', icon: 'canva', mark: 'C', length: 88 },
-      ].map((tool) => `<div class="tool-skill">
+        { name: 'Adobe Illustrator', color: '#FF9A00', icon: 'illustrator', mark: 'Ai', length: 86 },
+        { name: 'Adobe Premiere Pro', color: '#E976B9', icon: 'premierepro', mark: 'Pr', length: 78 },
+        { name: 'Adobe After Effects', color: '#D490C5', icon: 'aftereffects', mark: 'Ae', length: 70 },
+        { name: 'Adobe Photoshop', color: '#31A8FF', icon: 'photoshop', mark: 'Ps', length: 84 },
+        { name: 'Adobe Lightroom', color: '#31A8FF', icon: 'lightroom', mark: 'Lr', length: 72 },
+        { name: 'Office Suites', color: '#EA3E23', icon: 'microsoft365', mark: '✦', length: 80 },
+        { name: 'CapCut', color: '#191919', icon: 'capcut', mark: '✂', length: 77 },
+        { name: 'Canva', color: '#00C4CC', icon: 'canva', mark: 'C', length: 88 },
+      ].map((tool) => `<div class="tool-skill" style="--tool-brand-color:${esc(tool.color)}">
         <span class="tool-skill-icon" aria-hidden="true"><img class="tool-brand-logo" src="/assets/icons/tools/${esc(tool.icon)}.svg" alt="" loading="lazy" decoding="async"></span>
         <div class="tool-skill-info">
           <span class="tool-skill-name">${esc(tool.name)}</span>
