@@ -134,6 +134,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Animar las barras decorativas de las herramientas al aparecer.
+  const toolsShowcase = document.querySelector(".tools-showcase");
+  if (toolsShowcase) {
+    if (reduceMotion || !supportsObserver) {
+      toolsShowcase.classList.add("is-animated");
+    } else {
+      const toolsObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-animated");
+          toolsObserver.unobserve(entry.target);
+        }
+      }, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" });
+      toolsObserver.observe(toolsShowcase);
+    }
+  }
+
   // ABOUT: contar resultados cuando aparecen por primera vez.
   const impactValues = [...document.querySelectorAll(".about .impact-value")];
   const animateNumber = (element) => {
