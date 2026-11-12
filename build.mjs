@@ -116,6 +116,20 @@ ${contactBlock()}
 `;
 }
 
+// Original line icons for capabilities, with a loose hand-drawn character.
+const capabilityArt = [
+  '<path d="M11 33 12 12 32 8 51 13 49 35 31 41 11 33Z"/><path d="m13 14 17 10 19-11M30 24l1 15"/><path d="m47 46 4 3m-6 0 3-7"/>',
+  '<path d="m13 11 39 0-1 42-38-1z"/><path d="M20 21q12-5 24 0M20 29h23M20 37h12"/><path d="M38 34q8 2 7 12l-9-2z"/>',
+  '<path d="M14 20q4-9 17-10t17 11q8 11-5 21t-23 2q-11-7-6-24Z"/><path d="M20 26q11-11 22 0M19 33q12 10 25-1"/><path d="m11 47 8-5m31-27 5-5"/>',
+  '<rect x="13" y="18" width="40" height="28" rx="3"/><path d="m19 18 4-8h18l5 8M23 46l8 8 8-8"/><circle cx="33" cy="32" r="8"/><path d="m50 12 5-3M9 31l-5 2"/>',
+  '<path d="M12 13h40v34H12z"/><path d="m13 22 14 10 12-12 13 9M18 41l9-4 12 5"/><path d="M23 12q10-8 19 0M31 49l2 6"/>',
+  '<rect x="10" y="12" width="44" height="37" rx="3"/><path d="M10 22h44M20 17h1M27 17h1M21 36l7-7m-7 7 7 7m15-14-7 14"/><path d="m14 52 3 3m33-4-2 4"/>'
+];
+function capabilityIcon(index) {
+  const drawing = capabilityArt[index % capabilityArt.length];
+  return `<svg class="service-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${drawing}</svg>`;
+}
+
 function contactBlock() {
   return `<section class="contact" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
@@ -217,6 +231,24 @@ ${rows}
       <a class="about-cta" href="about/">Get to know me <span aria-hidden="true">↗</span></a>
     </div>
   </div>
+</section>
+<section class="services-section" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="services-heading">
+      <span class="services-eyebrow">What I bring to every project</span>
+      <h2 class="services-title" id="services-title">What I do</h2>
+    </div>
+    <div class="services-grid">
+      ${site.capabilities.map((capability, i) => `<article class="service-card service-card--${i % 6}">
+        <span class="service-number">${String(i + 1).padStart(2, '0')}</span>
+        ${capabilityIcon(i)}
+        <div class="service-content">
+          <h3 class="service-name">${esc(capability.title)}</h3>
+          <p class="service-description">${esc(capability.text)}</p>
+        </div>
+      </article>`).join('\n      ')}
+    </div>
+  </div>
 </section>`;
   return layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
 }
@@ -266,13 +298,6 @@ function aboutPage() {
         <p class="tool-line">${site.languages.map(esc).join('<br>')}</p>
       </div>
     </div>
-  </div>
-
-  <div class="wrap capabilities">
-    <h3 class="cv-title">What I do</h3>
-    <dl class="cap-list">
-      ${site.capabilities.map((c) => `<div class="cap"><dt>${esc(c.title)}</dt><dd>${esc(c.text)}</dd></div>`).join('\n      ')}
-    </dl>
   </div>
 
   </section>`;
