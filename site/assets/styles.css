@@ -1370,3 +1370,25 @@ a { color: inherit; }
   from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* RESULTADOS: una seccion independiente entre proyectos y About */
+.results-section {
+  padding-block: clamp(3rem, 6vw, 6rem);
+  border-top: 1px solid var(--rule);
+}
+.results-section .impact-wrap {
+  margin-top: 0;
+}
+.results-section .cv-title {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
+  color: #1F543B;
+  margin-bottom: clamp(1.25rem, 2vw, 2rem);
+}
+.results-section .impact-value,
+.results-section .impact-label {
+  color: #1F543B;
+}
+.results-section + .about-teaser {
+  border-top: 1px solid var(--rule);
+}
