@@ -2603,3 +2603,40 @@ a { color: inherit; }
     height: clamp(30px, 2.1vw, 36px);
   }
 }
+
+/* Refine the desktop hero: centered composition, left-aligned lettering and shorter facts. */
+@media (min-width: 1025px) {
+  .hero-custom-grid .hero-grid-title {
+    display: flex;
+    width: max-content;
+    max-width: 100%;
+    align-items: flex-start;
+    margin-inline: auto;
+    text-align: left;
+  }
+  .hero-custom-grid .hero-grid-line,
+  .hero-custom-grid .hero-grid-line--second {
+    width: auto;
+    max-width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .hero-custom-grid .hero-info-card {
+    width: 87%;
+    max-width: 100%;
+    justify-self: start;
+  }
+  .hero-custom-grid .hero-info-pill {
+    width: 100%;
+  }
+}
+/* Filled orange marker, black wording — follows line wrapping cleanly. */
+.hero-custom-grid .hero-bio-emphasis {
+  color: #171717;
+  background: #FF8000;
+  padding: 0 .12em .02em;
+  border-radius: 1px;
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
