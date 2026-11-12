@@ -134,17 +134,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Mobile: reveal each project's alternate photograph as it passes through
-  // the middle of the viewport while scrolling. Tapping always opens the project.
+  // Mobile: Karen-style circular photo reveal driven continuously by scroll.
+  // The second image grows from a small circle until it fills the project frame.
+  // Do not intercept taps: each project remains a normal link.
   const mobilePhotoView = window.matchMedia("(max-width: 760px) and (pointer: coarse)");
   const mobilePhotoMedia = [...document.querySelectorAll(".work .work-media:has(.work-lens-image)")];
-  if (mobilePhotoView.matches && mobilePhotoMedia.length && supportsObserver && !reduceMotion) {
-    const photoObserver = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        entry.target.classList.toggle("is-mobile-alt-visible", entry.isIntersecting);
+  if (mobilePhotoMedia.length && !reduceMotion) {
+    let photoUpdateQueued = false;
+    const updateMobilePhotoReveals = () => {
+      photoUpdateQueued = false;
+      if (!mobilePhotoView.matches) return;
+      const viewportHeight = window.innerHeight;
+      const startY = viewportHeight * 0.90;
+      const endY = viewportHeight * 0.30;
+      const revealDistance = startY - endY;
+      for (const media of mobilePhotoMedia) {
+        const bounds = media.getBoundingClientRect();
+        // Do not work on distant cards.
+        if (bounds.bottom < -viewportHeight || bounds.top > 2 * viewportHeight) continue;
+        const progress = Math.max(0, Math.min(1, (startY - bounds.top) / revealDistance));
+        // Circle 150% safely covers the full portrait frame including its corners.
+        media.style.setProperty("--mobile-reveal-radius", (progress * 150).toFixed(2) + "%");
       }
-    }, { rootMargin: "-33% 0px -33% 0px", threshold: 0 });
-    mobilePhotoMedia.forEach(media => photoObserver.observe(media));
+    };
+    const requestMobileRevealUpdate = () => {
+      if (photoUpdateQueued || !mobilePhotoView.matches) return;
+      photoUpdateQueued = true;
+      window.requestAnimationFrame(updateMobilePhotoReveals);
+    };
+    window.addEventListener("scroll", requestMobileRevealUpdate, { passive: true });
+    window.addEventListener("resize", requestMobileRevealUpdate, { passive: true });
+    if (typeof mobilePhotoView.addEventListener === "function") {
+      mobilePhotoView.addEventListener("change", requestMobileRevealUpdate);
+    }
+    requestMobileRevealUpdate();
   }
 
   // Animar las barras decorativas de las herramientas al aparecer.
