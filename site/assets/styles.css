@@ -1461,3 +1461,98 @@ a { color: inherit; }
     font-size: clamp(1.65rem, 7vw, 3.5rem);
   }
 }
+
+/* WHAT I DO - editorial services cards on forest green */
+.services-section {
+  background: #1F543B;
+  color: #F3E5D7;
+  padding-block: clamp(4.5rem, 8vw, 8rem);
+}
+.services-heading {
+  margin-bottom: clamp(2rem, 4vw, 3.8rem);
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(243,229,215,.45);
+}
+.services-eyebrow {
+  display: block;
+  margin-bottom: .75rem;
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  font-size: clamp(.85rem, 1vw, 1rem);
+  color: #F3E5D7;
+}
+.services-title {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.75rem, 6vw, 6rem);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.service-card {
+  min-width: 0;
+  min-height: clamp(320px, 29vw, 390px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 17px;
+  padding: clamp(1.35rem, 2vw, 2rem);
+  color: #1F543B;
+  background: #F3E5D7;
+  transition: transform .32s ease, box-shadow .32s ease;
+}
+.service-card--1, .service-card--4 { background: #F4A23A; }
+.service-card--2 { background: #EED9BD; }
+.service-card--3 { background: #F5B66A; }
+.service-card--5 { background: #F8E7D1; }
+.service-number {
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  font-size: .88rem;
+}
+.service-art {
+  width: clamp(64px, 7vw, 92px);
+  height: clamp(64px, 7vw, 92px);
+  margin-block: clamp(1.4rem, 3vw, 2.6rem);
+  transform: rotate(-5deg);
+  flex: none;
+}
+.service-card:nth-child(even) .service-art { transform: rotate(5deg); }
+.service-content { margin-top: auto; }
+.service-name {
+  margin-bottom: .85rem;
+  font-family: 'Obviously', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  line-height: 1.18;
+}
+.service-description {
+  max-width: 40ch;
+  font-family: 'Obviously', sans-serif;
+  font-weight: 400;
+  font-size: clamp(.93rem, 1.12vw, 1.08rem);
+  line-height: 1.52;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 13px 25px rgba(0,0,0,.18);
+  }
+}
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .service-card { min-height: 320px; }
+}
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { min-height: 270px; }
+  .service-art { margin-block: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card { transition: none; }
+}
