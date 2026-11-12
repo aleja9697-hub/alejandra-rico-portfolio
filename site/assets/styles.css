@@ -3474,3 +3474,28 @@ a { color: inherit; }
 @media (max-width: 760px) and (pointer: coarse) and (prefers-reduced-motion: reduce) {
   .work .work-media .work-lens-image { transition: none !important; }
 }
+
+/* Mobile portfolio: one image per project with only a subtle entrance zoom.
+   The alternate image remains available exclusively to the desktop hover lens. */
+@media (max-width: 760px) {
+  .work .work-media .work-lens-image,
+  .work .work-media.is-mobile-alt-visible .work-lens-image {
+    display: none !important;
+    opacity: 0 !important;
+    clip-path: none !important;
+  }
+  .work .work-media > img:first-child {
+    transform: scale(1) !important;
+    transition: transform .85s ease-out !important;
+  }
+  .work .work-item.is-visible .work-media > img:first-child {
+    transform: scale(1.025) !important;
+  }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .work .work-media > img:first-child,
+  .work .work-item.is-visible .work-media > img:first-child {
+    transform: none !important;
+    transition: none !important;
+  }
+}
