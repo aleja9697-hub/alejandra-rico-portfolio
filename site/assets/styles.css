@@ -2767,3 +2767,57 @@ a { color: inherit; }
   line-height: 1.1;
   max-width: 100%;
 }
+
+/* RESUULTS: dark-green full-width panel, cream type and clear column divider. */
+.about.results-section {
+  background: #1F543B;
+  color: #F3E5D7;
+  border-top: 0;
+}
+.results-section #results-title,
+.results-section .cv-title,
+.results-section .impact-value,
+.results-section .impact-label {
+  color: #F3E5D7;
+}
+.results-section #results-title {
+  border-bottom-color: rgba(243, 229, 215, .34);
+}
+.results-section .impact {
+  position: relative;
+}
+.results-section .impact-item {
+  grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
+  column-gap: 0;
+  border-bottom: 1px solid rgba(243, 229, 215, .28);
+}
+.results-section .impact-value {
+  padding-right: clamp(1rem, 2vw, 2rem);
+}
+.results-section .impact-label {
+  max-width: 100%;
+  padding-left: clamp(1.5rem, 3.2vw, 3rem);
+}
+/* One continuous dividing line, separate from the row rules. */
+.results-section .impact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30%;
+  width: 1px;
+  background: rgba(243, 229, 215, .48);
+  pointer-events: none;
+}
+@media (max-width: 760px) {
+  .results-section .impact-item {
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
+  .results-section .impact-label {
+    padding-left: 0;
+  }
+  .results-section .impact::before {
+    display: none;
+  }
+}
