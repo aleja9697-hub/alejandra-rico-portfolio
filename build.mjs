@@ -217,6 +217,14 @@ src="/img/Home1.png"
   </div>
 </section>
 
+<div class="skills-marquee" role="region" aria-label="Graphic design skills">
+  <div class="skills-marquee-track">
+    ${[0,1].map((copy) => `<div class="skills-marquee-set" ${copy === 1 ? 'aria-hidden="true"' : ''}>
+      ${["VISUAL IDENTITY","EDITORIAL DESIGN","SOCIAL MEDIA","VIDEO EDITING","PRINT & POP","WEB & UX"].map((name) => `<span class="skills-marquee-item"><span class="skills-marquee-star" aria-hidden="true">✳</span>${name}</span>`).join('')}
+    </div>`).join('')}
+  </div>
+</div>
+
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="section-head">
