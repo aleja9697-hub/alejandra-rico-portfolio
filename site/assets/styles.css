@@ -3116,3 +3116,50 @@ a { color: inherit; }
     width: clamp(35px, 9vw, 60px);
   }
 }
+
+/* Mobile typography: align portfolio headings and project captions to the left. */
+@media (max-width: 760px) {
+  .work .section-title,
+  .work .work-title,
+  .work .work-caption,
+  .results-section #results-title,
+  .about-teaser #about-title,
+  .services-section #services-title,
+  .contact .contact-title {
+    text-align: left;
+  }
+  .work .work-caption {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .work .work-title {
+    width: 100%;
+    align-self: flex-start;
+  }
+  .work .work-meta {
+    align-self: flex-start;
+    justify-content: flex-start;
+  }
+
+  /* Let the portrait extend above the rounded green arch without cropping her forehead. */
+  .about-teaser .about-portrait--animated {
+    overflow: visible;
+    background: transparent;
+    margin-top: clamp(30px, 8vw, 48px);
+  }
+  .about-teaser .about-portrait--animated::before {
+    border-radius: inherit;
+  }
+  .about-teaser .about-portrait--animated img:not(.about-portrait-star) {
+    width: 89%;
+    position: relative;
+    top: clamp(-45px, -9vw, -27px);
+    max-height: none;
+  }
+  .about-teaser .about-portrait--animated .about-portrait-star {
+    left: -2%;
+  }
+  .about-teaser .about-portrait--animated .about-portrait-star--second {
+    right: -1%;
+  }
+}
