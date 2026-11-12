@@ -147,7 +147,7 @@ export const projects = [
     ],
     palette: ['#018087', '#63BBB5', '#C9FFEB', '#D3D3D3'],
     cover: 6,
-    reveal: 3,
+    reveal: 2,
     coverPosition: '50% 55%',
     gallery: [[1, 2, 3], [4, 5]],
     alts: [
