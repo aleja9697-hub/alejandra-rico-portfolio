@@ -1954,3 +1954,11 @@ a { color: inherit; }
   }
   .hero-custom-grid .hero-grid-line--first { font-size: 1em; }
 }
+
+/* High-resolution source supplied for the hero: use image file directly */
+.hero-custom-grid .hero-grid-art {
+  background-image: url('/assets/img/fondo-grid-hero-hq.avif');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
