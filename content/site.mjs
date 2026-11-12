@@ -231,7 +231,7 @@ export const projects = [
       ['Result', '100 printed copies distributed in spaces tied to urban development, infrastructure, tourism and public space, and more than 25,000 interactions with the digital version.'],
     ],
     cover: 4,
-    reveal: 1,
+    reveal: 6,
     coverPosition: '50% 50%',
     gallery: [[1], [2, 3], [4, 5]],
     alts: [
