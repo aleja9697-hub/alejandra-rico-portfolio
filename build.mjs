@@ -248,7 +248,7 @@ ${rows}
 
 <section class="about results-section" id="results" aria-labelledby="results-title">
   <div class="wrap impact-wrap">
-    <h2 class="cv-title" id="results-title">RESUULTS</h2>
+    <h2 class="cv-title about-drawn-title" id="results-title"><span>RESUULTS</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
     <dl class="impact">
       ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
     </dl>
