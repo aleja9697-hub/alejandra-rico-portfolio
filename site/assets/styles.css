@@ -2640,3 +2640,40 @@ a { color: inherit; }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+/* Selected Work: compact single-line metadata and one-column Cali Film Commission. */
+.work .work-tag {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: .32em;
+  padding: .40em .58em;
+  font-size: clamp(.60rem, .72vw, .76rem);
+  line-height: 1.12;
+}
+.work .work-tag-discipline,
+.work .work-tag-year {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.work .work-tag-year {
+  padding-left: .45em;
+}
+.work .work-caption {
+  min-width: 0;
+}
+.work .work-title {
+  min-width: 0;
+}
+@media (min-width: 1025px) {
+  /* Keep the orange highlight and black text, but add two CSS pixels to the bio. */
+  .hero-custom-grid .hero-bio-card {
+    font-size: calc(clamp(.87rem, 1vw, 1.06rem) + 2px);
+    line-height: 1.35;
+  }
+  .hero-custom-grid .hero-bio-emphasis {
+    color: #171717;
+  }
+}
+@media (max-width: 760px) {
+  .work .work-tag { font-size: .7rem; }
+}
