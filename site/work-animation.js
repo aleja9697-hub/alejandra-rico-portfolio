@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Dibujar el subrayado ondulado tanto en About como en More About Me.
-  const aboutTitles = document.querySelectorAll(".about .about-drawn-title");
+  const aboutTitles = document.querySelectorAll(".about .about-drawn-title, .services-section .about-drawn-title");
   if (aboutTitles.length) {
     if (reduceMotion || !supportsObserver) {
       aboutTitles.forEach((heading) => heading.classList.add("is-drawn"));
