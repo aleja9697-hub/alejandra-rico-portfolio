@@ -193,7 +193,7 @@ ${row
     const alternateNumber = p.gallery?.flat().find((n) => n !== (p.cover || 1));
     const alternate = alternateNumber ? img(p.slug, alternateNumber) : null;
     const alt = p.coverImage ? `${p.title}: a selection of posts` : (p.alts?.[(p.cover || 1) - 1] || p.title);
-    return `  <a class="work-item span-${span}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
+    return `  <a class="work-item span-${span}${slug === 'cali-film-commission' ? ' is-featured-wide' : ''}${p.coverFit === 'contain' ? ' is-contain' : ''}" href="work/${p.slug}/" style="--span:${span}">
     <span class="work-media">${picture(c, alt, { sizes: `(max-width: 760px) 100vw, ${Math.round((span / 12) * 100)}vw`, eager: slug === 'al-centro' || slug === 'mandato-centro', style: p.coverPosition ? `object-position:${p.coverPosition}` : '' })}${alternate ? `<img class="work-lens-image" src="${alternate.src}" width="${alternate.w}" height="${alternate.h}" alt="" aria-hidden="true" loading="lazy" decoding="async">` : ''}</span>
     <span class="work-caption">
       <span class="work-title">${esc(p.shortTitle || p.title)}</span>   
@@ -248,7 +248,7 @@ ${rows}
 
 <section class="about results-section" id="results" aria-labelledby="results-title">
   <div class="wrap impact-wrap">
-    <h2 class="cv-title" id="results-title">Results</h2>
+    <h2 class="cv-title" id="results-title">RESUULTS</h2>
     <dl class="impact">
       ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
     </dl>
