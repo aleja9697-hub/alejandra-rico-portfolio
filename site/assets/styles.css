@@ -2528,3 +2528,78 @@ a { color: inherit; }
     height: clamp(40px, 3.2vw, 52px);
   }
 }
+
+/* Final hero hierarchy: orange marker highlight on every viewport. */
+.hero-custom-grid .hero-bio-emphasis {
+  text-decoration: none;
+  background: linear-gradient(to bottom, transparent 70%, #FF8000 70%, #FF8000 88%, transparent 88%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Desktop only: centered name and deliberately quieter, equal-height information cards. */
+@media (min-width: 1025px) {
+  .hero-custom-grid .hero-grid-title {
+    align-items: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .hero-custom-grid .hero-grid-line {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-custom-grid .hero-grid-line--second {
+    justify-content: center;
+  }
+  .hero-custom-grid .hero-grid-details--html {
+    width: min(100%, 1420px);
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(0px, 1.3vw, 22px);
+    grid-template-columns: minmax(0, 1.73fr) minmax(0, 1fr);
+    gap: clamp(20px, 2vw, 30px);
+    align-items: stretch;
+  }
+  .hero-custom-grid .hero-bio-card,
+  .hero-custom-grid .hero-info-card {
+    box-sizing: border-box;
+    height: clamp(142px, 9.1vw, 158px);
+    min-height: 0;
+    max-height: none;
+    align-self: stretch;
+  }
+  .hero-custom-grid .hero-bio-card {
+    display: flex;
+    justify-content: center;
+    padding: 13px clamp(17px, 1.2vw, 23px);
+    border-radius: 15px;
+    font-family: 'Obviously', sans-serif;
+    font-weight: 400;
+    font-size: clamp(.87rem, 1vw, 1.06rem);
+    line-height: 1.42;
+  }
+  .hero-custom-grid .hero-info-card {
+    display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .hero-custom-grid .hero-info-pill {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-height: 100%;
+    box-sizing: border-box;
+    padding: 3px 9px 3px 3px;
+    gap: 9px;
+    font-family: 'Obviously', sans-serif;
+    font-weight: 400;
+    font-size: clamp(.82rem, .89vw, .96rem);
+    line-height: 1.2;
+    overflow: hidden;
+  }
+  .hero-custom-grid .hero-pill-icon {
+    width: clamp(30px, 2.1vw, 36px);
+    height: clamp(30px, 2.1vw, 36px);
+  }
+}
