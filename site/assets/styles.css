@@ -3362,3 +3362,17 @@ a { color: inherit; }
   }
   .about-detail .tool-skill-info { min-width: 0; }
 }
+
+/* Tools: cream monograms on orange icon tiles; orange progress fill. */
+.about-detail .tool-skill-icon {
+  color: #F3E5D7;
+}
+.about-detail .tool-skill-fill {
+  background: #FF8000;
+}
+.about-detail .tool-capcut-logo {
+  display: block;
+  width: 65%;
+  height: 65%;
+  overflow: visible;
+}
