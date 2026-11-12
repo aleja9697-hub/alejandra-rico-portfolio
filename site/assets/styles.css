@@ -2436,3 +2436,36 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .work .work-lens-image { transition: none; }
 }
+
+/* MOBILE ONLY: scroll-driven photo crossfades and quieter hero information */
+@media (max-width: 760px) {
+  .hero-custom-grid .hero-grid-content {
+    gap: clamp(24px, 6vw, 34px);
+  }
+  .hero-custom-grid .hero-grid-details--html { gap: 10px; }
+  .hero-custom-grid .hero-bio-card {
+    font-family: 'Obviously', sans-serif;
+    font-weight: 400;
+    font-size: clamp(.75rem, 2.78vw, .84rem);
+    line-height: 1.5;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  .hero-custom-grid .hero-info-card { gap: 6px; }
+  .hero-custom-grid .hero-info-pill {
+    font-family: 'Obviously', sans-serif;
+    font-weight: 400;
+    font-size: clamp(.7rem, 2.55vw, .8rem);
+    line-height: 1.25;
+    padding: 3px 10px 3px 3px;
+  }
+  .hero-custom-grid .hero-pill-icon {
+    width: 29px;
+    height: 29px;
+  }
+  .work .work-mobile-photo-hint { display: none !important; }
+  .work .work-lens-image { transition: opacity .55s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work .work-lens-image { transition: none; }
+}
