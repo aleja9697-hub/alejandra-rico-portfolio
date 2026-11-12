@@ -1556,3 +1556,60 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .service-card { transition: none; }
 }
+
+/* WHAT I DO - compact six-card desktop layout */
+@media (min-width: 1280px) {
+  .services-section .wrap {
+    max-width: 1760px;
+  }
+  .services-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(10px, 1.1vw, 18px);
+  }
+  .service-card {
+    min-height: 305px;
+    padding: clamp(12px, 1.15vw, 19px);
+    border-radius: 13px;
+  }
+  .service-art {
+    width: clamp(46px, 3.8vw, 66px);
+    height: clamp(46px, 3.8vw, 66px);
+    margin-block: clamp(10px, 1.2vw, 22px);
+  }
+  .service-name {
+    font-size: clamp(1.02rem, 1.12vw, 1.35rem);
+    margin-bottom: .55rem;
+  }
+  .service-description {
+    font-size: clamp(.79rem, .79vw, .97rem);
+    line-height: 1.45;
+  }
+  .services-heading { margin-bottom: clamp(1.5rem, 3vw, 2.75rem); }
+}
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .service-card { min-height: 295px; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .service-card { min-height: 300px; padding: 1.1rem; }
+  .service-art { width: 58px; height: 58px; margin-block: .9rem; }
+  .service-name { font-size: 1.2rem; }
+  .service-description { font-size: .9rem; }
+}
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem; }
+  .service-card { min-height: 285px; padding: 1rem; }
+  .service-art { width: 52px; height: 52px; margin-block: .9rem; }
+  .service-name { font-size: 1.05rem; }
+  .service-description { font-size: .82rem; }
+}
+@media (max-width: 390px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { min-height: 245px; }
+}
+.service-art-file {
+  display: block;
+  object-fit: contain;
+  transform: none;
+}
