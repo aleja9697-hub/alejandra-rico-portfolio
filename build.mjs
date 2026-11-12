@@ -271,7 +271,7 @@ ${rows}
   <div class="wrap">
     <div class="services-heading">
       <span class="services-eyebrow">What I bring to every project</span>
-      <h2 class="services-title" id="services-title">WHATT I DOO</h2>
+      <h2 class="services-title about-drawn-title" id="services-title"><span>WHATT I DOO</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
     </div>
     <div class="services-grid">
       ${site.capabilities.map((capability, i) => `<article class="service-card service-card--${i % 6}">
