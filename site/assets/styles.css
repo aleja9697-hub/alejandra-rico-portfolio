@@ -2880,3 +2880,56 @@ a { color: inherit; }
     transition: none;
   }
 }
+
+/* Bridge between ABOOUT and WHATT I DOO: scroll-highlighted design statement. */
+.statement-section {
+  background: #F3E5D7;
+  color: #1F543B;
+  padding: clamp(2.5rem, 6vw, 6rem) 0 clamp(3rem, 6vw, 6rem);
+}
+.statement-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.statement-title {
+  position: relative;
+  display: block;
+  width: min(100%, 1100px);
+  margin: 0;
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.05rem, 5.6vw, 6rem);
+  line-height: 1.18;
+  letter-spacing: 0;
+  text-align: center;
+  overflow-wrap: normal;
+}
+.statement-base,
+.statement-reveal {
+  display: block;
+  white-space: normal;
+}
+.statement-reveal {
+  position: absolute;
+  inset: 0;
+  color: #F3E5D7;
+  background: #1F543B;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.55s cubic-bezier(.2,.7,.1,1);
+  pointer-events: none;
+}
+.statement-title.is-highlighted .statement-reveal {
+  clip-path: inset(0 0 0 0);
+}
+@media (max-width: 760px) {
+  .statement-section { padding-block: 3rem; }
+  .statement-title {
+    font-size: clamp(1.6rem, 7vw, 3.5rem);
+    line-height: 1.25;
+    text-align: left;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .statement-reveal { clip-path: inset(0 0 0 0); transition: none; }
+}
