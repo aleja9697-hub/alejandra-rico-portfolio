@@ -2881,3 +2881,13 @@ a { color: inherit; }
   }
 }
 
+
+/* Tighten the desktop transition from ABOOUT to WHATT I DOO, without changing mobile. */
+@media (min-width: 1025px) {
+  .about.about-teaser {
+    padding-bottom: clamp(1.5rem, 2.8vw, 3rem);
+  }
+  .services-section {
+    padding-top: clamp(1.25rem, 2vw, 2.5rem);
+  }
+}
