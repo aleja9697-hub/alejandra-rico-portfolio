@@ -118,12 +118,18 @@ ${contactBlock()}
 
 // Original line icons for capabilities, with a loose hand-drawn character.
 const capabilityArt = [
-  '<path d="M11 33 12 12 32 8 51 13 49 35 31 41 11 33Z"/><path d="m13 14 17 10 19-11M30 24l1 15"/><path d="m47 46 4 3m-6 0 3-7"/>',
-  '<path d="m13 11 39 0-1 42-38-1z"/><path d="M20 21q12-5 24 0M20 29h23M20 37h12"/><path d="M38 34q8 2 7 12l-9-2z"/>',
-  '<path d="M14 20q4-9 17-10t17 11q8 11-5 21t-23 2q-11-7-6-24Z"/><path d="M20 26q11-11 22 0M19 33q12 10 25-1"/><path d="m11 47 8-5m31-27 5-5"/>',
-  '<rect x="13" y="18" width="40" height="28" rx="3"/><path d="m19 18 4-8h18l5 8M23 46l8 8 8-8"/><circle cx="33" cy="32" r="8"/><path d="m50 12 5-3M9 31l-5 2"/>',
-  '<path d="M12 13h40v34H12z"/><path d="m13 22 14 10 12-12 13 9M18 41l9-4 12 5"/><path d="M23 12q10-8 19 0M31 49l2 6"/>',
-  '<rect x="10" y="12" width="44" height="37" rx="3"/><path d="M10 22h44M20 17h1M27 17h1M21 36l7-7m-7 7 7 7m15-14-7 14"/><path d="m14 52 3 3m33-4-2 4"/>'
+  // Visual identity: pen nib with anchor-point detail.
+  '<path d="M32 8 53 29 40 51 24 54 10 40 13 24Z"/><path d="M32 8v14M10 40l15-15M40 51l-9-9"/><circle cx="31" cy="33" r="5"/><path d="m31 38-7 16"/>',
+  // Editorial: open two-page publication with typographic lines.
+  '<path d="M32 17c-7-5-16-5-25-2v35c9-3 18-3 25 2 7-5 16-5 25-2V15c-9-3-18-3-25 2Z"/><path d="M32 17v35M13 23c4-1 8-1 13 1M13 31c4-1 8-1 13 1M38 24c4-2 8-2 13-1M38 32c4-2 8-2 13-1"/><path d="M13 39c4-1 8-1 13 1"/>',
+  // Social media: recognizable phone, heart and message bubble.
+  '<rect x="17" y="7" width="30" height="50" rx="6"/><path d="M27 12h10M28 51h8"/><path d="M32 39c-6-4-11-8-8-13 2-4 7-3 8 0 2-3 7-4 9 0 3 5-2 9-9 13Z"/>',
+  // Video and motion: clapper board and a play button.
+  '<rect x="9" y="22" width="46" height="34" rx="3"/><path d="M9 22 7 14 52 7l2 10-45 7M17 12l7 10M31 10l7 10M45 8l6 10"/><path d="m27 31 13 8-13 8V31Z"/>',
+  // Print and POP: layered poster sheets and print registration mark.
+  '<path d="M15 14h33v41H15zM21 9h33v41"/><path d="M22 22h18v11H22zM22 39h18M22 45h12"/><path d="M44 16h7m-3-3v7"/>',
+  // Web & UX: browser interface, layout and cursor arrow.
+  '<rect x="7" y="10" width="50" height="43" rx="4"/><path d="M7 21h50M14 16h2M21 16h2M28 16h2M15 30h18v13H15z"/><path d="m39 30 11 13-7-1-3 6-4-16Z"/>'
 ];
 const selectedServiceIcons = [
   'visual-identity',
