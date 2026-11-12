@@ -98,6 +98,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // About photo reveal: paint the green arch, reveal the original portrait,
+  // then let the orange star float. Runs once on scroll into view.
+  const animatedPortrait = document.querySelector(".about-teaser .about-portrait--animated");
+  if (animatedPortrait) {
+    if (reduceMotion || !supportsObserver) {
+      animatedPortrait.classList.add("is-painted");
+    } else {
+      const portraitObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-painted");
+          portraitObserver.unobserve(entry.target);
+        }
+      }, { threshold: .25, rootMargin: "0px 0px -6% 0px" });
+      portraitObserver.observe(animatedPortrait);
+    }
+  }
+
   // Dibujar el subrayado ondulado tanto en About como en More About Me.
   const aboutTitles = document.querySelectorAll(".about .about-drawn-title, .services-section .about-drawn-title");
   if (aboutTitles.length) {
