@@ -120,6 +120,7 @@ export const projects = [
     ],
     palette: ['#E66D1F', '#161616', '#DCCFAB'],
     cover: 1,
+    reveal: 5,
     coverPosition: '50% 48%',
     gallery: [[1, 2, 3], [4, 5]],
     alts: [
@@ -145,7 +146,8 @@ export const projects = [
       ['Result', 'A cleaner, more modern brand that communicates better on social media and holds up on site, from hard hats and uniforms to buildings and flags.'],
     ],
     palette: ['#018087', '#63BBB5', '#C9FFEB', '#D3D3D3'],
-    cover: 2,
+    cover: 5,
+    reveal: 3,
     coverPosition: '50% 55%',
     gallery: [[1, 2, 3], [4, 5]],
     alts: [
@@ -173,6 +175,7 @@ export const projects = [
     ],
     palette: ['#F75514', '#0D1A62', '#2E2EDF', '#F4F5D2'],
     cover: 1,
+    reveal: 2,
     coverPosition: '100% 50%',
     gallery: [[1, 2, 3], [4, 5]],
     alts: [
@@ -226,6 +229,7 @@ export const projects = [
       ['Result', '100 printed copies distributed in spaces tied to urban development, infrastructure, tourism and public space, and more than 25,000 interactions with the digital version.'],
     ],
     cover: 4,
+    reveal: 1,
     coverPosition: '50% 50%',
     gallery: [[1], [2, 3], [4, 5]],
     alts: [
@@ -305,6 +309,7 @@ export const projects = [
       ['Result', 'A family of printed pieces used at events and in public space across the city.'],
     ],
     cover: 1,
+    reveal: 5,
     coverPosition: '50% 35%',
     gallery: [[1, 2, 3], [4, 5]],
     alts: [
