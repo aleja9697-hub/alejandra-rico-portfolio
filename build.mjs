@@ -252,7 +252,7 @@ ${rows}
   <div class="wrap">
     <div class="services-heading">
       <span class="services-eyebrow">What I bring to every project</span>
-      <h2 class="services-title" id="services-title">What I do</h2>
+      <h2 class="services-title" id="services-title">WHATT I DOO</h2>
     </div>
     <div class="services-grid">
       ${site.capabilities.map((capability, i) => `<article class="service-card service-card--${i % 6}">
