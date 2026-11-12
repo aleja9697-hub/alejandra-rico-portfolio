@@ -269,6 +269,14 @@ ${rows}
     </div>
   </div>
 </section>
+<section class="quote-motion-section" aria-label="GREEAT DESIGN HAS SOOMETHING TO SAY.">
+  <div class="quote-motion-band">
+    <div class="quote-motion-track" aria-hidden="true">
+      <div class="quote-motion-group"><span class="quote-motion-item"><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"><span>GREEAT DESIGN HAS SOOMETHING TO SAY.</span><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"></span><span class="quote-motion-item"><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"><span>GREEAT DESIGN HAS SOOMETHING TO SAY.</span><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"></span></div>
+      <div class="quote-motion-group"><span class="quote-motion-item"><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"><span>GREEAT DESIGN HAS SOOMETHING TO SAY.</span><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"></span><span class="quote-motion-item"><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"><span>GREEAT DESIGN HAS SOOMETHING TO SAY.</span><img src="/assets/img/estrella-marquee.svg" width="42" height="42" alt="" aria-hidden="true"></span></div>
+    </div>
+  </div>
+</section>
 <section class="services-section" id="services" aria-labelledby="services-title">
   <div class="wrap">
     <div class="services-heading">
