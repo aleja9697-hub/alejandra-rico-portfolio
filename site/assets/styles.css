@@ -1648,3 +1648,15 @@ a { color: inherit; }
 .service-art {
   color: #F3E5D7;
 }
+
+/* ABOUT teaser heading: Stretch Pro, aligned with Selected Work */
+.about-teaser .about-drawn-title {
+  font-family: 'Stretch Pro', sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  font-size: clamp(2.4rem, 6.5vw, 6rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #1F543B;
+}
