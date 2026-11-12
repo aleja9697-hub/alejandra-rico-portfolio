@@ -229,7 +229,7 @@ function aboutPage() {
     <div class="wrap about-detail-intro">
       <a class="about-back" href="../#about">← Back to home</a>
       <span class="about-eyebrow">The person behind the work</span>
-      <h1 id="about-title" class="section-title">More about me</h1>
+      <h1 id="about-title" class="section-title about-drawn-title"><span>More about me</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h1>
       <div class="about-detail-lead">
         <figure class="about-portrait">
           ${picture(portrait, `Portrait of ${site.fullName}`, { sizes: '(max-width: 760px) 85vw, 32vw', eager: true })}
@@ -260,10 +260,6 @@ function aboutPage() {
         <ul class="plain-list">
           ${site.education.map((e) => `<li><span class="strong">${esc(e.title)}</span><span>${esc(e.org)}${e.note ? `, ${esc(e.note)}` : ''}</span></li>`).join('\n          ')}
         </ul>
-      </div>
-      <div class="cv-block">
-        <h3 class="cv-title">Tools</h3>
-        <p class="tool-line">${site.tools.map(esc).join(', ')}</p>
       </div>
       <div class="cv-block">
         <h3 class="cv-title">Languages</h3>
