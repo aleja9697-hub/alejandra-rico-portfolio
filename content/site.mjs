@@ -283,7 +283,7 @@ export const projects = [
       ['Approach', 'Expressive typography, vibrant color, photography and key data, organized so institutional results read as a clear, approachable and territory focused publication.'],
       ['Result', 'Together with the 2024 edition, about 2,000 copies distributed in downtown Cali.'],
     ],
-    cover: 2,
+    cover: 6,
     coverPosition: '50% 50%',
     gallery: [[1], [2, 3], [4, 5]],
     alts: [
@@ -292,6 +292,7 @@ export const projects = [
       'Newspapers stacked on a woven tray',
       'The newspaper posted on a graffiti covered wall',
       'Several copies fanned out on a table',
+      'Reader holding the teal Edison Giraldo accountability booklet',
     ],
   },
   {
