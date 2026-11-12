@@ -2891,3 +2891,83 @@ a { color: inherit; }
     padding-top: clamp(1.25rem, 2vw, 2.5rem);
   }
 }
+
+/* About teaser portrait: paint the arched green backdrop first, then reveal portrait,
+   with the portfolio's original orange star gently floating above it. */
+.about-teaser .about-portrait--animated {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #1F543B;
+  border-radius: 999px 999px 3px 3px;
+}
+.about-teaser .about-portrait--animated::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #1F543B;
+}
+.about-teaser .about-portrait--animated picture,
+.about-teaser .about-portrait--animated > img:not(.about-portrait-star) {
+  position: relative;
+  z-index: 1;
+}
+.about-teaser .about-portrait--animated img:not(.about-portrait-star) {
+  width: 84%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  transform-origin: center bottom;
+}
+.about-teaser .about-portrait--animated .about-portrait-star {
+  position: absolute;
+  top: 17%;
+  left: 0;
+  z-index: 3;
+  width: clamp(55px, 7vw, 106px);
+  height: auto;
+  pointer-events: none;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .about-teaser .about-portrait--animated {
+    background: transparent;
+  }
+  .about-teaser .about-portrait--animated::before {
+    clip-path: inset(100% 0 0 0 round 48% 48% 0 0);
+    transition: clip-path .85s cubic-bezier(.2,.7,.2,1);
+  }
+  .about-teaser .about-portrait--animated img:not(.about-portrait-star) {
+    opacity: 0;
+    transform: translateY(34px) scale(.96);
+    transition: opacity .8s ease .55s, transform .9s cubic-bezier(.2,.7,.2,1) .55s;
+  }
+  .about-teaser .about-portrait--animated .about-portrait-star {
+    opacity: 0;
+    transform: translateY(18px) scale(.5) rotate(-28deg);
+    transition: opacity .5s ease 1.12s, transform .75s cubic-bezier(.2,.75,.2,1) 1.12s;
+  }
+  .about-teaser .about-portrait--animated.is-painted::before {
+    clip-path: inset(0 0 0 0);
+  }
+  .about-teaser .about-portrait--animated.is-painted img:not(.about-portrait-star) {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .about-teaser .about-portrait--animated.is-painted .about-portrait-star {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+    animation: about-star-float 4.2s ease-in-out 1.85s infinite alternate;
+  }
+  @keyframes about-star-float {
+    from { transform: translateY(0) rotate(-7deg); }
+    to { transform: translateY(-9px) rotate(9deg); }
+  }
+}
+@media (max-width: 760px) {
+  .about-teaser .about-portrait--animated .about-portrait-star {
+    width: clamp(52px, 16vw, 83px);
+  }
+}
