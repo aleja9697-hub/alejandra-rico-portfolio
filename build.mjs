@@ -267,14 +267,6 @@ ${rows}
     </div>
   </div>
 </section>
-<section class="statement-section" aria-label="Creative statement">
-  <div class="wrap statement-wrap">
-    <h2 class="statement-title">
-      <span class="statement-base">Greeat DESIGN HAS SooMETHING TO SAY.</span>
-      <span class="statement-reveal" aria-hidden="true">Greeat DESIGN HAS SooMETHING TO SAY.</span>
-    </h2>
-  </div>
-</section>
 <section class="services-section" id="services" aria-labelledby="services-title">
   <div class="wrap">
     <div class="services-heading">
