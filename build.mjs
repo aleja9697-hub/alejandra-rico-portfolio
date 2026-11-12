@@ -197,6 +197,15 @@ ${rows}
   </div>
 </section>
 
+<section class="about results-section" id="results" aria-labelledby="results-title">
+  <div class="wrap impact-wrap">
+    <h2 class="cv-title" id="results-title">Results</h2>
+    <dl class="impact">
+      ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
+    </dl>
+  </div>
+</section>
+
 <section class="about about-teaser" id="about" aria-labelledby="about-title">
   <div class="wrap about-grid">
     <figure class="about-portrait">
@@ -230,13 +239,6 @@ function aboutPage() {
         </div>
       </div>
     </div>
-  <div class="wrap impact-wrap">
-    <h3 class="cv-title">Results</h3>
-    <dl class="impact">
-      ${site.impact.map((m) => `<div class="impact-item"><dt class="impact-value">${esc(m.value)}</dt><dd class="impact-label">${esc(m.label)}</dd></div>`).join('\n      ')}
-    </dl>
-  </div>
-
   <div class="wrap cv">
     <div class="cv-block cv-experience">
       <h3 class="cv-title">Experience</h3>
