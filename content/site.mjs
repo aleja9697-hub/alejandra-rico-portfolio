@@ -227,6 +227,7 @@ export const projects = [
     heroImage: 7,
     galleryMode: 'carousel',
     flipbook: 'https://online.fliphtml5.com/jhcro/vvmu/#p=1',
+    flipbookPdf: 'publications/Mandato-Centro-WEB-Lectura.pdf',
     client: 'Cali City Council',
     role: 'Editorial design and layout',
     tools: ['Adobe Illustrator', 'Adobe Photoshop'],
