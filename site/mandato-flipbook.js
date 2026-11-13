@@ -8,7 +8,7 @@ async function loadPageFlip() {
   if (window.St && window.St.PageFlip) return window.St.PageFlip;
   await new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js';
+    script.src = 'https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js';
     script.onload = resolve;
     script.onerror = reject;
     document.head.appendChild(script);
@@ -112,7 +112,7 @@ async function setupBook(container) {
       near(current);
     }
     pageFlip.on('flip', (event) => update(event.data));
-    pageFlip.loadFromHtml(sheets.map((sheet) => sheet.page));
+    pageFlip.loadFromHTML(sheets.map((sheet) => sheet.page));
 
     prev.addEventListener('click', () => pageFlip.flipPrev('bottom'));
     next.addEventListener('click', () => pageFlip.flipNext('bottom'));
