@@ -441,12 +441,29 @@ ${images[g.key]
       .join('\n');
   }
 
-  const body = `<article class="project">
-  <header class="project-head">
+
+  const isMandato = p.slug === 'mandato-centro';
+  const heroPhoto = isMandato ? img(p.slug, 3) : null;
+  const editorialHero = isMandato ? `<header class="editorial-hero" aria-label="Mandato Centro project introduction">
+    ${picture(heroPhoto, p.alts?.[2] || p.title, { sizes: '100vw', eager: true, cls: 'editorial-hero-image' })}
+    <div class="editorial-hero-shade" aria-hidden="true"></div>
+    <div class="editorial-hero-inner wrap">
+      <a class="editorial-back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
+      <div class="editorial-hero-bottom">
+        <span class="editorial-category">${esc(p.discipline)} · ${esc(p.year)}</span>
+        <h1 class="editorial-title">${esc(p.title)}<img src="${root}assets/img/estrella-marquee.svg" class="editorial-title-star" alt="" aria-hidden="true" width="140" height="140"></h1>
+        <p class="editorial-subtitle">${esc(p.summary)}</p>
+      </div>
+    </div>
+  </header>` : '';
+
+  const body = `<article class="project ${isMandato ? 'project--editorial' : ''}">
+  ${editorialHero}
+  <header class="project-head ${isMandato ? 'project-head--editorial' : ''}">
     <div class="wrap">
-      <a class="back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
+${isMandato ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
       <h1 class="project-title">${esc(p.title)}</h1>
-      <p class="project-summary">${esc(p.summary)}</p>
+      <p class="project-summary">${esc(p.summary)}</p>`}
       <dl class="project-meta">
         ${meta.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('\n        ')}
       </dl>
@@ -473,7 +490,7 @@ ${images[g.key]
   </nav>
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: isMandato ? 'is-project is-mandato' : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {
