@@ -413,7 +413,7 @@ function projectPage(p, i) {
     <div class="project-carousel-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="${esc(p.title)} project photography">
 ${photoNumbers.map((n, k) => {
   const im = img(p.slug, n);
-  if (!im) throw new Error(${p.slug}: image ${n} missing`);
+  if (!im) throw new Error(`${p.slug}: image ${n} missing`);
   return `      <figure class="project-carousel-slide" aria-label="Image ${k + 1} of ${photoNumbers.length}">
         ${picture(im, p.alts?.[n - 1] || p.title, { sizes: '(max-width: 760px) 90vw, 74vw' })}
       </figure>`;
