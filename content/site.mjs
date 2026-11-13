@@ -203,7 +203,8 @@ export const projects = [
       ['Result', 'An identity applied to the menu, pizza boxes, staff shirts, tote bags and street signage ahead of opening.'],
     ],
     palette: ['#5E0006', '#8F0F06', '#C83D0F', '#E1CDAC'],
-    cover: 6,
+    cover: 7,
+    reveal: 5,
     coverPosition: '50% 40%',
     gallery: [[1], [2, 3], [4, 5, 6]],
     alts: [
@@ -213,6 +214,7 @@ export const projects = [
       'Staff member in a red Fornatta shirt',
       'Red Fornatta tote bag with the oven illustration',
       'Fornatta sidewalk sign',
+      'Fornatta Pizza updated cover photograph',
     ],
   },
   {
