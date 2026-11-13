@@ -495,10 +495,22 @@ ${images[g.key]
         <h2 id="project-flipbook-title">Flip through the book</h2>
         <p>Explore the complete publication, page by page.</p>
       </div>
+      ${p.flipbookPdf ? `<div class="project-flipbook-custom" data-pdf="${root}${esc(p.flipbookPdf)}" hidden>
+        <div class="project-book-stage">
+          <div class="project-book-loading" role="status">Preparing your book…</div>
+          <div class="project-book-pages" aria-label="Interactive page turning viewer"></div>
+        </div>
+        <div class="project-book-controls">
+          <button class="project-book-btn" type="button" data-book-prev aria-label="Previous page">${icon.arrowLeft}</button>
+          <span class="project-book-counter" aria-live="polite">Page 1</span>
+          <button class="project-book-btn" type="button" data-book-next aria-label="Next page">${icon.arrowRight}</button>
+        </div>
+      </div>` : ''}
       <div class="project-flipbook-frame">
         <iframe src="${esc(p.flipbook)}" title="${esc(p.title)} interactive publication" loading="lazy" allowfullscreen></iframe>
       </div>
-      <a class="project-flipbook-link" href="${esc(p.flipbook)}" target="_blank" rel="noopener noreferrer">Open the full book ${icon.arrowUpRight}</a>
+      <a class="project-flipbook-link" href="${esc(p.flipbookPdf ? root + p.flipbookPdf : p.flipbook)}" target="_blank" rel="noopener noreferrer" data-book-download>Open the full book ${icon.arrowUpRight}</a>
+      ${p.flipbookPdf ? `<script type="module" src="${root}mandato-flipbook.js"></script>` : ''}
     </div>
   </section>` : '';
 
