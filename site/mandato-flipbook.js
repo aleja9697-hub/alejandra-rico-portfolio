@@ -84,14 +84,18 @@ async function setupBook(container) {
     await renderSheet(0);
     await Promise.all([renderSheet(1), renderSheet(2)]);
 
+    // PageFlip measures the mount on creation; it must not be display:none.
+    // Keep the current reader visible until the replacement has initialized.
+    container.hidden = false;
+    container.style.visibility = 'hidden';
     const pageFlip = new PageFlip(mount, {
-      width: 538,
-      height: 411,
+      width: 440,
+      height: 440,
       size: 'stretch',
-      minWidth: 260,
-      maxWidth: 538,
-      minHeight: 198,
-      maxHeight: 411,
+      minWidth: 220,
+      maxWidth: 440,
+      minHeight: 220,
+      maxHeight: 440,
       drawShadow: true,
       maxShadowOpacity: 0.22,
       showCover: true,
@@ -108,7 +112,7 @@ async function setupBook(container) {
       near(current);
     }
     pageFlip.on('flip', (event) => update(event.data));
-    pageFlip.loadFromHTML(sheets.map((sheet) => sheet.page));
+    pageFlip.loadFromHtml(sheets.map((sheet) => sheet.page));
 
     prev.addEventListener('click', () => pageFlip.flipPrev('bottom'));
     next.addEventListener('click', () => pageFlip.flipNext('bottom'));
@@ -117,14 +121,15 @@ async function setupBook(container) {
       if (event.key === 'ArrowLeft') { event.preventDefault(); pageFlip.flipPrev('bottom'); }
       if (event.key === 'ArrowRight') { event.preventDefault(); pageFlip.flipNext('bottom'); }
     });
-    container.hidden = false;
-    if (frame) frame.hidden = true;
     if (loading) loading.hidden = true;
+    if (frame) frame.hidden = true;
+    container.style.visibility = '';
     update(0);
   } catch (error) {
     // Keep existing FlipHTML5 embed as a fallback when libraries fail.
     console.error('Unable to initialize portfolio book:', error);
     container.hidden = true;
+    container.style.visibility = '';
     if (frame) frame.hidden = false;
   }
 }
