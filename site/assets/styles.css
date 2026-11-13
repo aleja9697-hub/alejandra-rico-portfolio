@@ -3815,3 +3815,89 @@ a { color: inherit; }
   .project-carousel-track { scroll-behavior: auto; }
   .project-carousel-arrow { transition: none; }
 }
+
+
+/* CUSTOM, AD-FREE MANDATO CENTRO BOOK READER */
+.project-flipbook-custom[hidden],
+.project-flipbook-frame[hidden],
+.project-book-loading[hidden] { display: none !important; }
+.project-flipbook-custom {
+  padding: clamp(1.2rem, 3vw, 3rem);
+  border: 1px solid rgba(31,84,59,.22);
+  border-radius: 18px;
+  background: #eee3d7;
+  overflow: hidden;
+}
+.project-book-stage {
+  position: relative;
+  min-height: clamp(260px, 40vw, 455px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.project-book-pages {
+  width: min(100%, 1090px);
+  height: clamp(240px, 37vw, 435px);
+  margin: 0 auto;
+  outline-offset: 4px;
+}
+.project-book-sheet {
+  background: #fff;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.04);
+}
+.project-book-sheet img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.project-book-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #1F543B;
+  font-family: 'Obviously','Archivo',sans-serif;
+}
+.project-book-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding-top: 1.25rem;
+}
+.project-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  color: #1F543B;
+  background: transparent;
+  border: 1.5px solid #1F543B;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.project-book-btn:hover:not(:disabled),
+.project-book-btn:focus-visible {
+  color: #F3E5D7;
+  background: #1F543B;
+}
+.project-book-btn:disabled { opacity: .32; cursor: not-allowed; }
+.project-book-btn .icon { width: 22px; height: 22px; }
+.project-book-counter {
+  min-width: 7rem;
+  color: #1F543B;
+  text-align: center;
+  font-family: 'Obviously','Archivo',sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) {
+  .project-flipbook-custom { padding: 1rem .6rem; border-radius: 12px; }
+  .project-book-stage { min-height: clamp(260px, 65vw, 420px); }
+  .project-book-pages { height: clamp(240px, 60vw, 385px); }
+}
