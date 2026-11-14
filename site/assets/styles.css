@@ -3669,3 +3669,62 @@ a { color: inherit; }
 @media (hover:hover) and (max-width:760px) and (prefers-reduced-motion:no-preference){
   .services-section .service-card:hover{transform:translateY(-2px)}
 }
+
+/* Shared project-page opening transition.
+   Reuses Mandato Centro's forest curtain and orange signature star;
+   applies only to case-study pages, not Home or About. */
+@media (prefers-reduced-motion: no-preference) {
+  body.is-project::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: #1F543B;
+    pointer-events: none;
+    animation: project-intro-curtain 1.16s cubic-bezier(.7, 0, .2, 1) both;
+  }
+
+  body.is-project::after {
+    content: "";
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: clamp(66px, 11vw, 112px);
+    aspect-ratio: 605 / 638;
+    z-index: 3001;
+    background: url("/assets/img/estrella-marquee.svg") center / contain no-repeat;
+    pointer-events: none;
+    transform-origin: center;
+    animation: project-intro-star 1.16s ease-in-out both;
+  }
+
+  @keyframes project-intro-curtain {
+    0%, 56% { transform: translateY(0); visibility: visible; }
+    100% { transform: translateY(-101%); visibility: hidden; }
+  }
+
+  @keyframes project-intro-star {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.55) rotate(-35deg);
+      visibility: visible;
+    }
+    15% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(.9) rotate(-10deg);
+    }
+    54% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotate(25deg);
+    }
+    76% {
+      opacity: 0;
+      transform: translate(-50%, -64%) scale(.93) rotate(40deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -90%) scale(.9) rotate(40deg);
+      visibility: hidden;
+    }
+  }
+}
