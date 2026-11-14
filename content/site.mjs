@@ -92,8 +92,8 @@ export const site = {
 export const homeRows = [
   [['al-centro', 7], ['mandato-centro', 5]],
   [['energizar', 4], ['jca', 4], ['fornatta', 4]],
-  [['accountability-report-2025', 5], ['music-film-events', 7]],
-  [['accountability-report-2024', 5], ['social-media', 7]],
+  [['accountability-report-2024', 6], ['accountability-report-2025', 6]],
+  [['music-film-events', 6], ['social-media', 6]],
   [['cali-film-commission', 12]],
 ];
 
@@ -259,7 +259,7 @@ export const projects = [
       ['Approach', 'Turn an institutional report into an accessible product. Bold typography, photography, structured information and campaign inspired graphics communicate impact directly and memorably.'],
       ['Result', 'Together with the 2025 edition, about 2,000 copies distributed in downtown Cali.'],
     ],
-    cover: 7,
+    cover: 9,
     reveal: 8,
     coverPosition: '50% 50%',
     gallery: [[1], [2, 3], [4, 5, 6]],
@@ -272,6 +272,7 @@ export const projects = [
       'Vendor reading the newspaper on the street',
       'Man reading Edison Giraldo accountability report in a downtown shop',
       'Alternative accountability report photograph for desktop reveal',
+      '2024 accountability report featured photograph for homepage',
     ],
   },
   {
