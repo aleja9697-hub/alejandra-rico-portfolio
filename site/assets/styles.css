@@ -3580,3 +3580,92 @@ a { color: inherit; }
   .is-mandato .editorial-title-star { width: clamp(37px,10vw,65px); }
   .is-mandato .editorial-hero-inner { padding-bottom: 2.5rem; }
 }
+
+
+/* Compact mobile WHAT I DO: forest-green outlines, cream background and
+   minimal line-art icons. Scoped to mobile; desktop remains unchanged. */
+@media (max-width:760px){
+  .services-section .services-grid{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:12px;
+  }
+  .services-section .service-card,
+  .services-section .service-card--0,
+  .services-section .service-card--1,
+  .services-section .service-card--2,
+  .services-section .service-card--3,
+  .services-section .service-card--4,
+  .services-section .service-card--5{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:16px;
+    width:100%;
+    height:auto;
+    min-height:126px !important;
+    padding:21px 20px;
+    border:1.5px solid #1F543B;
+    border-radius:16px;
+    background:transparent !important;
+    color:#1F543B !important;
+    box-shadow:none;
+  }
+  .services-section .service-card::before{
+    content:"";
+    display:block;
+    width:70px;
+    height:70px;
+    flex:0 0 70px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+  }
+  .services-section .service-art,
+  .services-section .service-art-file{
+    display:none !important;
+  }
+  .services-section .service-number{
+    position:absolute;
+    top:12px;
+    right:16px;
+    margin:0;
+    font-size:.72rem;
+    color:#1F543B !important;
+    opacity:.72;
+  }
+  .services-section .service-content{
+    flex:1;
+    min-width:0;
+    margin-top:0;
+    padding-right:12px;
+  }
+  .services-section .service-name{
+    margin:0 0 .35rem;
+    font-family:'Obviously',sans-serif;
+    font-size:clamp(1rem,4.3vw,1.23rem);
+    font-weight:900;
+    line-height:1.17;
+    color:#1F543B !important;
+  }
+  .services-section .service-description{
+    margin:0;
+    max-width:none;
+    font-size:clamp(.82rem,3.45vw,.97rem);
+    line-height:1.4;
+    color:#1F543B !important;
+  }
+  .services-section .service-card--0::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22m3%2021%203-7%2010-10%206%206-10%2010-7%203-2-2Z%22%2F%3E%3Cpath%20d%3D%22m14%206%206%206M3%2021l5-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+.services-section .service-card--1::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M12%206c-3-2-6-2-10-1v15c4-1%207-1%2010%201%203-2%206-2%2010-1V5c-4-1-7-1-10%201Z%22%2F%3E%3Cpath%20d%3D%22M12%206v15M5%209l4%201M15%2010l4-1%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+.services-section .service-card--2::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Crect%20x%3D%225%22%20y%3D%221.5%22%20width%3D%2214%22%20height%3D%2223%22%20rx%3D%223%22%2F%3E%3Cpath%20d%3D%22M9%205h6%22%2F%3E%3Cpath%20d%3D%22M12%2011c-3-3-6%201%200%205%206-4%203-8%200-5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+.services-section .service-card--3::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M3%209h19v14H3zM3%209%201%204%2019%201l2%205L3%209ZM7%204l3%205M14%203l3%205M10%2013l6%203-6%203Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+.services-section .service-card--4::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M5%203h14v19H5zM2%206h3M8%208h8M8%2012h8M8%2016h5M19%209h3v15H8v-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+.services-section .service-card--5::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%2222%22%20height%3D%2217%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M2%208h22M7%2024h12M13%2020v4M6%205.5h1M10%205.5h1%22%2F%3E%3Cpath%20d%3D%22m16%2011%205%205-3-.5-1%203-2-7Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+}
+@media(max-width:360px){
+  .services-section .service-card{gap:11px;padding:19px 15px}
+  .services-section .service-card::before{width:58px;height:58px;flex-basis:58px}
+}
+@media (hover:hover) and (max-width:760px) and (prefers-reduced-motion:no-preference){
+  .services-section .service-card:hover{transform:translateY(-2px)}
+}
