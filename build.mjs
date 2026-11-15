@@ -66,6 +66,7 @@ const spark =
   '<svg class="spark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 0l3.2 12.4L33.5 4.6l-6.1 11.2L40 20l-12.6 4.2 6.1 11.2-10.3-7.8L20 40l-3.2-12.4-10.3 7.8 6.1-11.2L0 20l12.6-4.2L6.5 4.6l10.3 7.8z"/></svg>';
 
 function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
+  const isProject = bodyClass.split(' ').includes('is-project');
   const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.role}`;
   const og = ogImage ? `${site.url}/${ogImage}` : `${site.url}/img/al-centro/01.webp`;
   return `<!doctype html>
@@ -87,7 +88,8 @@ function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
 <link rel="stylesheet" href="${root}assets/styles.css">
 <script src="${root}work-animation.js" defer></script></head>
-<body class="${bodyClass}">
+<body class="${bodyClass}"${isProject ? ' id="top"' : ''}>
+${isProject ? `<div class="project-loader" aria-hidden="true"><img src="${root}assets/img/estrella-marquee.svg" alt="" width="96" height="96"></div><script src="${root}project-entry.js"></script>` : ''}
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap header-inner">
@@ -104,13 +106,19 @@ function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
 <main id="main">
 ${body}
 </main>
-${contactBlock()}
+${isProject ? `${skillsMarquee()}
+<footer class="project-footer">
+  <div class="wrap project-footer-inner">
+    <div><p>Alejandra Rico | Graphic designer</p><p class="project-footer-copyright">© 2026 Alejandra Rico. All rights reserved.</p></div>
+    <div class="project-footer-actions"><button type="button" disabled>Download CV ↓</button><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>` : `${contactBlock()}
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <p>${esc(site.fullName)}, ${esc(site.role)}. ${esc(site.location)}.</p>
     <p><a href="${root}#top">Back to top</a></p>
   </div>
-</footer>
+</footer>`}
 </body>
 </html>
 `;
@@ -383,6 +391,15 @@ function aboutPage() {
 }
 
 // ---------------- Project page ----------------
+function toolIcons(tools, root) {
+  const icons = { 'Adobe Illustrator': 'illustrator', 'Adobe Photoshop': 'photoshop', 'Adobe InDesign': 'indesign', 'Adobe After Effects': 'aftereffects', 'Adobe Premiere Pro': 'premierepro', 'Adobe Lightroom': 'lightroom', 'Canva': 'canva', 'CapCut': 'capcut', 'Microsoft 365': 'microsoft365' };
+  return `<span class="project-tools">${tools.map((tool) => {
+    const file = icons[tool] && `assets/icons/tools/${icons[tool]}.svg`;
+    return file && existsSync(new URL('./site/' + file, import.meta.url))
+      ? `<img src="${root}${file}" alt="${esc(tool)}" title="${esc(tool)}" width="36" height="36" loading="lazy">`
+      : `<span>${esc(tool)}</span>`;
+  }).join('')}</span>`;
+}
 function projectPage(p, i) {
   const root = '../../';
   const next = projects[(i + 1) % projects.length];
@@ -509,7 +526,7 @@ ${images[g.key]
       <div class="project-flipbook-frame">
         <iframe src="${esc(p.flipbook)}" title="${esc(p.title)} interactive publication" loading="lazy" allowfullscreen></iframe>
       </div>
-      <a class="project-flipbook-link" href="${esc(p.flipbookPdf ? root + p.flipbookPdf : p.flipbook)}" target="_blank" rel="noopener noreferrer" data-book-download>Open the full book ${icon.arrowUpRight}</a>
+      ${p.slug === 'mandato-centro' ? '' : `<a class="project-flipbook-link" href="${esc(p.flipbookPdf ? root + p.flipbookPdf : p.flipbook)}" target="_blank" rel="noopener noreferrer" data-book-download>Open the full book ${icon.arrowUpRight}</a>`}
       ${p.flipbookPdf ? `<script type="module" src="${root}mandato-flipbook.js"></script>` : ''}
     </div>
   </section>` : '';
@@ -522,7 +539,7 @@ ${isEditorial ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span
       <h1 class="project-title">${esc(p.title)}</h1>
       <p class="project-summary">${esc(p.summary)}</p>`}
       <dl class="project-meta">
-        ${meta.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('\n        ')}
+        ${meta.map(([k, v]) => `<div><dt>${k}</dt><dd>${k === 'Tools' ? toolIcons(p.tools, root) : esc(v)}</dd></div>`).join('\n        ')}
       </dl>
       ${p.links?.length ? `<p class="project-links">${p.links.map((l) => `<a class="pill-link" href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}${icon.arrowUpRight}</a>`).join(' ')}</p>` : ''}
     </div>
@@ -539,14 +556,30 @@ ${isEditorial ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span
 
   ${galleryHtml}
 
-  <nav class="next" aria-label="Next project">
+  ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
+    <a class="project-next-visual-link" href="${root}work/${next.slug}/">
+      <div class="project-next-visual-atmosphere" aria-hidden="true">
+        ${picture(img(p.slug, p.nextProjectImage), '', { cls: 'project-next-visual-background' })}
+      </div>
+      <div class="project-next-visual-content wrap">
+        <div class="project-next-visual-copy">
+          <span class="project-next-visual-label">Next Project ${icon.arrowRight}</span>
+          <h2>${esc(next.shortTitle || next.title)}</h2>
+          <p>${esc(next.summary)}</p>
+        </div>
+        <div class="project-next-visual-photo">
+          ${picture(p.nextProjectPreview ? img(next.slug, p.nextProjectPreview) : coverOf(next), next.alts?.[(p.nextProjectPreview || next.cover || 1) - 1] || next.title, { cls: 'project-next-visual-image', sizes: '(max-width: 760px) 100vw, 42vw' })}
+        </div>
+      </div>
+    </a>
+  </nav><script src="${root}project-next.js" defer></script>` : `<nav class="next" aria-label="Next project">
     <div class="wrap">
       <a class="next-link" href="${root}work/${next.slug}/">
         <span class="next-title">${esc(next.shortTitle || next.title)}</span>
         <span class="next-label">Next project ${icon.arrowRight}</span>
       </a>
     </div>
-  </nav>
+  </nav>`}
 </article>`;
   const og = coverOf(p).src;
   return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: isEditorial ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);

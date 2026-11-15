@@ -225,6 +225,8 @@ export const projects = [
     // Reusable editorial case-study layout. Next projects can opt in with these fields.
     pageStyle: 'editorial',
     heroImage: 7,
+    nextProjectImage: 8,
+    nextProjectPreview: 9,
     galleryMode: 'carousel',
     flipbook: 'https://online.fliphtml5.com/jhcro/vvmu/#p=1',
     flipbookPdf: 'publications/Mandato-Centro-WEB-Lectura.pdf',

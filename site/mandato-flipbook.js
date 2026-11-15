@@ -36,6 +36,13 @@ async function setupBook(container) {
       loadPageFlip(),
       getDocument({ url: pdfUrl }).promise,
     ]);
+    const firstPage = await pdf.getPage(1);
+    const pageViewport = firstPage.getViewport({ scale: 1 });
+    const pageRatio = pageViewport.width / pageViewport.height;
+    const maxPageWidth = 600;
+    const minPageWidth = 280;
+    container.style.setProperty('--book-page-ratio', pageRatio);
+
     const sheets = Array.from({ length: pdf.numPages }, (_, i) => {
       const page = document.createElement('div');
       page.className = 'project-book-sheet';
@@ -89,13 +96,13 @@ async function setupBook(container) {
     container.hidden = false;
     container.style.visibility = 'hidden';
     const pageFlip = new PageFlip(mount, {
-      width: 440,
-      height: 440,
+      width: maxPageWidth,
+      height: maxPageWidth / pageRatio,
       size: 'stretch',
-      minWidth: 220,
-      maxWidth: 440,
-      minHeight: 220,
-      maxHeight: 440,
+      minWidth: minPageWidth,
+      maxWidth: maxPageWidth,
+      minHeight: minPageWidth / pageRatio,
+      maxHeight: maxPageWidth / pageRatio,
       drawShadow: true,
       maxShadowOpacity: 0.22,
       showCover: true,
