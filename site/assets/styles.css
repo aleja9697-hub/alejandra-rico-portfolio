@@ -4177,3 +4177,15 @@ a { color: inherit; }
     }
   }
 }
+
+/* Integration: use one shared entrance effect, not two stacked loaders.
+   The global project curtain/star replaces the older JS loader. */
+body.is-project .project-loader,
+body.is-project .project-loader.is-active {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  body.is-editorial-project::before {
+    content: none;
+  }
+}
