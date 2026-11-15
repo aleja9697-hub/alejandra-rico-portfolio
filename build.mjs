@@ -402,7 +402,9 @@ function toolIcons(tools, root) {
 }
 function projectPage(p, i) {
   const root = '../../';
-  const next = projects[(i + 1) % projects.length];
+  const featuredProjects = projects.filter((item) => item.slug !== 'cali-film-commission');
+  const featuredIndex = featuredProjects.findIndex((item) => item.slug === p.slug);
+  const next = featuredProjects[(featuredIndex + 1) % featuredProjects.length];
   const meta = [
     ['Discipline', p.discipline],
     ['Client', p.client],
@@ -492,7 +494,8 @@ ${images[g.key]
   const isEditorial = p.pageStyle === 'editorial';
   const hasEditorialHero = isEditorial || p.heroStyle === 'editorial';
   const heroIndex = p.heroImage || p.cover || 1;
-  const heroPhoto = hasEditorialHero ? img(p.slug, heroIndex) : null;
+  const heroPhoto = hasEditorialHero ? (p.coverImage ? coverOf(p) : img(p.slug, heroIndex)) : null;
+  const heroLabel = p.heroTitle || p.shortTitle || p.title;
   if (hasEditorialHero && !heroPhoto) throw new Error(`${p.slug}: hero image ${heroIndex} missing`);
   const editorialHero = hasEditorialHero ? `<header class="editorial-hero" aria-label="${esc(p.title)} project introduction">
     ${picture(heroPhoto, p.alts?.[heroIndex - 1] || p.title, { sizes: '100vw', eager: true, cls: 'editorial-hero-image' })}
@@ -501,7 +504,7 @@ ${images[g.key]
       <a class="editorial-back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
       <div class="editorial-hero-bottom">
         <span class="editorial-category editorial-category-pill">${esc(p.discipline)} · ${esc(p.year)}</span>
-        <h1 class="editorial-title">${esc(p.title)}<img src="${root}assets/img/estrella-marquee.svg" class="editorial-title-star" alt="" aria-hidden="true" width="140" height="140"></h1>
+        <h1 class="editorial-title${heroLabel.length > 21 ? ' editorial-title--long' : ''}">${esc(heroLabel)}<img src="${root}assets/img/estrella-marquee.svg" class="editorial-title-star" alt="" aria-hidden="true" width="140" height="140"></h1>
         <p class="editorial-subtitle">${esc(p.summary)}</p>
       </div>
     </div>
