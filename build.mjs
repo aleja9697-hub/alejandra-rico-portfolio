@@ -412,14 +412,12 @@ function projectPage(p, i) {
   ].filter(Boolean);
 
   let galleryHtml = '';
-  if (p.galleryMode === 'carousel' && p.gallery) {
-    const photoNumbers = p.gallery.flat();
-    galleryHtml = `<section class="project-carousel" aria-labelledby="project-carousel-title">
+  const renderCarousel = (photoNumbers, { id = 'project-carousel-title', title = 'A closer look', eyebrow = 'SELECTED IMAGES', cls = '' } = {}) => `<section class="project-carousel${cls ? ` ${cls}` : ''}" aria-labelledby="${id}">
   <div class="wrap">
     <div class="project-carousel-heading">
       <div>
-        <span class="project-section-eyebrow">SELECTED IMAGES</span>
-        <h2 id="project-carousel-title">A closer look</h2>
+${eyebrow ? `        <span class="project-section-eyebrow">${esc(eyebrow)}</span>` : ''}
+        <h2 id="${id}">${esc(title)}</h2>
       </div>
       <div class="project-carousel-controls">
         <span class="project-carousel-counter" aria-live="polite">01 / ${String(photoNumbers.length).padStart(2, '0')}</span>
@@ -438,7 +436,10 @@ ${photoNumbers.map((n, k) => {
     </div>
   </div>
 </section>`;
+  if (p.galleryMode === 'carousel' && p.gallery) {
+    galleryHtml = renderCarousel(p.gallery.flat());
   }
+  const episodesHtml = p.episodes?.length ? renderCarousel(p.episodes, { id: 'podcast-episodes-title', title: 'PODCAST EPISODES', eyebrow: '', cls: 'podcast-episodes' }) : '';
 
   if (p.gallery && p.galleryMode !== 'carousel') {
     galleryHtml = `<section class="gallery" aria-label="Project images">
@@ -556,6 +557,8 @@ ${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}
   ${flipbookHtml}
 
   ${galleryHtml}
+
+  ${episodesHtml}
 
   ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
     <a class="project-next-visual-link" href="${root}work/${next.slug}/">

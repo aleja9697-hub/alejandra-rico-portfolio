@@ -37,6 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     previous.addEventListener("click", () => moveBy(-1));
     next.addEventListener("click", () => moveBy(1));
+    if (carousel.classList.contains("podcast-episodes")) {
+      track.addEventListener("keydown", (event) => {
+        if (event.target !== track) return;
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          moveBy(event.key === "ArrowRight" ? 1 : -1);
+        } else if (event.key === "Home" || event.key === "End") {
+          event.preventDefault();
+          const index = event.key === "Home" ? 0 : slides.length - 1;
+          track.scrollTo({ left: slides[index].offsetLeft, behavior: reduceMotion ? "auto" : "smooth" });
+        }
+      });
+    }
     let queued = false;
     track.addEventListener("scroll", () => {
       if (queued) return;
