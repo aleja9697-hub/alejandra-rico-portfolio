@@ -4238,3 +4238,26 @@ body.is-project .project-loader.is-active {
   .is-al-centro .palette .hex { font-size: clamp(.625rem, 2.6vw, .875rem); }
   .is-al-centro .project-next-visual-atmosphere { height: clamp(220px, 64vw, 360px); }
 }
+
+/* Al Centro identity triptych; other project galleries keep their layout. */
+.is-al-centro .gallery .g-row:first-child {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.is-al-centro .gallery .g-row:first-child .g-item {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.is-al-centro .gallery .g-row:first-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.is-al-centro .gallery .g-row:first-child .g-item:nth-child(3) img { object-position: 47% center; }
+.is-al-centro .podcast-episodes { background: #F3E5D7; }
+.is-al-centro .podcast-episodes .project-carousel-track { grid-auto-columns: 100%; }
+@media (max-width: 760px) {
+  .is-al-centro .gallery .g-row:first-child { grid-template-columns: minmax(0, 1fr); }
+}

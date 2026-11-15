@@ -123,9 +123,10 @@ export const projects = [
     ],
     palette: ['#E86D1F', '#161616', '#DCCFAB'],
     cover: 8,
-    reveal: 5,
+    reveal: 12,
     coverPosition: '50% 48%',
-    gallery: [[1, 2, 3], [4, 5]],
+    gallery: [[1, 2, 3], [5]],
+    episodes: [9, 4, 10, 11],
     alts: [
       'Al Centro Podcast logo over a downtown Cali street scene',
       'Guest seated in an armchair framed by large orange letterforms',
@@ -135,6 +136,10 @@ export const projects = [
       'Al Centro Podcast opening cover',
       'Al Centro Podcast closing cover',
       'Al Centro Podcast portfolio cover',
+      'Al Centro Podcast episode artwork, first selection',
+      'Al Centro Podcast episode artwork, third selection',
+      'Al Centro Podcast episode artwork, fourth selection',
+      'Al Centro Podcast identity detail',
     ],
   },
   {
