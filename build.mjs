@@ -440,6 +440,9 @@ ${photoNumbers.map((n, k) => {
     galleryHtml = renderCarousel(p.gallery.flat());
   }
   const episodesHtml = p.episodes?.length ? renderCarousel(p.episodes, { id: 'podcast-episodes-title', title: 'PODCAST EPISODES', eyebrow: '', cls: 'podcast-episodes' }) : '';
+  const carouselsHtml = (p.carousels || []).map((carousel, index) => renderCarousel(carousel.images, {
+    id: `${p.slug}-carousel-${index + 1}-title`, title: carousel.title, eyebrow: '',
+  })).join('\n');
 
   if (p.gallery && p.galleryMode !== 'carousel') {
     galleryHtml = `<section class="gallery" aria-label="Project images">
@@ -558,7 +561,20 @@ ${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}
 
   ${galleryHtml}
 
-  ${episodesHtml}
+${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby="energizar-motion-title">
+    <div class="wrap energizar-motion-grid">
+      <div class="energizar-motion-copy">
+        <h2 class="story-title" id="energizar-motion-title">Brand in motion</h2>
+        <p class="energizar-motion-caption" lang="es"><span class="energizar-motion-highlight">Video de lanzamiento del rebranding de la marca</span></p>
+      </div>
+      <video width="720" height="960" controls playsinline muted preload="none" poster="${root}img/energizar/video-poster.webp" aria-label="Energizar brand animation">
+        <source src="${root}img/energizar/video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video. <a href="${root}img/energizar/video.mp4">Watch the Energizar video</a>.
+      </video>
+    </div>
+  </section><script src="${root}energizar-motion.js" defer></script>` : ''}
+
+${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wrap fornatta-carousels">\n${carouselsHtml}\n</div>` : carouselsHtml) : ''}
 
   ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
     <a class="project-next-visual-link" href="${root}work/${next.slug}/">
@@ -586,7 +602,7 @@ ${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {
