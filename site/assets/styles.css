@@ -1686,13 +1686,13 @@ a { color: inherit; }
   .service-card { transition: none; }
 }
 
-/* WHAT I DO - compact six-card desktop layout */
+/* WHAT I DO - compact desktop services layout */
 @media (min-width: 1280px) {
   .services-section .wrap {
     max-width: 1760px;
   }
   .services-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: clamp(10px, 1.1vw, 18px);
   }
   .service-card {
