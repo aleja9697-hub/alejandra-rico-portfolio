@@ -35,7 +35,7 @@ for (const d of readdirSync(IMG_DIR, { withFileTypes: true })) {
   images[d.name] = files.map((f) => {
     const size = imageSize(readFileSync(new URL(d.name + '/' + f, IMG_DIR)));
     if (!size) throw new Error(`Cannot read the size of img/${d.name}/${f}. Use a normal .webp, .jpg or .png file.`);
-    return { src: `img/${d.name}/${f}`, w: size.w, h: size.h };
+    return { src: `img/${d.name}/${f}${d.name === 'al-centro' && f === '05.webp' ? '?v=20261114-hq' : ''}`, w: size.w, h: size.h };
   });
 }
 const OUT = new URL('./site/', import.meta.url);
