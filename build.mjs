@@ -440,6 +440,9 @@ ${photoNumbers.map((n, k) => {
     galleryHtml = renderCarousel(p.gallery.flat());
   }
   const episodesHtml = p.episodes?.length ? renderCarousel(p.episodes, { id: 'podcast-episodes-title', title: 'PODCAST EPISODES', eyebrow: '', cls: 'podcast-episodes' }) : '';
+  const carouselsHtml = (p.carousels || []).map((carousel, index) => renderCarousel(carousel.images, {
+    id: `${p.slug}-carousel-${index + 1}-title`, title: carousel.title, eyebrow: '',
+  })).join('\n');
 
   if (p.gallery && p.galleryMode !== 'carousel') {
     galleryHtml = `<section class="gallery" aria-label="Project images">
@@ -571,7 +574,7 @@ ${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby=
     </div>
   </section><script src="${root}energizar-motion.js" defer></script>` : ''}
 
-${episodesHtml}
+${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wrap fornatta-carousels">\n${carouselsHtml}\n</div>` : carouselsHtml) : ''}
 
   ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
     <a class="project-next-visual-link" href="${root}work/${next.slug}/">
@@ -599,7 +602,7 @@ ${episodesHtml}
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {

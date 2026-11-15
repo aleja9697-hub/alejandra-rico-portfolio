@@ -205,6 +205,9 @@ export const projects = [
   },
   {
     slug: 'fornatta',
+    pageStyle: 'editorial',
+    heroImage: 8,
+    nextProjectImage: 9,
     title: 'Fornatta Pizza',
     discipline: 'Visual identity',
     year: '2026',
@@ -221,7 +224,12 @@ export const projects = [
     cover: 7,
     reveal: 5,
     coverPosition: '50% 40%',
-    gallery: [[1], [2, 3], [4, 5, 6]],
+    carousels: [
+      { title: 'Applications', images: [4, 5, 6, 13] },
+      { title: 'Menu', images: [10, 2, 11, 12] },
+      { title: 'textures', images: [14, 15, 16, 17, 18] },
+      { title: 'photos', images: [19, 20, 21, 22, 23, 24, 25] },
+    ],
     alts: [
       'Fornatta Pizza wordmark over a wood fired oven',
       'Fornatta menu card on a table of pizzas',
@@ -230,6 +238,13 @@ export const projects = [
       'Red Fornatta tote bag with the oven illustration',
       'Fornatta sidewalk sign',
       'Fornatta Pizza updated cover photograph',
+      'Fornatta Pizza opening cover',
+      'Fornatta Pizza closing cover',
+      'Fornatta Pizza menu design, first view',
+      'Fornatta Pizza menu design, second view',
+      'Fornatta Pizza menu design, third view',
+      'Fornatta Pizza brand application',
+      ...Array.from({ length: 12 }, (_, i) => `Fornatta Pizza texture study ${i + 1}`),
     ],
   },
   {
