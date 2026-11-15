@@ -94,7 +94,6 @@ export const homeRows = [
   [['energizar', 4], ['jca', 4], ['fornatta', 4]],
   [['accountability-report-2024', 6], ['accountability-report-2025', 6]],
   [['music-film-events', 6], ['social-media', 6]],
-  [['cali-film-commission', 12]],
 ];
 
 // ---------------------------------------------------------------------
@@ -176,6 +175,9 @@ export const projects = [
   },
   {
     slug: 'jca',
+    pageStyle: 'editorial',
+    heroImage: 6,
+    nextProjectImage: 6,
     title: 'JCA Hydraulic and Hydrologic Engineering',
     shortTitle: 'JCA Engineering',
     discipline: 'Visual identity',
@@ -205,6 +207,9 @@ export const projects = [
   },
   {
     slug: 'fornatta',
+    pageStyle: 'editorial',
+    heroImage: 7,
+    nextProjectImage: 7,
     title: 'Fornatta Pizza',
     discipline: 'Visual identity',
     year: '2026',
@@ -271,6 +276,9 @@ export const projects = [
   },
   {
     slug: 'accountability-report-2024',
+    pageStyle: 'editorial',
+    heroImage: 9,
+    nextProjectImage: 9,
     title: 'Accountability Report 2024',
     discipline: 'Editorial design',
     year: '2025',
@@ -302,6 +310,9 @@ export const projects = [
   },
   {
     slug: 'accountability-report-2025',
+    pageStyle: 'editorial',
+    heroImage: 6,
+    nextProjectImage: 6,
     title: 'Accountability Report 2025',
     discipline: 'Editorial design',
     year: '2026',
@@ -329,6 +340,9 @@ export const projects = [
   },
   {
     slug: 'music-film-events',
+    pageStyle: 'editorial',
+    heroImage: 1,
+    nextProjectImage: 1,
     title: 'Music and Film Event Design',
     shortTitle: 'Music and Film Events',
     discipline: 'Print and events',
@@ -356,6 +370,9 @@ export const projects = [
   },
   {
     slug: 'social-media',
+    pageStyle: 'editorial',
+    heroImage: 1,
+    nextProjectImage: 1,
     title: 'Social Media',
     discipline: 'Social media',
     year: 'Various',
