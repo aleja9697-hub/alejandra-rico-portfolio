@@ -565,7 +565,7 @@ ${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby=
     <div class="wrap energizar-motion-grid">
       <div class="energizar-motion-copy">
         <h2 class="story-title" id="energizar-motion-title">Brand in motion</h2>
-        <p class="energizar-motion-caption" lang="es"><span class="energizar-motion-highlight">Video de lanzamiento del rebranding de la marca</span></p>
+        <p class="energizar-motion-caption" lang="en"><span class="energizar-motion-highlight">Brand Rebranding Launch Video</span></p>
       </div>
       <video width="720" height="960" controls playsinline muted preload="none" poster="${root}img/energizar/video-poster.webp" aria-label="Energizar brand animation">
         <source src="${root}img/energizar/video.mp4" type="video/mp4">
