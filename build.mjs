@@ -489,10 +489,11 @@ ${images[g.key]
 
   // The editorial case-study layout is opted into by content, not by project slug.
   const isEditorial = p.pageStyle === 'editorial';
+  const hasEditorialHero = isEditorial || p.heroStyle === 'editorial';
   const heroIndex = p.heroImage || p.cover || 1;
-  const heroPhoto = isEditorial ? img(p.slug, heroIndex) : null;
-  if (isEditorial && !heroPhoto) throw new Error(`${p.slug}: hero image ${heroIndex} missing`);
-  const editorialHero = isEditorial ? `<header class="editorial-hero" aria-label="${esc(p.title)} project introduction">
+  const heroPhoto = hasEditorialHero ? img(p.slug, heroIndex) : null;
+  if (hasEditorialHero && !heroPhoto) throw new Error(`${p.slug}: hero image ${heroIndex} missing`);
+  const editorialHero = hasEditorialHero ? `<header class="editorial-hero" aria-label="${esc(p.title)} project introduction">
     ${picture(heroPhoto, p.alts?.[heroIndex - 1] || p.title, { sizes: '100vw', eager: true, cls: 'editorial-hero-image' })}
     <div class="editorial-hero-shade" aria-hidden="true"></div>
     <div class="editorial-hero-inner wrap">
@@ -533,9 +534,9 @@ ${images[g.key]
 
   const body = `<article class="project ${isEditorial ? 'project--editorial' : ''}">
   ${editorialHero}
-  <header class="project-head ${isEditorial ? 'project-head--editorial' : ''}">
+  <header class="project-head ${hasEditorialHero ? 'project-head--editorial' : ''}">
     <div class="wrap">
-${isEditorial ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
+${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
       <h1 class="project-title">${esc(p.title)}</h1>
       <p class="project-summary">${esc(p.summary)}</p>`}
       <dl class="project-meta">
@@ -548,7 +549,7 @@ ${isEditorial ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span
   <section class="project-story" aria-label="Project overview">
     <div class="wrap story-grid">
       ${p.sections.map(([h, t]) => `<div class="story"><h2 class="story-title">${esc(h)}</h2><p>${esc(t)}</p></div>`).join('\n      ')}
-      ${p.palette ? `<div class="palette" aria-label="Brand colors"><h2 class="story-title">Palette</h2><ul>${p.palette.map((c) => `<li><span class="swatch" style="background:${c}"></span><span class="hex">${c}</span></li>`).join('')}</ul></div>` : ''}
+      ${p.palette ? `<div class="palette${p.pageStyle === 'editorial' ? ' story' : ''}" aria-label="Brand colors"><h2 class="story-title">Palette</h2><ul>${p.palette.map((c) => `<li><span class="swatch" style="background:${c}"></span><span class="hex">${c}</span></li>`).join('')}</ul></div>` : ''}
     </div>
   </section>
 
@@ -582,7 +583,7 @@ ${isEditorial ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}<span
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: isEditorial ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {
