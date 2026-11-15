@@ -603,12 +603,12 @@ a { color: inherit; }
   .project-next-visual-link:hover .project-next-visual-image,
   .project-next-visual-link:hover .icon { transform: none; }
 }
-.is-mandato .project-meta dt,
-.is-mandato .project-meta dd { font-family: 'Obviously', sans-serif; font-weight: 400; }
-.is-mandato .project-meta dt { font-size: .8rem; letter-spacing: .04em; }
+:is(.is-mandato, .is-al-centro) .project-meta dt,
+:is(.is-mandato, .is-al-centro) .project-meta dd { font-family: 'Obviously', sans-serif; font-weight: 400; }
+:is(.is-mandato, .is-al-centro) .project-meta dt { font-size: .8rem; letter-spacing: .04em; }
 .project-tools { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; }
 .project-tools img { width: 36px; height: 36px; object-fit: contain; }
-.is-mandato .project--editorial .project-story {
+:is(.is-mandato, .is-al-centro) .project--editorial .project-story {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -619,11 +619,11 @@ a { color: inherit; }
   background-size: 30px 30px;
   background-repeat: repeat;
 }
-.is-mandato .project-story .story { background: #1AAA71; border-color: #1F543B; }
-.is-mandato .project-story .story-title,
-.is-mandato .project-story .story p { color: #11281B; }
-.is-mandato .project-story::before,
-.is-mandato .project-story::after {
+:is(.is-mandato, .is-al-centro) .project-story .story { background: #1AAA71; border-color: #1F543B; }
+:is(.is-mandato, .is-al-centro) .project-story .story-title,
+:is(.is-mandato, .is-al-centro) .project-story .story p { color: #11281B; }
+:is(.is-mandato, .is-al-centro) .project-story::before,
+:is(.is-mandato, .is-al-centro) .project-story::after {
   content: '';
   position: absolute;
   width: clamp(100px, 18vw, 240px);
@@ -633,8 +633,8 @@ a { color: inherit; }
   pointer-events: none;
   z-index: -1;
 }
-.is-mandato .project-story::before { top: 0; left: -3%; background-image: url('./img/star-side-left.svg'); }
-.is-mandato .project-story::after { bottom: 0; right: -3%; background-image: url('./img/star-side-right.svg'); }
+:is(.is-mandato, .is-al-centro) .project-story::before { top: 0; left: -3%; background-image: url('./img/star-side-left.svg'); }
+:is(.is-mandato, .is-al-centro) .project-story::after { bottom: 0; right: -3%; background-image: url('./img/star-side-right.svg'); }
 .project-footer { background: #F3E5D7; color: #1F543B; font: 400 .95rem/1.6 'Obviously', sans-serif; }
 .project-footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding-block: 2.5rem; }
 .project-footer-copyright { margin-top: .5rem; font-size: .75rem; }
@@ -4188,4 +4188,53 @@ body.is-project .project-loader.is-active {
   body.is-editorial-project::before {
     content: none;
   }
+}
+
+/* Al Centro: editorial cover treatment and wrapping for its longer title. */
+.is-al-centro .editorial-hero-shade {
+  background: linear-gradient(180deg, rgba(31, 84, 59, .32) 0%, rgba(31, 84, 59, .18) 32%, rgba(31, 84, 59, .82) 75%, #1F543B 100%);
+}
+.is-al-centro .editorial-title {
+  width: fit-content;
+  white-space: normal;
+  text-wrap: balance;
+}
+
+/* Al Centro: evenly spaced palette and a compact, top-aligned phone cover. */
+.is-al-centro .palette {
+  padding-inline: clamp(1rem, 2.778vw, 2.5rem);
+}
+.is-al-centro .palette .story-title {
+  font-family: 'Obviously', 'Archivo', sans-serif;
+  font-weight: 900;
+}
+.is-al-centro .palette ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.5rem, 1.667vw, 1.5rem);
+}
+.is-al-centro .palette li {
+  min-width: 0;
+  gap: .75rem;
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+}
+.is-al-centro .palette .swatch {
+  width: 100%;
+  height: clamp(3rem, 8.333vw, 7.5rem);
+  aspect-ratio: auto;
+  border-radius: 5px;
+}
+.is-al-centro .project-next-visual-atmosphere {
+  height: clamp(260px, 38vw, 560px);
+}
+.is-al-centro .project-next-visual-background {
+  object-fit: cover;
+  object-position: 50% top;
+}
+@media (max-width: 760px) {
+  .is-al-centro .palette .swatch { height: clamp(2.5rem, 15vw, 5rem); }
+  .is-al-centro .palette .hex { font-size: clamp(.625rem, 2.6vw, .875rem); }
+  .is-al-centro .project-next-visual-atmosphere { height: clamp(220px, 64vw, 360px); }
 }

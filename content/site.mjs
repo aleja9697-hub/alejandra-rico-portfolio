@@ -106,6 +106,9 @@ export const homeRows = [
 export const projects = [
   {
     slug: 'al-centro',
+    pageStyle: 'editorial',
+    heroImage: 6,
+    nextProjectImage: 7,
     title: 'Al Centro Podcast',
     discipline: 'Visual identity',
     year: '2024',
@@ -118,8 +121,8 @@ export const projects = [
       ['Approach', 'A brand that reflects the essence, diversity and energy of the area. Stacked, playful lettering sits over street photography, and oversized letterforms frame guests, so every cover, thumbnail and shirt reads as part of the same city.'],
       ['Result', 'A contemporary identity applied across episode covers, video thumbnails, merchandise and outdoor mockups.'],
     ],
-    palette: ['#E66D1F', '#161616', '#DCCFAB'],
-    cover: 1,
+    palette: ['#E86D1F', '#161616', '#DCCFAB'],
+    cover: 8,
     reveal: 5,
     coverPosition: '50% 48%',
     gallery: [[1, 2, 3], [4, 5]],
@@ -129,6 +132,9 @@ export const projects = [
       'Black t-shirt printed with the Al Centro Podcast logo',
       'Episode thumbnail with bold orange headline and two hosts',
       'Episode posters displayed on billboards in a station corridor',
+      'Al Centro Podcast opening cover',
+      'Al Centro Podcast closing cover',
+      'Al Centro Podcast portfolio cover',
     ],
   },
   {
