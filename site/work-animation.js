@@ -3,6 +3,54 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const supportsObserver = "IntersectionObserver" in window;
 
+  // Reusable horizontal project gallery: arrows, scroll/touch and live slide count.
+  document.querySelectorAll(".project-carousel").forEach((carousel) => {
+    const track = carousel.querySelector(".project-carousel-track");
+    const slides = track ? [...track.querySelectorAll(".project-carousel-slide")] : [];
+    const previous = carousel.querySelector("[data-carousel-prev]");
+    const next = carousel.querySelector("[data-carousel-next]");
+    const counter = carousel.querySelector(".project-carousel-counter");
+    if (!track || !slides.length || !previous || !next || !counter) return;
+
+    const currentIndex = () => {
+      let closest = 0;
+      let distance = Infinity;
+      for (let i = 0; i < slides.length; i++) {
+        const difference = Math.abs(slides[i].offsetLeft - track.scrollLeft);
+        if (difference < distance) {
+          closest = i;
+          distance = difference;
+        }
+      }
+      return closest;
+    };
+    const updateControls = () => {
+      const index = currentIndex();
+      counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+      previous.disabled = index === 0;
+      next.disabled = index === slides.length - 1;
+    };
+    const moveBy = (step) => {
+      const target = Math.max(0, Math.min(slides.length - 1, currentIndex() + step));
+      track.scrollTo({ left: slides[target].offsetLeft, behavior: reduceMotion ? "auto" : "smooth" });
+    };
+
+    previous.addEventListener("click", () => moveBy(-1));
+    next.addEventListener("click", () => moveBy(1));
+    let queued = false;
+    track.addEventListener("scroll", () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        updateControls();
+      });
+    }, { passive: true });
+    window.addEventListener("resize", updateControls, { passive: true });
+    updateControls();
+  });
+
+
   // Barra fija que aparece al subir y desaparece al bajar.
   const header = document.querySelector(".site-header");
   if (header) {
