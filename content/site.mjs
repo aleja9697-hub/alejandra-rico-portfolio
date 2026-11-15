@@ -144,6 +144,9 @@ export const projects = [
   },
   {
     slug: 'energizar',
+    pageStyle: 'editorial',
+    heroImage: 5,
+    nextProjectImage: 6,
     title: 'Energizar',
     discipline: 'Rebrand',
     year: '2025',
@@ -160,7 +163,7 @@ export const projects = [
     cover: 6,
     reveal: 2,
     coverPosition: '50% 55%',
-    gallery: [[1, 2, 3], [4, 5]],
+    gallery: [[1, 2, 3], [4, 7]],
     alts: [
       'Energizar symbol: a lowercase e inside concentric rings on mint green',
       'Teal hard hat with the Energizar wordmark',
@@ -168,6 +171,7 @@ export const projects = [
       'Energizar signage on an industrial building',
       'Energizar flags against a blue sky',
       'Four Energizar rebrand flags against a bright blue sky',
+      'Energizar signage on an industrial building',
     ],
   },
   {

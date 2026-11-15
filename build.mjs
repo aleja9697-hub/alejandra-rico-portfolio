@@ -558,7 +558,20 @@ ${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}
 
   ${galleryHtml}
 
-  ${episodesHtml}
+${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby="energizar-motion-title">
+    <div class="wrap energizar-motion-grid">
+      <div class="energizar-motion-copy">
+        <h2 class="story-title" id="energizar-motion-title">Brand in motion</h2>
+        <p class="energizar-motion-caption" lang="es"><span class="energizar-motion-highlight">Video de lanzamiento del rebranding de la marca</span></p>
+      </div>
+      <video width="720" height="960" controls playsinline muted preload="none" poster="${root}img/energizar/video-poster.webp" aria-label="Energizar brand animation">
+        <source src="${root}img/energizar/video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video. <a href="${root}img/energizar/video.mp4">Watch the Energizar video</a>.
+      </video>
+    </div>
+  </section><script src="${root}energizar-motion.js" defer></script>` : ''}
+
+${episodesHtml}
 
   ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
     <a class="project-next-visual-link" href="${root}work/${next.slug}/">
@@ -586,7 +599,7 @@ ${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {
