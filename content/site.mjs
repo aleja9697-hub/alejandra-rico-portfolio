@@ -193,7 +193,7 @@ export const projects = [
       ['Result', 'An identity system shown on uniforms, equipment, hoardings and billboards.'],
     ],
     palette: ['#F75514', '#0D1A62', '#2E2EDF', '#F4F5D2'],
-    cover: 6,
+    cover: 8,
     reveal: 2,
     coverPosition: '57% 50%',
     gallery: [[1, 2, 3], [4, 5]],
@@ -347,7 +347,7 @@ export const projects = [
       ['Approach', 'Expressive typography, vibrant color, photography and key data, organized so institutional results read as a clear, approachable and territory focused publication.'],
       ['Result', 'Together with the 2024 edition, about 2,000 copies distributed in downtown Cali.'],
     ],
-    cover: 6,
+    cover: 4,
     coverPosition: '50% 50%',
     gallery: [[1], [2, 3], [4, 5]],
     alts: [
