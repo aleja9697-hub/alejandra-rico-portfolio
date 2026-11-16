@@ -25,11 +25,15 @@ async function setupBook(container) {
   const next = container.querySelector('[data-book-next]');
   const counter = container.querySelector('.project-book-counter');
   const pdfUrl = container.dataset.pdf;
+  const lazy = container.hasAttribute('data-book-lazy');
   if (!mount || !pdfUrl) return;
 
   // Do not replace the working external reader until the local PDF exists.
   const response = await fetch(pdfUrl, { method: 'HEAD' });
-  if (!response.ok) return;
+  if (!response.ok) {
+    if (lazy && loading) loading.textContent = 'The reader is unavailable. Open the full PDF below.';
+    return;
+  }
 
   try {
     const [PageFlip, pdf] = await Promise.all([
@@ -40,7 +44,7 @@ async function setupBook(container) {
     const pageViewport = firstPage.getViewport({ scale: 1 });
     const pageRatio = pageViewport.width / pageViewport.height;
     const maxPageWidth = 600;
-    const minPageWidth = 280;
+    const minPageWidth = lazy ? Math.min(280, mount.clientWidth) : 280;
     container.style.setProperty('--book-page-ratio', pageRatio);
 
     const sheets = Array.from({ length: pdf.numPages }, (_, i) => {
@@ -48,7 +52,7 @@ async function setupBook(container) {
       page.className = 'project-book-sheet';
       page.setAttribute('aria-label', 'Page ' + (i + 1));
       const image = document.createElement('img');
-      image.alt = 'Mandato Centro — page ' + (i + 1);
+      image.alt = (container.dataset.bookTitle || 'Mandato Centro') + ' — page ' + (i + 1);
       image.decoding = 'async';
       image.draggable = false;
       page.appendChild(image);
@@ -63,7 +67,11 @@ async function setupBook(container) {
       if (jobs.has(index)) return jobs.get(index);
       const task = (async () => {
         const page = await pdf.getPage(index + 1);
-        const viewport = page.getViewport({ scale: 2.06 });
+        const baseViewport = page.getViewport({ scale: 1 });
+        const availableWidth = Math.max(1, mount.clientWidth);
+        const displayWidth = Math.min(maxPageWidth, availableWidth / (availableWidth >= minPageWidth * 2 ? 2 : 1));
+        const scale = lazy ? Math.min(2.06, displayWidth * Math.min(2, Math.max(1.5, devicePixelRatio || 1)) / baseViewport.width) : 2.06;
+        const viewport = page.getViewport({ scale });
         const canvas = document.createElement('canvas');
         canvas.width = Math.ceil(viewport.width);
         canvas.height = Math.ceil(viewport.height);
@@ -82,7 +90,7 @@ async function setupBook(container) {
     }
 
     function near(index) {
-      for (let i = Math.max(0, index - 2); i <= Math.min(pdf.numPages - 1, index + 5); i++) {
+      for (let i = Math.max(0, index - (lazy ? 1 : 2)); i <= Math.min(pdf.numPages - 1, index + (lazy ? 3 : 5)); i++) {
         renderSheet(i).catch((err) => console.warn('Book page loading failed:', err));
       }
     }
@@ -113,12 +121,14 @@ async function setupBook(container) {
     });
     function update(index) {
       const current = Math.max(0, Math.min(pdf.numPages - 1, index));
-      counter.textContent = 'Page ' + (current + 1) + ' of ' + pdf.numPages;
+      const end = lazy && pageFlip.getOrientation() === 'landscape' && current > 0 ? Math.min(current + 1, pdf.numPages - 1) : current;
+      counter.textContent = end > current ? 'Pages ' + (current + 1) + '–' + (end + 1) + ' of ' + pdf.numPages : 'Page ' + (current + 1) + ' of ' + pdf.numPages;
       prev.disabled = current === 0;
-      next.disabled = current === pdf.numPages - 1;
+      next.disabled = (lazy ? end : current) === pdf.numPages - 1;
       near(current);
     }
     pageFlip.on('flip', (event) => update(event.data));
+    if (lazy) pageFlip.on('changeOrientation', () => update(pageFlip.getCurrentPageIndex()));
     pageFlip.loadFromHTML(sheets.map((sheet) => sheet.page));
 
     prev.addEventListener('click', () => pageFlip.flipPrev('bottom'));
@@ -135,6 +145,19 @@ async function setupBook(container) {
   } catch (error) {
     // Keep existing FlipHTML5 embed as a fallback when libraries fail.
     console.error('Unable to initialize portfolio book:', error);
+    if (lazy) {
+      container.hidden = false;
+      container.style.visibility = '';
+      mount.hidden = true;
+      if (loading) {
+        loading.hidden = false;
+        loading.textContent = 'The reader is unavailable. Open the full PDF below.';
+      }
+      prev.disabled = true;
+      next.disabled = true;
+      counter.textContent = 'Reader unavailable';
+      return;
+    }
     container.hidden = true;
     container.style.visibility = '';
     if (frame) frame.hidden = false;
@@ -142,7 +165,17 @@ async function setupBook(container) {
 }
 
 document.querySelectorAll('.project-flipbook-custom[data-pdf]').forEach((container) => {
-  setupBook(container).catch((error) => {
+  const start = () => setupBook(container).catch((error) => {
     console.warn('Local book is not ready yet:', error);
   });
+  if (container.hasAttribute('data-book-lazy') && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      start();
+    }, { rootMargin: '400px 0px' });
+    observer.observe(container);
+  } else {
+    start();
+  }
 });

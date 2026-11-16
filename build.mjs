@@ -536,6 +536,25 @@ ${images[g.key]
       ${p.slug === 'mandato-centro' ? '' : `<a class="project-flipbook-link" href="${esc(p.flipbookPdf ? root + p.flipbookPdf : p.flipbook)}" target="_blank" rel="noopener noreferrer" data-book-download>Open the full book ${icon.arrowUpRight}</a>`}
       ${p.flipbookPdf ? `<script type="module" src="${root}mandato-flipbook.js"></script>` : ''}
     </div>
+  </section>` : p.publicationPending || (p.slug === 'accountability-report-2024' && p.flipbookPdf) ? `<section class="project-flipbook ${p.flipbookPdf ? 'publication-ready' : 'publication-pending'}" aria-labelledby="project-flipbook-title">
+    <div class="wrap">
+      <div class="project-flipbook-heading">
+        <h2 id="project-flipbook-title" class="about-drawn-title"><span>EXPLORE THE PUBLICATION</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
+      </div>
+      <div class="project-flipbook-custom" ${p.flipbookPdf ? `data-pdf="${root}${esc(p.flipbookPdf)}" data-book-lazy data-book-title="${esc(p.title)}"` : 'data-publication-pending'}>
+        <div class="project-book-stage"${p.flipbookPdf ? '' : ' aria-describedby="publication-pending-note"'}>
+          ${p.flipbookPdf ? '<div class="project-book-loading" role="status">Preparing your book…</div>' : '<p id="publication-pending-note">The interactive publication will be available here soon.</p>'}
+          <div class="project-book-pages" aria-label="Interactive page turning viewer"${p.flipbookPdf ? '' : ' hidden'}></div>
+        </div>
+        <div class="project-book-controls">
+          <button class="project-book-btn" type="button" data-book-prev aria-label="Previous page" disabled>${icon.arrowLeft}</button>
+          <span class="project-book-counter" aria-live="polite">${p.flipbookPdf ? 'Preparing publication…' : 'Publication coming soon'}</span>
+          <button class="project-book-btn" type="button" data-book-next aria-label="Next page" disabled>${icon.arrowRight}</button>
+        </div>
+      </div>
+      ${p.flipbookPdf ? `<a class="project-flipbook-link" href="${root}${esc(p.flipbookPdf)}" target="_blank" rel="noopener noreferrer" data-book-download>Open the full PDF ${icon.arrowUpRight}</a>
+      <script type="module" src="${root}mandato-flipbook.js"></script>` : ''}
+    </div>
   </section>` : '';
 
   const body = `<article class="project ${isEditorial ? 'project--editorial' : ''}">
@@ -585,7 +604,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
       </div>
       <div class="project-next-visual-content wrap">
         <div class="project-next-visual-copy">
-          <span class="project-next-visual-label">Next Project ${icon.arrowRight}</span>
+          <span class="project-next-visual-label">${p.slug === 'accountability-report-2024' ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
           <h2>${esc(next.shortTitle || next.title)}</h2>
           <p>${esc(next.summary)}</p>
         </div>
@@ -604,7 +623,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {
