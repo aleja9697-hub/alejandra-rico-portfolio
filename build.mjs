@@ -48,7 +48,7 @@ const esc = (s = '') =>
 
 const img = (slug, n) => images[slug]?.[n - 1];
 const coverOf = (p) =>
-  p.coverImage ? images[p.slug][0] : img(p.slug, p.cover || 1);
+  p.coverImage ? images[p.slug].find((im) => im.src === p.coverImage) : img(p.slug, p.cover || 1);
 
 const icon = {
   arrowUpRight:
@@ -205,7 +205,7 @@ ${row
   .map(([slug, span]) => {
     const p = bySlug[slug];
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
-    const c = coverOf(p);
+    const c = p.homeCoverImage ? images[p.slug].find((im) => im.src === p.homeCoverImage) : coverOf(p);
     // Mostrar otra imagen real del mismo proyecto dentro de la lente.
     const alternateNumber = p.reveal ?? p.gallery?.flat().find((n) => n !== (p.cover || 1));
     const alternate = alternateNumber ? img(p.slug, alternateNumber) : null;
@@ -404,7 +404,7 @@ function toolIcons(tools, root) {
 }
 function projectPage(p, i) {
   const root = '../../';
-  const next = projects[(i + 1) % projects.length];
+  const next = p.nextDestination || projects[(i + 1) % projects.length];
   const meta = [
     ['Discipline', p.discipline],
     ['Client', p.client],
@@ -414,12 +414,13 @@ function projectPage(p, i) {
   ].filter(Boolean);
 
   let galleryHtml = '';
-  const renderCarousel = (photoNumbers, { id = 'project-carousel-title', title = 'A closer look', eyebrow = 'SELECTED IMAGES', cls = '' } = {}) => `<section class="project-carousel${cls ? ` ${cls}` : ''}" aria-labelledby="${id}">
+  const renderCarousel = (photoNumbers, { id = 'project-carousel-title', title = 'A closer look', eyebrow = 'SELECTED IMAGES', cls = '', sourceSlug = p.slug, subtitle = '' } = {}) => `<section class="project-carousel${cls ? ` ${cls}` : ''}" aria-labelledby="${id}">
   <div class="wrap">
     <div class="project-carousel-heading">
       <div>
 ${eyebrow ? `        <span class="project-section-eyebrow">${esc(eyebrow)}</span>` : ''}
         <h2 id="${id}"${cls === 'music-film-carousel' ? ' class="about-drawn-title"' : ''}>${cls === 'music-film-carousel' ? `<span>${esc(title)}</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg>` : esc(title)}</h2>
+${subtitle ? `        <p class="social-note">${esc(subtitle)}</p>` : ''}
       </div>
       <div class="project-carousel-controls">
         <span class="project-carousel-counter" aria-live="polite">01 / ${String(photoNumbers.length).padStart(2, '0')}</span>
@@ -427,12 +428,12 @@ ${eyebrow ? `        <span class="project-section-eyebrow">${esc(eyebrow)}</span
         <button class="project-carousel-arrow" type="button" data-carousel-next aria-label="Next image">${icon.arrowRight}</button>
       </div>
     </div>
-    <div class="project-carousel-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="${esc(p.title)} project photography">
+    <div class="project-carousel-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="${esc(sourceSlug === p.slug ? p.title : title)} project photography">
 ${photoNumbers.map((n, k) => {
-  const im = img(p.slug, n);
-  if (!im) throw new Error(`${p.slug}: image ${n} missing`);
+  const im = img(sourceSlug, n);
+  if (!im) throw new Error(`${sourceSlug}: image ${n} missing`);
   return `      <figure class="project-carousel-slide" aria-label="Image ${k + 1} of ${photoNumbers.length}">
-        ${picture(im, p.alts?.[n - 1] || p.title, { sizes: '(max-width: 760px) 90vw, 74vw' })}
+        ${picture(im, sourceSlug === p.slug ? p.alts?.[n - 1] || p.title : `${title} social media post ${n}`, { sizes: '(max-width: 760px) 90vw, 74vw' })}
       </figure>`;
 }).join('\n')}
     </div>
@@ -470,7 +471,18 @@ ${p.gallery
 </section>`;
   }
 
-  if (p.groups) {
+  if (p.groups && p.pageStyle === 'editorial') {
+    galleryHtml = `<section class="social-projects" aria-labelledby="social-projects-title">
+  <div class="wrap social-projects-heading">
+    <h2 id="social-projects-title" class="about-drawn-title"><span>SOCIAL MEDIA PROJECTS</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
+  </div>
+  <div class="wrap fornatta-carousels">
+${p.groups.map((g) => renderCarousel(Array.from({ length: 12 }, (_, k) => k + 1), {
+  id: g.key, title: g.name, subtitle: g.note, eyebrow: '', cls: 'social-brand-carousel', sourceSlug: g.key,
+})).join('\n')}
+  </div>
+</section>`;
+  } else if (p.groups) {
     galleryHtml = p.groups
       .map(
         (g) => `<section class="social-group" aria-labelledby="${g.key}">
@@ -498,7 +510,7 @@ ${images[g.key]
   const isEditorial = p.pageStyle === 'editorial';
   const hasEditorialHero = isEditorial || p.heroStyle === 'editorial';
   const heroIndex = p.heroImage || p.cover || 1;
-  const heroPhoto = hasEditorialHero ? img(p.slug, heroIndex) : null;
+  const heroPhoto = hasEditorialHero ? (p.coverImage && !p.heroImage ? images[p.slug]?.find((im) => im.src === p.coverImage) : img(p.slug, heroIndex)) : null;
   if (hasEditorialHero && !heroPhoto) throw new Error(`${p.slug}: hero image ${heroIndex} missing`);
   const editorialHero = hasEditorialHero ? `<header class="editorial-hero" aria-label="${esc(p.title)} project introduction">
     ${picture(heroPhoto, p.alts?.[heroIndex - 1] || p.title, { sizes: '100vw', eager: true, cls: 'editorial-hero-image' })}
@@ -598,20 +610,20 @@ ${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby=
 
 ${episodesHtml}${carouselsHtml ? '\n' + (['fornatta', 'music-film-events'].includes(p.slug) ? `<div class="wrap fornatta-carousels">\n${carouselsHtml}\n</div>` : carouselsHtml) : ''}
 
-  ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
-    <a class="project-next-visual-link" href="${root}work/${next.slug}/">
+  ${p.nextProjectImage || p.nextProjectBackground ? `<nav class="project-next-visual" aria-label="${p.nextProjectHref ? 'Selected work' : 'Next project'}">
+    <a class="project-next-visual-link" href="${p.nextProjectHref ? root + esc(p.nextProjectHref) : `${root}work/${next.slug}/`}">
       <div class="project-next-visual-atmosphere" aria-hidden="true">
-        ${picture(img(p.slug, p.nextProjectImage), '', { cls: 'project-next-visual-background' })}
+        ${picture(p.nextProjectBackground ? images[p.slug]?.find((im) => im.src === p.nextProjectBackground) : img(p.slug, p.nextProjectImage), '', { cls: 'project-next-visual-background' })}
       </div>
-      <div class="project-next-visual-content wrap">
+      <div class="project-next-visual-content wrap${p.nextProjectTextOnly ? ' project-next-visual-content--text-only' : ''}">
         <div class="project-next-visual-copy">
-          <span class="project-next-visual-label">${(p.slug.startsWith('accountability-report-') || p.slug === 'music-film-events') ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
-          <h2>${esc(next.shortTitle || next.title)}</h2>
+          <span class="project-next-visual-label">${(p.slug.startsWith('accountability-report-') || p.slug === 'music-film-events' || p.slug === 'social-media') ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
+          <h2>${p.nextProjectTextOnly ? `<mark class="project-next-highlight">${esc(next.shortTitle || next.title)}</mark>` : esc(next.shortTitle || next.title)}</h2>
           <p>${esc(next.summary)}</p>
         </div>
-        <div class="project-next-visual-photo">
+${p.nextProjectTextOnly ? '' : `        <div class="project-next-visual-photo">
           ${picture(p.nextProjectPreview ? img(next.slug, p.nextProjectPreview) : coverOf(next), next.alts?.[(p.nextProjectPreview || next.cover || 1) - 1] || next.title, { cls: 'project-next-visual-image', sizes: '(max-width: 760px) 100vw, 42vw' })}
-        </div>
+        </div>`}
       </div>
     </a>
   </nav><script src="${root}project-next.js" defer></script>` : `<nav class="next" aria-label="Next project">
@@ -624,7 +636,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (['fornatta', 'music-film-events'].inclu
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'music-film-events' ? ' is-music-film-events' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}${p.slug === 'accountability-report-2025' ? ' is-accountability-2025' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'music-film-events' ? ' is-music-film-events' : ''}${p.slug === 'social-media' ? ' is-social-media' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}${p.slug === 'accountability-report-2025' ? ' is-accountability-2025' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {

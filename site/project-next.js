@@ -2,6 +2,18 @@
 (() => {
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (motion.matches || !('IntersectionObserver' in window)) return;
+  const highlights = document.querySelectorAll('.is-social-media .project-next-highlight');
+  const highlightObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('is-highlighted');
+      highlightObserver.unobserve(entry.target);
+    }
+  }, { threshold: .35, rootMargin: '0px 0px -8% 0px' });
+  highlights.forEach((highlight) => {
+    highlight.classList.add('is-scroll-highlight-ready');
+    highlightObserver.observe(highlight);
+  });
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;

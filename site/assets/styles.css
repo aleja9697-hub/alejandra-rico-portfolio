@@ -4299,20 +4299,20 @@ body.is-project .project-loader.is-active {
   border-radius: 5px;
   box-shadow: inset 0 0 0 1px rgba(31,84,59,.25);
 }
-:is(.is-fornatta, .is-music-film-events) .fornatta-carousels {
+:is(.is-fornatta, .is-music-film-events, .is-social-media) .fornatta-carousels {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
   padding-block: clamp(2rem, 5vw, 5rem);
 }
-:is(.is-fornatta, .is-music-film-events) .fornatta-carousels .project-carousel {
+:is(.is-fornatta, .is-music-film-events, .is-social-media) .fornatta-carousels .project-carousel {
   min-width: 0;
   padding: clamp(1rem, 1.7vw, 1.5rem);
   border: 1px solid rgba(31,84,59,.2);
   border-radius: 18px;
   background: #F3E5D7;
 }
-:is(.is-fornatta, .is-music-film-events) .fornatta-carousels .project-carousel > .wrap { width: 100%; max-width: none; margin: 0; }
+:is(.is-fornatta, .is-music-film-events, .is-social-media) .fornatta-carousels .project-carousel > .wrap { width: 100%; max-width: none; margin: 0; }
 .is-fornatta .project-carousel-heading { min-height: 5.5rem; align-items: center; margin-bottom: 1.25rem; }
 .is-fornatta .project-carousel-heading h2 { font-size: clamp(1.6rem, 2.5vw, 2.5rem); }
 .is-fornatta .project-carousel-slide { height: clamp(300px, 32vw, 480px); }
@@ -4329,7 +4329,7 @@ body.is-project .project-loader.is-active {
   background: linear-gradient(180deg, rgba(31,84,59,.08), rgba(31,84,59,.55) 50%, #1F543B);
 }
 @media (max-width: 760px) {
-  :is(.is-fornatta, .is-music-film-events) .fornatta-carousels { grid-template-columns: minmax(0, 1fr); }
+  :is(.is-fornatta, .is-music-film-events, .is-social-media) .fornatta-carousels { grid-template-columns: minmax(0, 1fr); }
   .is-fornatta .project-carousel-slide { height: clamp(280px, 95vw, 460px); }
   .is-fornatta .palette ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .is-fornatta .palette .swatch { height: clamp(2.5rem, 15vw, 5rem); }
@@ -4619,6 +4619,128 @@ body.is-project .project-loader.is-active {
   .is-music-film-events .editorial-title-star { width: 32px; }
   .is-music-film-events .gallery .g-row { flex-direction: column; }
   .is-music-film-events .gallery .g-item { flex: auto; }
+}
+
+/* Social Media uses the shared editorial case study and carousel grid. */
+.is-social-media .project-next-visual-content--text-only { grid-template-columns: minmax(0, 1fr); }
+.is-social-media .project-next-highlight {
+  padding: .06em .16em .12em;
+  background: linear-gradient(#F3E5D7, #F3E5D7) left center / 100% 100% no-repeat;
+  color: #1F543B;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.is-social-media .project-next-visual-content--text-only h2 { line-height: 1.4; }
+.is-social-media .project-next-highlight.is-scroll-highlight-ready {
+  background-size: 0% 100%;
+  color: #F3E5D7;
+  transition: background-size 900ms cubic-bezier(.22, 1, .36, 1), color 350ms 300ms ease;
+}
+.is-social-media .project-next-highlight.is-scroll-highlight-ready.is-highlighted {
+  background-size: 100% 100%;
+  color: #1F543B;
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-social-media .project-next-highlight.is-scroll-highlight-ready {
+    background-size: 100% 100%;
+    color: #1F543B;
+    transition: none;
+  }
+}
+.is-social-media .editorial-hero-shade {
+  background: linear-gradient(180deg, rgba(31,84,59,.32), rgba(31,84,59,.18) 32%, rgba(31,84,59,.82) 75%, #1F543B);
+}
+.is-social-media .editorial-hero-image { object-position: 50% 50%; }
+.is-social-media .editorial-title {
+  width: fit-content;
+  white-space: normal;
+  text-wrap: balance;
+}
+.is-social-media .project-head,
+.is-social-media .social-projects { background: #F3E5D7; }
+.is-social-media .project-meta dt,
+.is-social-media .project-meta dd { font: 400 1rem/1.5 'Obviously', sans-serif; }
+.is-social-media .project-meta dt { font-size: .8rem; letter-spacing: .04em; }
+.is-social-media .project--editorial .project-story {
+  background-color: #1F543B;
+  background-image:
+    linear-gradient(to right, rgba(68,133,104,.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(68,133,104,.3) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.is-social-media .project-story .story { background: #1AAA71; border-color: #1F543B; }
+.is-social-media .project-story .story-title { color: #1F543B; font-weight: 900; }
+.is-social-media .project-story .story p { color: #1F543B; }
+.is-social-media .social-projects-heading { padding-top: clamp(3rem, 6vw, 6rem); }
+.is-social-media .social-projects-heading .about-drawn-title {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 100%;
+  padding-bottom: .19em;
+  color: #1F543B;
+  font: 400 clamp(1.5rem, 4vw, 3.7rem)/1.2 'Stretch Pro', sans-serif;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.is-social-media .about-underline {
+  width: 100%;
+  height: clamp(11px, 1.5vw, 20px);
+  margin-top: .14em;
+  overflow: visible;
+  fill: none;
+}
+.is-social-media .about-underline path {
+  fill: none;
+  stroke: #1F543B;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 2.2s cubic-bezier(.4, 0, .2, 1);
+}
+.is-social-media .is-drawn .about-underline path { stroke-dashoffset: 0; }
+.is-social-media .social-brand-carousel .project-carousel-heading {
+  display: grid;
+  grid-template-rows: 8rem auto;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+.is-social-media .social-brand-carousel .project-carousel-heading h2 {
+  color: #1F543B;
+  font: 900 clamp(1.5rem, 2.5vw, 2.5rem)/1.15 'Obviously', sans-serif;
+  letter-spacing: -.04em;
+}
+.is-social-media .social-brand-carousel .social-note {
+  margin-top: .65rem;
+  color: #1F543B;
+  font: 400 clamp(.85rem, 1.2vw, 1rem)/1.5 'Obviously', sans-serif;
+}
+.is-social-media .project-carousel-controls { justify-self: end; }
+.is-social-media .project-carousel-track { grid-auto-columns: 100%; }
+.is-social-media .project-carousel-slide {
+  height: clamp(300px, 32vw, 480px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.is-social-media .project-carousel-slide img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+}
+.is-social-media .project-next-visual-atmosphere { height: clamp(220px, 24vw, 360px); }
+.is-social-media .project-next-visual-content { padding-block: clamp(2rem, 3vw, 3rem); }
+.is-social-media .project-next-visual-image { max-height: 280px; }
+@media (max-width: 760px) {
+  .is-social-media .project-carousel-slide { height: clamp(280px, 95vw, 460px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-social-media .about-underline path { stroke-dashoffset: 0; transition: none; }
 }
 
 /* JCA follows the shared editorial hierarchy and preserves its four brand colors. */

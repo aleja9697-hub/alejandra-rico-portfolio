@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Dibujar el subrayado ondulado tanto en About como en More About Me.
-  const aboutTitles = document.querySelectorAll(".about .about-drawn-title, .services-section .about-drawn-title, .is-music-film-events .music-film-carousel .about-drawn-title, :is(.is-accountability-2024, .is-accountability-2025) .about-drawn-title");
+  const aboutTitles = document.querySelectorAll(".about .about-drawn-title, .services-section .about-drawn-title, .is-music-film-events .music-film-carousel .about-drawn-title, .is-social-media .about-drawn-title, :is(.is-accountability-2024, .is-accountability-2025) .about-drawn-title");
   if (aboutTitles.length) {
     if (reduceMotion || !supportsObserver) {
       aboutTitles.forEach((heading) => heading.classList.add("is-drawn"));

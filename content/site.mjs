@@ -406,6 +406,18 @@ export const projects = [
   },
   {
     slug: 'social-media',
+    pageStyle: 'editorial',
+    heroImage: 1,
+    homeCoverImage: 'img/social-media/01.webp',
+    nextProjectBackground: 'img/social-media/02.webp',
+    nextProjectTextOnly: true,
+    nextProjectHref: '#work',
+    nextDestination: {
+      slug: 'social-media',
+      title: 'Selected Work',
+      summary: 'Explore more visual identity, editorial and digital projects.',
+      coverImage: 'img/social-media/03.webp',
+    },
     title: 'Social Media',
     discipline: 'Social media',
     year: 'Various',
@@ -428,7 +440,7 @@ export const projects = [
       { key: 'social-pulpas-rico', name: 'Pulpas Rico', note: 'Fruit pulps' },
     ],
     coverImage: 'img/social-media/cover.webp',
-    coverFit: 'contain',
+    coverFit: 'cover',
   },
   {
     slug: 'cali-film-commission',
