@@ -419,7 +419,7 @@ function projectPage(p, i) {
     <div class="project-carousel-heading">
       <div>
 ${eyebrow ? `        <span class="project-section-eyebrow">${esc(eyebrow)}</span>` : ''}
-        <h2 id="${id}">${esc(title)}</h2>
+        <h2 id="${id}"${cls === 'music-film-carousel' ? ' class="about-drawn-title"' : ''}>${cls === 'music-film-carousel' ? `<span>${esc(title)}</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg>` : esc(title)}</h2>
       </div>
       <div class="project-carousel-controls">
         <span class="project-carousel-counter" aria-live="polite">01 / ${String(photoNumbers.length).padStart(2, '0')}</span>
@@ -444,6 +444,7 @@ ${photoNumbers.map((n, k) => {
   const episodesHtml = p.episodes?.length ? renderCarousel(p.episodes, { id: 'podcast-episodes-title', title: 'PODCAST EPISODES', eyebrow: '', cls: 'podcast-episodes' }) : '';
   const carouselsHtml = (p.carousels || []).map((carousel, index) => renderCarousel(carousel.images, {
     id: `${p.slug}-carousel-${index + 1}-title`, title: carousel.title, eyebrow: '',
+    cls: p.slug === 'music-film-events' && carousel.drawnTitle ? 'music-film-carousel' : '',
   })).join('\n');
 
   if (p.gallery && p.galleryMode !== 'carousel') {
@@ -595,7 +596,7 @@ ${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby=
     </div>
   </section><script src="${root}energizar-motion.js" defer></script>` : ''}
 
-${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wrap fornatta-carousels">\n${carouselsHtml}\n</div>` : carouselsHtml) : ''}
+${episodesHtml}${carouselsHtml ? '\n' + (['fornatta', 'music-film-events'].includes(p.slug) ? `<div class="wrap fornatta-carousels">\n${carouselsHtml}\n</div>` : carouselsHtml) : ''}
 
   ${p.nextProjectImage ? `<nav class="project-next-visual" aria-label="Next project">
     <a class="project-next-visual-link" href="${root}work/${next.slug}/">
@@ -604,7 +605,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
       </div>
       <div class="project-next-visual-content wrap">
         <div class="project-next-visual-copy">
-          <span class="project-next-visual-label">${p.slug.startsWith('accountability-report-') ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
+          <span class="project-next-visual-label">${(p.slug.startsWith('accountability-report-') || p.slug === 'music-film-events') ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
           <h2>${esc(next.shortTitle || next.title)}</h2>
           <p>${esc(next.summary)}</p>
         </div>
@@ -623,7 +624,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}${p.slug === 'accountability-report-2025' ? ' is-accountability-2025' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'music-film-events' ? ' is-music-film-events' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}${p.slug === 'accountability-report-2025' ? ' is-accountability-2025' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {

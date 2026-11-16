@@ -4299,20 +4299,20 @@ body.is-project .project-loader.is-active {
   border-radius: 5px;
   box-shadow: inset 0 0 0 1px rgba(31,84,59,.25);
 }
-.is-fornatta .fornatta-carousels {
+:is(.is-fornatta, .is-music-film-events) .fornatta-carousels {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
   padding-block: clamp(2rem, 5vw, 5rem);
 }
-.is-fornatta .fornatta-carousels .project-carousel {
+:is(.is-fornatta, .is-music-film-events) .fornatta-carousels .project-carousel {
   min-width: 0;
   padding: clamp(1rem, 1.7vw, 1.5rem);
   border: 1px solid rgba(31,84,59,.2);
   border-radius: 18px;
   background: #F3E5D7;
 }
-.is-fornatta .fornatta-carousels .project-carousel > .wrap { width: 100%; max-width: none; margin: 0; }
+:is(.is-fornatta, .is-music-film-events) .fornatta-carousels .project-carousel > .wrap { width: 100%; max-width: none; margin: 0; }
 .is-fornatta .project-carousel-heading { min-height: 5.5rem; align-items: center; margin-bottom: 1.25rem; }
 .is-fornatta .project-carousel-heading h2 { font-size: clamp(1.6rem, 2.5vw, 2.5rem); }
 .is-fornatta .project-carousel-slide { height: clamp(300px, 32vw, 480px); }
@@ -4329,7 +4329,7 @@ body.is-project .project-loader.is-active {
   background: linear-gradient(180deg, rgba(31,84,59,.08), rgba(31,84,59,.55) 50%, #1F543B);
 }
 @media (max-width: 760px) {
-  .is-fornatta .fornatta-carousels { grid-template-columns: minmax(0, 1fr); }
+  :is(.is-fornatta, .is-music-film-events) .fornatta-carousels { grid-template-columns: minmax(0, 1fr); }
   .is-fornatta .project-carousel-slide { height: clamp(280px, 95vw, 460px); }
   .is-fornatta .palette ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .is-fornatta .palette .swatch { height: clamp(2.5rem, 15vw, 5rem); }
@@ -4514,6 +4514,111 @@ body.is-project .project-loader.is-active {
 }
 @media (prefers-reduced-motion: reduce) {
   :is(.is-accountability-2024, .is-accountability-2025) .about-underline path { stroke-dashoffset: 0; transition: none; }
+}
+
+/* Music and Film Events opts into the existing editorial components. */
+.is-music-film-events .editorial-hero-shade {
+  background: linear-gradient(180deg, rgba(31,84,59,.32), rgba(31,84,59,.18) 32%, rgba(31,84,59,.82) 75%, #1F543B);
+}
+.is-music-film-events .editorial-hero-image { object-position: 50% 65%; }
+.is-music-film-events .editorial-title {
+  display: block;
+  width: fit-content;
+  white-space: normal;
+  text-wrap: balance;
+  font-size: clamp(2rem, 5.8vw, 5.75rem);
+}
+.is-music-film-events .editorial-title-star {
+  display: inline-block;
+  vertical-align: middle;
+  margin-inline-start: .22em;
+}
+.is-music-film-events .project-head,
+.is-music-film-events .gallery { background: #F3E5D7; }
+.is-music-film-events .project-meta dt,
+.is-music-film-events .project-meta dd { font: 400 1rem/1.5 'Obviously', sans-serif; }
+.is-music-film-events .project-meta dt { font-size: .8rem; letter-spacing: .04em; }
+.is-music-film-events .project--editorial .project-story {
+  background-color: #1F543B;
+  background-image:
+    linear-gradient(to right, rgba(68,133,104,.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(68,133,104,.3) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.is-music-film-events .project-story .story { background: #1AAA71; border-color: #1F543B; }
+.is-music-film-events .project-story .story-title { color: #1F543B; font-weight: 900; }
+.is-music-film-events .project-story .story p { color: #1F543B; }
+.is-music-film-events .gallery .g-item img { border-radius: 15px; }
+.is-music-film-events .project-next-visual-background { object-position: 50% 42%; }
+.is-music-film-events .project-next-visual-atmosphere {
+  height: clamp(220px, 24vw, 360px);
+}
+.is-music-film-events .project-next-visual-content {
+  padding-block: clamp(2rem, 3vw, 3rem);
+}
+.is-music-film-events .project-next-visual-image { max-height: 280px; }
+.is-music-film-events .music-film-carousel { background: #F3E5D7; }
+.is-music-film-events .music-film-carousel .project-carousel-track { grid-auto-columns: 100%; }
+.is-music-film-events .music-film-carousel .project-carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.is-music-film-events .music-film-carousel .project-carousel-slide img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+}
+.is-music-film-events .music-film-carousel .project-carousel-heading {
+  display: grid;
+  grid-template-rows: 7rem auto;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.is-music-film-events .music-film-carousel .project-carousel-controls { justify-self: end; }
+.is-music-film-events .music-film-carousel .project-carousel-slide { height: clamp(300px, 32vw, 480px); }
+.is-music-film-events .music-film-carousel .project-carousel-heading > div:first-child { min-width: 0; max-width: 100%; }
+.is-music-film-events .music-film-carousel .about-drawn-title {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 100%;
+  padding-bottom: .19em;
+  color: #1F543B;
+  font: 400 clamp(1.6rem, 2.5vw, 2.5rem)/1.2 'Stretch Pro', sans-serif;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.is-music-film-events .music-film-carousel .about-underline {
+  width: 100%;
+  height: clamp(11px, 1.5vw, 20px);
+  margin-top: .14em;
+  overflow: visible;
+  fill: none;
+}
+.is-music-film-events .music-film-carousel .about-underline path {
+  fill: none;
+  stroke: #1F543B;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 2.2s cubic-bezier(.4, 0, .2, 1);
+}
+.is-music-film-events .music-film-carousel .is-drawn .about-underline path { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .is-music-film-events .music-film-carousel .about-underline path { stroke-dashoffset: 0; transition: none; }
+}
+@media (max-width: 760px) {
+  .is-music-film-events .music-film-carousel .project-carousel-slide { height: clamp(280px, 95vw, 460px); }
+  .is-music-film-events .editorial-title { font-size: clamp(2rem, 9vw, 3.4rem); }
+  .is-music-film-events .editorial-title-star { width: 32px; }
+  .is-music-film-events .gallery .g-row { flex-direction: column; }
+  .is-music-film-events .gallery .g-item { flex: auto; }
 }
 
 /* JCA follows the shared editorial hierarchy and preserves its four brand colors. */
