@@ -1,6 +1,7 @@
 // Static site generator for the portfolio. No dependencies.
 // Usage: node build.mjs   ->   writes HTML pages into ./site
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { site, projects, homeRows } from './content/site.mjs';
 
 // Image sizes are read automatically from the files in site/img/<project>/.
@@ -432,8 +433,13 @@ ${subtitle ? `        <p class="social-note">${esc(subtitle)}</p>` : ''}
 ${photoNumbers.map((n, k) => {
   const im = img(sourceSlug, n);
   if (!im) throw new Error(`${sourceSlug}: image ${n} missing`);
+  // Social posts are replaced in place while /img has immutable, year-long caching.
+  // Version only these carousel URLs so browsers fetch the actual current artwork.
+  const carouselImage = cls === 'social-brand-carousel'
+    ? { ...im, src: `${im.src}?v=${createHash('sha256').update(readFileSync(new URL('./site/' + im.src, import.meta.url))).digest('hex').slice(0, 12)}` }
+    : im;
   return `      <figure class="project-carousel-slide" aria-label="Image ${k + 1} of ${photoNumbers.length}">
-        ${picture(im, sourceSlug === p.slug ? p.alts?.[n - 1] || p.title : `${title} social media post ${n}`, { sizes: '(max-width: 760px) 90vw, 74vw' })}
+        ${picture(carouselImage, sourceSlug === p.slug ? p.alts?.[n - 1] || p.title : `${title} social media post ${n}`, { sizes: '(max-width: 760px) 90vw, 74vw' })}
       </figure>`;
 }).join('\n')}
     </div>
