@@ -28,7 +28,9 @@ const IMG_DIR = new URL('./site/img/', import.meta.url);
 const images = {};
 for (const d of readdirSync(IMG_DIR, { withFileTypes: true })) {
   if (!d.isDirectory()) continue;
-  const files = readdirSync(new URL(d.name + '/', IMG_DIR)).filter((f) => /^(\d+|cover)\.(webp|jpe?g|png)$/i.test(f)).sort();
+  const files = readdirSync(new URL(d.name + '/', IMG_DIR)).filter((f) => /^(\d+|cover)\.(webp|jpe?g|png)$/i.test(f))
+    // JCA keeps its legacy JPEG; use the selected WebP without deleting either asset.
+    .filter((f) => !(d.name === 'jca' && f === '06.jpg' && existsSync(new URL('jca/06.webp', IMG_DIR)))).sort();
   const stems = files.map((f) => f.replace(/\.[^.]+$/, ''));
   const dup = stems.find((x, i) => stems.indexOf(x) !== i);
   if (dup) throw new Error(`img/${d.name} has two files named ${dup} with different extensions. Delete the old one so only one ${dup} remains.`);
@@ -504,8 +506,8 @@ ${images[g.key]
       <a class="editorial-back" href="${root}#work">${icon.arrowLeft}<span>All work</span></a>
       <div class="editorial-hero-bottom">
         <span class="editorial-category editorial-category-pill">${esc(p.discipline)} · ${esc(p.year)}</span>
-        <h1 class="editorial-title">${esc(p.title)}<img src="${root}assets/img/estrella-marquee.svg" class="editorial-title-star" alt="" aria-hidden="true" width="140" height="140"></h1>
-        <p class="editorial-subtitle">${esc(p.summary)}</p>
+        <h1 class="editorial-title">${esc(p.heroTitle || p.title)}<img src="${root}assets/img/estrella-marquee.svg" class="editorial-title-star" alt="" aria-hidden="true" width="140" height="140"></h1>
+        <p class="editorial-subtitle">${esc(p.heroSubtitle || p.summary)}</p>
       </div>
     </div>
   </header>` : '';
@@ -602,7 +604,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {

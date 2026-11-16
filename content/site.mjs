@@ -175,6 +175,11 @@ export const projects = [
   },
   {
     slug: 'jca',
+    pageStyle: 'editorial',
+    heroImage: 6,
+    nextProjectImage: 7,
+    heroTitle: 'JCA',
+    heroSubtitle: 'Hydraulic and Hydrologic Engineering',
     title: 'JCA Hydraulic and Hydrologic Engineering',
     shortTitle: 'JCA Engineering',
     discipline: 'Visual identity',
@@ -200,6 +205,7 @@ export const projects = [
       'Blue JCA billboard on a city street',
       'Large JCA banner on a concrete building',
       'Engineer in white hard hat at a construction site',
+      'JCA closing cover',
     ],
   },
   {
