@@ -193,7 +193,7 @@ export const projects = [
       ['Result', 'An identity system shown on uniforms, equipment, hoardings and billboards.'],
     ],
     palette: ['#F75514', '#0D1A62', '#2E2EDF', '#F4F5D2'],
-    cover: 8,
+    cover: 6,
     reveal: 2,
     coverPosition: '57% 50%',
     gallery: [[1, 2, 3], [4, 5]],
@@ -205,7 +205,6 @@ export const projects = [
       'Large JCA banner on a concrete building',
       'Engineer in white hard hat at a construction site',
       'JCA closing cover',
-      'JCA Engineering portfolio cover',
     ],
   },
   {
