@@ -290,6 +290,11 @@ export const projects = [
   },
   {
     slug: 'accountability-report-2024',
+    pageStyle: 'editorial',
+    galleryMode: 'carousel',
+    heroImage: 10,
+    nextProjectImage: 11,
+    flipbookPdf: 'publications/accountability-report-2024/GESTIÓN EDISON GIRALDO 2024.pdf',
     title: 'Accountability Report 2024',
     discipline: 'Editorial design',
     year: '2025',
@@ -306,7 +311,7 @@ export const projects = [
     cover: 9,
     reveal: 8,
     coverPosition: '50% 50%',
-    gallery: [[1], [2, 3], [4, 5, 6]],
+    gallery: [[1, 3, 5, 6, 8]],
     alts: [
       'Shoppers reading the newspaper in a downtown store',
       'Hand opening the 2024 accountability newspaper',
@@ -317,6 +322,8 @@ export const projects = [
       'Man reading Edison Giraldo accountability report in a downtown shop',
       'Alternative accountability report photograph for desktop reveal',
       '2024 accountability report featured photograph for homepage',
+      '2024 accountability report opening cover photograph',
+      '2024 accountability newspaper on a blue chair',
     ],
   },
   {
