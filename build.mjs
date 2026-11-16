@@ -29,8 +29,8 @@ const images = {};
 for (const d of readdirSync(IMG_DIR, { withFileTypes: true })) {
   if (!d.isDirectory()) continue;
   const files = readdirSync(new URL(d.name + '/', IMG_DIR)).filter((f) => /^(\d+|cover)\.(webp|jpe?g|png)$/i.test(f))
-    // JCA keeps its legacy JPEG; use the selected WebP without deleting either asset.
-    .filter((f) => !(d.name === 'jca' && f === '06.jpg' && existsSync(new URL('jca/06.webp', IMG_DIR)))).sort();
+    // These projects keep their legacy JPEG; use the selected WebP without deleting either asset.
+    .filter((f) => !(['jca', 'accountability-report-2025'].includes(d.name) && f === '06.jpg' && existsSync(new URL(`${d.name}/06.webp`, IMG_DIR)))).sort();
   const stems = files.map((f) => f.replace(/\.[^.]+$/, ''));
   const dup = stems.find((x, i) => stems.indexOf(x) !== i);
   if (dup) throw new Error(`img/${d.name} has two files named ${dup} with different extensions. Delete the old one so only one ${dup} remains.`);
@@ -536,7 +536,7 @@ ${images[g.key]
       ${p.slug === 'mandato-centro' ? '' : `<a class="project-flipbook-link" href="${esc(p.flipbookPdf ? root + p.flipbookPdf : p.flipbook)}" target="_blank" rel="noopener noreferrer" data-book-download>Open the full book ${icon.arrowUpRight}</a>`}
       ${p.flipbookPdf ? `<script type="module" src="${root}mandato-flipbook.js"></script>` : ''}
     </div>
-  </section>` : p.publicationPending || (p.slug === 'accountability-report-2024' && p.flipbookPdf) ? `<section class="project-flipbook ${p.flipbookPdf ? 'publication-ready' : 'publication-pending'}" aria-labelledby="project-flipbook-title">
+  </section>` : p.publicationPending || p.flipbookPdf ? `<section class="project-flipbook ${p.flipbookPdf ? 'publication-ready' : 'publication-pending'}" aria-labelledby="project-flipbook-title">
     <div class="wrap">
       <div class="project-flipbook-heading">
         <h2 id="project-flipbook-title" class="about-drawn-title"><span>EXPLORE THE PUBLICATION</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
@@ -578,9 +578,9 @@ ${hasEditorialHero ? '' : `<a class="back" href="${root}#work">${icon.arrowLeft}
     </div>
   </section>
 
-  ${flipbookHtml}
+  ${p.publicationAfterGallery ? galleryHtml : flipbookHtml}
 
-  ${galleryHtml}
+  ${p.publicationAfterGallery ? flipbookHtml : galleryHtml}
 
 ${p.slug === 'energizar' ? `  <section class="energizar-motion" aria-labelledby="energizar-motion-title">
     <div class="wrap energizar-motion-grid">
@@ -604,7 +604,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
       </div>
       <div class="project-next-visual-content wrap">
         <div class="project-next-visual-copy">
-          <span class="project-next-visual-label">${p.slug === 'accountability-report-2024' ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
+          <span class="project-next-visual-label">${p.slug.startsWith('accountability-report-') ? 'NEXT PROJECT' : 'Next Project'} ${icon.arrowRight}</span>
           <h2>${esc(next.shortTitle || next.title)}</h2>
           <p>${esc(next.summary)}</p>
         </div>
@@ -623,7 +623,7 @@ ${episodesHtml}${carouselsHtml ? '\n' + (p.slug === 'fornatta' ? `<div class="wr
   </nav>`}
 </article>`;
   const og = coverOf(p).src;
-  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
+  return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}${p.slug === 'accountability-report-2025' ? ' is-accountability-2025' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
 function notFound() {

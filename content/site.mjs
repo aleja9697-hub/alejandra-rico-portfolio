@@ -328,6 +328,12 @@ export const projects = [
   },
   {
     slug: 'accountability-report-2025',
+    pageStyle: 'editorial',
+    galleryMode: 'carousel',
+    heroImage: 7,
+    nextProjectImage: 5,
+    flipbookPdf: 'publications/accountability-report-2025/Gestión 2025.pdf',
+    publicationAfterGallery: false,
     title: 'Accountability Report 2025',
     discipline: 'Editorial design',
     year: '2026',
