@@ -36,8 +36,12 @@ for (const d of readdirSync(IMG_DIR, { withFileTypes: true })) {
   const dup = stems.find((x, i) => stems.indexOf(x) !== i);
   if (dup) throw new Error(`img/${d.name} has two files named ${dup} with different extensions. Delete the old one so only one ${dup} remains.`);
   images[d.name] = files.map((f) => {
-    const size = imageSize(readFileSync(new URL(d.name + '/' + f, IMG_DIR)));
+    const data = readFileSync(new URL(d.name + '/' + f, IMG_DIR));
+    const size = imageSize(data);
     if (!size) throw new Error(`Cannot read the size of img/${d.name}/${f}. Use a normal .webp, .jpg or .png file.`);
+    if (d.name === 'about' && f === '01.webp') {
+      return { src: `img/about/01.webp?v=${createHash('sha256').update(data).digest('hex').slice(0, 12)}`, w: size.w, h: size.h };
+    }
     return { src: `img/${d.name}/${f}${d.name === 'al-centro' && f === '05.webp' ? '?v=20261114-hq' : d.name === 'al-centro' && ['04.webp', '09.webp', '10.webp', '11.webp'].includes(f) ? '?v=20261114-episodes' : ''}`, w: size.w, h: size.h };
   });
 }
@@ -737,6 +741,16 @@ function notFound() {
 }
 
 // ---------------- Write ----------------
+function updatePortraitImage(html, root) {
+  const portrait = images.about[0];
+  const pattern = /(<figure\b[^>]*class="[^"]*\babout-portrait\b[^"]*"[^>]*>[\s\S]*?)(<img\b[^>]*>)/;
+  if (!portrait || !pattern.test(html)) throw new Error('Cannot locate the approved About portrait.');
+  return html.replace(pattern, (_, prefix, tag) => prefix + tag
+    .replace(/\bsrc="[^"]*"/, `src="${root}${esc(portrait.src)}"`)
+    .replace(/\bwidth="[^"]*"/, `width="${portrait.w}"`)
+    .replace(/\bheight="[^"]*"/, `height="${portrait.h}"`));
+}
+
 const write = (rel, html) => {
   const url = new URL(rel, OUT);
   mkdirSync(new URL('./', url), { recursive: true });
@@ -745,9 +759,14 @@ const write = (rel, html) => {
 // Release this section without regenerating the approved, checked-in project pages.
 const videosOnly = process.argv.includes('--videos-only');
 const homeOnly = process.argv.includes('--home-only');
-if (videosOnly && homeOnly) throw new Error('Choose either --videos-only or --home-only.');
+const portraitOnly = process.argv.includes('--portrait-only');
+if ([videosOnly, homeOnly, portraitOnly].filter(Boolean).length > 1) throw new Error('Choose only one scoped build mode.');
 if (homeOnly) write('index.html', home(readFileSync(new URL('index.html', OUT), 'utf8')));
-if (!videosOnly && !homeOnly) {
+if (portraitOnly) {
+  write('index.html', updatePortraitImage(readFileSync(new URL('index.html', OUT), 'utf8'), ''));
+  write('about/index.html', updatePortraitImage(readFileSync(new URL('about/index.html', OUT), 'utf8'), '../'));
+}
+if (!videosOnly && !homeOnly && !portraitOnly) {
 if (existsSync(new URL('work/', OUT))) rmSync(new URL('work/', OUT), { recursive: true });
 write('index.html', home());
 write('about/index.html', aboutPage());
@@ -761,5 +780,5 @@ write(
 );
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 }
-if (!homeOnly) write('videos/index.html', videosPage());
-console.log(homeOnly ? 'Rebuilt Selected Work in /; preserved approved cards and other pages' : videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
+if (!homeOnly && !portraitOnly) write('videos/index.html', videosPage());
+console.log(portraitOnly ? 'Updated About portrait in / and /about/; preserved all other content' : homeOnly ? 'Rebuilt Selected Work in /; preserved approved cards and other pages' : videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
