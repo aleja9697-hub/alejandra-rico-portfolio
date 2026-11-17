@@ -1900,6 +1900,15 @@ a { color: inherit; }
 .site-header .nav a {
   color: #1F543B;
 }
+@media (max-width: 620px) {
+  .site-header .header-inner {
+    flex-wrap: wrap;
+    gap: .35rem 1rem;
+    padding-block: .7rem;
+  }
+  .site-header nav { width: 100%; }
+  .site-header .nav { justify-content: space-between; }
+}
 @media (max-width: 760px) {
   .site-header .header-inner,
   .is-home .header-inner {

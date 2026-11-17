@@ -2,7 +2,7 @@
 // Usage: node build.mjs   ->   writes HTML pages into ./site
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { site, projects, homeRows } from './content/site.mjs';
+import { site, projects, homeRows, videoPage } from './content/site.mjs';
 
 // Image sizes are read automatically from the files in site/img/<project>/.
 // Name files 01, 02, 03... (or cover) (.webp, .jpg, .jpeg or .png). No size list to maintain.
@@ -89,7 +89,7 @@ function layout({ title, description, root, body, ogImage, bodyClass = '' }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
-<link rel="stylesheet" href="${root}assets/styles.css">
+<link rel="stylesheet" href="${root}assets/styles.css">${bodyClass === 'is-videos' ? `\n<link rel="preload" href="${root}assets/fonts/StretchPro.otf" as="font" type="font/otf" crossorigin>\n<link rel="stylesheet" href="${root}assets/videos.css?v=${createHash('sha256').update(readFileSync(new URL('./site/assets/videos.css', import.meta.url))).digest('hex').slice(0, 12)}">` : ''}
 <script src="${root}work-animation.js" defer></script></head>
 <body class="${bodyClass}"${isProject ? ' id="top"' : ''}>
 ${isProject ? `<div class="project-loader" aria-hidden="true"><img src="${root}assets/img/estrella-marquee.svg" alt="" width="96" height="96"></div><script src="${root}project-entry.js"></script>` : ''}
@@ -100,6 +100,7 @@ ${isProject ? `<div class="project-loader" aria-hidden="true"><img src="${root}a
     <nav aria-label="Main">
       <ul class="nav">
         <li><a href="${root}#work">Work</a></li>
+        <li><a href="${root}videos/">Videos</a></li>
         <li><a href="${root}about/">About</a></li>
         <li><a href="${root}#contact">Contact</a></li>
       </ul>
@@ -645,6 +646,67 @@ ${p.nextProjectTextOnly ? '' : `        <div class="project-next-visual-photo">
   return layout({ title: p.title, description: p.summary, root, body, ogImage: og, bodyClass: hasEditorialHero ? `is-project is-editorial-project${p.slug === 'mandato-centro' ? ' is-mandato' : ''}${p.slug === 'al-centro' ? ' is-al-centro' : ''}${p.slug === 'energizar' ? ' is-energizar' : ''}${p.slug === 'fornatta' ? ' is-fornatta' : ''}${p.slug === 'jca' ? ' is-jca' : ''}${p.slug === 'music-film-events' ? ' is-music-film-events' : ''}${p.slug === 'social-media' ? ' is-social-media' : ''}${p.slug === 'accountability-report-2024' ? ' is-accountability-2024' : ''}${p.slug === 'accountability-report-2025' ? ' is-accountability-2025' : ''}` : 'is-project' }).replaceAll('{ROOT}', root);
 }
 
+// Independent audiovisual gallery; project generation remains unchanged.
+function videosPage() {
+  const root = '../';
+  if (videoPage.heroVideo && !videoPage.heroImage) throw new Error('Videos: heroImage is required as the background video fallback.');
+  const asset = (src) => {
+    if (!src) return '';
+    if (!existsSync(new URL('./site/' + src, import.meta.url))) throw new Error(`Videos: asset missing: ${src}`);
+    return root + esc(src);
+  };
+  const eye = '<svg class="video-eye" viewBox="0 0 48 32" fill="none" aria-hidden="true"><path d="M2 16S10 3 24 3s22 13 22 13-8 13-22 13S2 16 2 16Z"/><circle cx="24" cy="16" r="7"/></svg>';
+  const underline = '<svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg>';
+  const body = `<section class="video-hero" id="top" aria-labelledby="video-title">
+    ${videoPage.heroImage ? `<img class="video-hero-image" src="${asset(videoPage.heroImage)}" alt="" fetchpriority="high">` : ''}
+    ${videoPage.heroVideo ? `<video class="video-hero-video" autoplay muted loop playsinline preload="none" poster="${asset(videoPage.heroImage)}" aria-hidden="true" tabindex="-1"><source data-src="${asset(videoPage.heroVideo)}" type="${videoPage.heroVideo.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'}"></video><button class="video-background-toggle" type="button" aria-label="Play background video" hidden>Play video</button>` : ''}
+    <div class="video-hero-shade" aria-hidden="true"></div>
+    <div class="wrap video-hero-inner">
+      <a class="video-back" href="${root}#work">${icon.arrowLeft}<span>Back to Work</span></a>
+      <div class="video-hero-bottom">
+        <span class="video-eyebrow">EDITING · MOTION · STORYTELLING</span>
+        <h1 id="video-title">${esc(videoPage.title)}</h1>
+        <img class="video-hero-star" src="${root}assets/img/estrella-marquee.svg" alt="" aria-hidden="true" width="140" height="148">
+      </div>
+    </div>
+  </section>
+  <section class="video-collections" aria-labelledby="video-collections-title">
+    <div class="wrap">
+      <div class="video-introduction">
+        <h2 id="video-collections-title" class="about-drawn-title"><span>SELECTED AUDIOVISUAL WORK</span>${underline}</h2>
+        <p>${esc(videoPage.introduction)}</p>
+      </div>
+      <div class="video-category-grid">
+${videoPage.categories.map((category, i) => `<button class="video-category" type="button" data-video-category="${esc(category.id)}" aria-haspopup="dialog" aria-controls="video-gallery" aria-label="Open ${esc(category.title)} video gallery">
+        ${category.coverImage ? `<img class="video-category-image" src="${asset(category.coverImage)}" alt="" loading="lazy" decoding="async">` : ''}
+        <span class="video-category-number" aria-hidden="true">0${i + 1}</span>
+        ${category.coverImage ? '' : `<span class="video-category-name">${esc(category.title)}</span>`}
+        <span class="video-category-eye">${eye}</span>
+      </button>`).join('\n')}
+      </div>
+      <noscript><p class="video-noscript">Enable JavaScript to open the video collections.</p></noscript>
+    </div>
+  </section>
+  <dialog class="video-gallery" id="video-gallery" aria-labelledby="video-gallery-title">
+    <div class="video-panel-intro" aria-hidden="true"><img src="${root}assets/img/estrella-marquee.svg" width="96" height="102" alt=""></div>
+    <div class="wrap video-gallery-inner">
+      <div class="video-gallery-heading"><h2 id="video-gallery-title"></h2><button class="video-close" type="button" data-video-close aria-label="Close gallery and return to categories"><span>Close</span><span aria-hidden="true">×</span></button></div>
+      <div class="video-gallery-content"></div>
+    </div>
+  </dialog>
+${videoPage.categories.map((category) => {
+  const configured = category.videos.filter((video) => video.src);
+  return `<template id="video-template-${esc(category.id)}" data-title="${esc(category.title)}">
+${configured.length ? `<div class="video-player-grid">${configured.map((video) => {
+    if (!video.title.trim()) throw new Error(`Videos: a title is required for ${video.src}`);
+    return `<figure class="video-player-card"><video width="900" height="1600" controls playsinline preload="none" aria-label="${esc(video.title)}"${video.poster ? ` poster="${asset(video.poster)}"` : ''}><source src="${asset(video.src)}" type="${video.src.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'}">Your browser does not support video. <a href="${asset(video.src)}">Watch ${esc(video.title)}</a>.</video><figcaption>${esc(video.title)}</figcaption></figure>`;
+  }).join('')}</div>` : `<div class="video-pending">${eye}<p class="video-pending-label">Coming soon</p><p>This video collection is being prepared.</p></div>`}
+  </template>`;
+}).join('\n')}
+  <script src="${root}videos.js" defer></script>`;
+  return layout({ title: videoPage.title, description: videoPage.introduction, root, body, bodyClass: 'is-videos' }).replaceAll('{ROOT}', root).replace(/[\t ]+$/gm, '');
+}
+
 function notFound() {
   const root = '/';
   const body = `<section class="hero hero-404"><div class="wrap">
@@ -660,6 +722,9 @@ const write = (rel, html) => {
   mkdirSync(new URL('./', url), { recursive: true });
   writeFileSync(url, html);
 };
+// Release this section without regenerating the approved, checked-in project pages.
+const videosOnly = process.argv.includes('--videos-only');
+if (!videosOnly) {
 if (existsSync(new URL('work/', OUT))) rmSync(new URL('work/', OUT), { recursive: true });
 write('index.html', home());
 write('about/index.html', aboutPage());
@@ -667,9 +732,11 @@ projects.forEach((p, i) => write(`work/${p.slug}/index.html`, projectPage(p, i))
 write('404.html', notFound());
 write(
   'sitemap.xml',
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${site.url}/</loc></url>\n<url><loc>${site.url}/about/</loc></url>\n${projects
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${site.url}/</loc></url>\n<url><loc>${site.url}/about/</loc></url>\n<url><loc>${site.url}/videos/</loc></url>\n${projects
     .map((p) => `<url><loc>${site.url}/work/${p.slug}/</loc></url>`)
     .join('\n')}\n</urlset>\n`
 );
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
-console.log(`Built ${projects.length + 2} pages into ./site`);
+}
+write('videos/index.html', videosPage());
+console.log(videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
