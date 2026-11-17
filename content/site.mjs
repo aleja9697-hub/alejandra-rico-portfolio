@@ -85,6 +85,30 @@ export const site = {
   languages: ['Spanish, native', 'English, professional working'],
 };
 
+// VIDEO EDITING: paths are relative to /site. Leave assets null until supplied.
+// Example: src: 'media/videos/campaigns/01.mp4', poster: 'img/videos/campaigns/01.webp'.
+export const videoPage = {
+  title: 'VIDEOO EDITTING',
+  // Supply both heroVideo and heroImage for a background film with image fallback.
+  heroVideo: 'media/videos/1116.mp4',
+  heroImage: 'img/videos/hero.webp',
+  introduction: 'A selection of video editing projects across campaigns, political communication, institutional content, and organizational storytelling.',
+  categories: ['Campaigns', 'Political', 'Institutional', 'Organizational'].map((title, index) => ({
+    id: title.toLowerCase(),
+    title,
+    coverImage: `img/videos/0${index + 1}.webp`,
+    videos: Array.from({ length: 3 }, (_, videoIndex) => {
+      const folder = ['campaigns', 'political', 'Institutional', 'Organizational'][index];
+      const number = [1, 10, 7, 4][index] + videoIndex;
+      return {
+        title: `${title} ${String(videoIndex + 1).padStart(2, '0')}`,
+        src: `videos/${folder}/${number}.mp4`,
+        poster: `img/videos/${folder.toLowerCase()}/${String(number).padStart(2, '0')}.webp`,
+      };
+    }),
+  })),
+};
+
 // ---------------------------------------------------------------------
 //  HOME PAGE GRID: rows of [project slug, column span out of 12]
 // ---------------------------------------------------------------------
