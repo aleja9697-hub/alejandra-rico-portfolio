@@ -409,6 +409,7 @@ export const projects = [
     pageStyle: 'editorial',
     heroImage: 1,
     homeCoverImage: 'img/social-media/01.webp',
+    reveal: 2,
     nextProjectBackground: 'img/social-media/02.webp',
     nextProjectTextOnly: true,
     nextProjectHref: '#work',
