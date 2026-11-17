@@ -212,8 +212,18 @@ ${row
   .map(([slug, span]) => {
     const p = bySlug[slug];
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
-    if (existingCards.has(slug)) return existingCards.get(slug);
     const c = p.homeCoverImage ? images[p.slug].find((im) => im.src === p.homeCoverImage) : coverOf(p);
+    if (!c) throw new Error(`Missing homepage cover for "${slug}"`);
+    if (existingCards.has(slug)) {
+      const existing = existingCards.get(slug);
+      // Explicit cover configuration must also update preserved homepage cards.
+      const currentSource = existing.match(/<img\b[^>]*\bsrc="([^"]*)"/)?.[1];
+      if (!p.homeCoverImage || currentSource === c.src) return existing;
+      return existing.replace(/<img\b[^>]*>/, (tag) => tag
+        .replace(/\bsrc="[^"]*"/, `src="${esc(c.src)}"`)
+        .replace(/\bwidth="[^"]*"/, `width="${c.w}"`)
+        .replace(/\bheight="[^"]*"/, `height="${c.h}"`));
+    }
     // Mostrar otra imagen real del mismo proyecto dentro de la lente.
     const alternateNumber = p.reveal ?? p.gallery?.flat().find((n) => n !== (p.cover || 1));
     const alternate = alternateNumber ? img(p.slug, alternateNumber) : null;
