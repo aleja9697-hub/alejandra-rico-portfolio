@@ -469,6 +469,7 @@ export const projects = [
   },
   {
     slug: 'cali-film-commission',
+    showOnHome: false,
     title: 'Cali Film Commission',
     discipline: 'Web and UX',
     year: '2025',
