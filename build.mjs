@@ -197,16 +197,22 @@ function picture(im, alt, { sizes = '100vw', eager = false, cls = '', style = ''
 }
 
 // ---------------- Home ----------------
-function home() {
+function home(existingHtml = '') {
   const root = '';
-  const count = projects.length;
-  const rows = homeRows
+  const visibleRows = homeRows
+    .map((row) => row.filter(([slug]) => bySlug[slug]?.showOnHome !== false))
+    .filter((row) => row.length);
+  const count = visibleRows.flat().length;
+  // A scoped homepage rebuild preserves the approved artwork and interactions.
+  const existingCards = new Map(Array.from(existingHtml.matchAll(/  <a class="work-item\b[^>]*href="work\/([^/]+)\/"[^>]*>[\s\S]*?<\/a>/g), (match) => [match[1], match[0]]));
+  const rows = visibleRows
     .map(
       (row) => `<div class="work-row">
 ${row
   .map(([slug, span]) => {
     const p = bySlug[slug];
     if (!p) throw new Error(`homeRows references unknown project "${slug}"`);
+    if (existingCards.has(slug)) return existingCards.get(slug);
     const c = p.homeCoverImage ? images[p.slug].find((im) => im.src === p.homeCoverImage) : coverOf(p);
     // Mostrar otra imagen real del mismo proyecto dentro de la lente.
     const alternateNumber = p.reveal ?? p.gallery?.flat().find((n) => n !== (p.cover || 1));
@@ -316,7 +322,11 @@ ${rows}
 </section>
 
 ${skillsMarquee()}`;
-  return layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
+  const generated = layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
+  if (!existingHtml) return generated;
+  const workSection = /<section class="work" id="work"[^>]*>[\s\S]*?<\/section>/;
+  if (!workSection.test(existingHtml)) throw new Error('Cannot locate the approved Selected Work section.');
+  return existingHtml.replace(workSection, generated.match(workSection)[0]);
 }
 
 // ---------------- About page ----------------
@@ -724,7 +734,10 @@ const write = (rel, html) => {
 };
 // Release this section without regenerating the approved, checked-in project pages.
 const videosOnly = process.argv.includes('--videos-only');
-if (!videosOnly) {
+const homeOnly = process.argv.includes('--home-only');
+if (videosOnly && homeOnly) throw new Error('Choose either --videos-only or --home-only.');
+if (homeOnly) write('index.html', home(readFileSync(new URL('index.html', OUT), 'utf8')));
+if (!videosOnly && !homeOnly) {
 if (existsSync(new URL('work/', OUT))) rmSync(new URL('work/', OUT), { recursive: true });
 write('index.html', home());
 write('about/index.html', aboutPage());
@@ -738,5 +751,5 @@ write(
 );
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 }
-write('videos/index.html', videosPage());
-console.log(videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
+if (!homeOnly) write('videos/index.html', videosPage());
+console.log(homeOnly ? 'Rebuilt Selected Work in /; preserved approved cards and other pages' : videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
