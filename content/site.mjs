@@ -184,6 +184,7 @@ export const projects = [
     ],
     palette: ['#018087', '#63BBB5', '#C9FFEB', '#D3D3D3'],
     cover: 6,
+    coverImage: 'img/energizar/06.webp',
     homeCoverImage: 'img/energizar/06.webp',
     reveal: 2,
     coverPosition: '50% 55%',
