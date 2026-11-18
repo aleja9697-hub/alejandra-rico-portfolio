@@ -221,6 +221,8 @@ function servicesSection(modifier = "") {
 </section>`;
 }
 
+const servicesSectionPattern = /<section class="services-section(?: about-services)?"[^>]*>[\s\S]*?<\/section>/;
+
 // ---------------- Home ----------------
 function home(existingHtml = '') {
   const root = '';
@@ -344,7 +346,10 @@ ${skillsMarquee()}`;
   if (!existingHtml) return generated;
   const workSection = /<section class="work" id="work"[^>]*>[\s\S]*?<\/section>/;
   if (!workSection.test(existingHtml)) throw new Error('Cannot locate the approved Selected Work section.');
-  return existingHtml.replace(workSection, generated.match(workSection)[0]);
+  if (!servicesSectionPattern.test(existingHtml)) throw new Error('Cannot locate the homepage services section.');
+  return existingHtml
+    .replace(workSection, () => generated.match(workSection)[0])
+    .replace(servicesSectionPattern, () => servicesSection());
 }
 
 // ---------------- About page ----------------
@@ -765,11 +770,10 @@ const aboutServicesOnly = process.argv.includes('--about-services-only');
 if (aboutServicesOnly) {
   const aboutPath = 'about/index.html';
   const html = readFileSync(new URL(aboutPath, OUT), 'utf8');
-  const existingSection = /<section class="services-section about-services"[^>]*>[\s\S]*?<\/section>/;
   const section = servicesSection(' about-services');
   if (!html.includes('</main>')) throw new Error('Cannot locate the About page main content.');
-  write(aboutPath, existingSection.test(html)
-    ? html.replace(existingSection, () => section)
+  write(aboutPath, servicesSectionPattern.test(html)
+    ? html.replace(servicesSectionPattern, () => section)
     : html.replace('</main>', () => section + '\n</main>'));
   console.log('Built WHATT I DOO in /about/.');
   process.exit(0);
@@ -800,4 +804,4 @@ write(
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 }
 if (!homeOnly && !portraitOnly) write('videos/index.html', videosPage());
-console.log(portraitOnly ? 'Updated About portrait in / and /about/; preserved all other content' : homeOnly ? 'Rebuilt Selected Work in /; preserved approved cards and other pages' : videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
+console.log(portraitOnly ? 'Updated About portrait in / and /about/; preserved all other content' : homeOnly ? 'Rebuilt Selected Work and WHATT I DOO in /' : videosOnly ? 'Built /videos/; preserved existing portfolio pages' : `Built ${projects.length + 3} pages into ./site`);
