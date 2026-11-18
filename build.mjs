@@ -223,6 +223,10 @@ function servicesSection(modifier = "") {
 
 const servicesSectionPattern = /<section class="services-section(?: about-services)?"[^>]*>[\s\S]*?<\/section>/;
 
+function downloadCvLink(root) {
+  return `<a class="about-cta" href="${root}assets/Alejandra_Rico_CV.pdf" download>DOWNLOAD CV <span aria-hidden="true">↓</span></a>`;
+}
+
 // ---------------- Home ----------------
 function home(existingHtml = '') {
   const root = '';
@@ -327,7 +331,10 @@ ${rows}
     <div class="about-body">
       <h2 id="about-title" class="section-title about-drawn-title"><span>ABOOUT</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
       <p class="lede">${esc(site.about[0])}</p>
-      <a class="about-cta" href="about/">Get to know me <span aria-hidden="true">↗</span></a>
+      <div class="about-actions">
+        <a class="about-cta" href="about/">Get to know me <span aria-hidden="true">↗</span></a>
+        ${downloadCvLink(root)}
+      </div>
     </div>
   </div>
 </section>
@@ -369,7 +376,7 @@ function aboutPage() {
         </figure>
         <div class="about-detail-copy">
           ${site.about.slice(1).map(p => `<p>${esc(p)}</p>`).join('\n          ')}
-          <a class="about-cta" href="${root}assets/Alejandra_Rico_CV.pdf" download>DOWNLOAD CV <span aria-hidden="true">↓</span></a>
+          ${downloadCvLink(root)}
         </div>
       </div>
     </div>

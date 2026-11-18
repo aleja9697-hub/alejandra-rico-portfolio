@@ -1451,6 +1451,14 @@ a { color: inherit; }
 .about-teaser .about-body { gap: clamp(1.2rem, 2vw, 2rem); }
 .about-teaser .section-title { font-size: clamp(3rem, 8vw, 7rem); line-height: 1; }
 .about-teaser .lede { font-size: clamp(1.1rem, 1.6vw, 1.4rem); line-height: 1.6; }
+.about-teaser .about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1rem;
+  margin-top: .5rem;
+}
+.about-teaser .about-actions .about-cta { margin-top: 0; }
 .about-cta {
   display: inline-flex; align-items: center; justify-content: space-between;
   gap: 1.5rem; width: fit-content; padding: 0.9rem 1.25rem;
