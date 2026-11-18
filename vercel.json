@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node build.mjs --home-only && node build.mjs --videos-only && node build.mjs --portrait-only && node build.mjs --about-services-only",
+  "buildCommand": "node build.mjs --home-only && node build.mjs --videos-only && node build.mjs --portrait-only && node build.mjs --about-services-only && node build.mjs --al-centro-preview-only",
   "outputDirectory": "site",
   "framework": null,
   "trailingSlash": true,

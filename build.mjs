@@ -773,6 +773,19 @@ const write = (rel, html) => {
   mkdirSync(new URL('./', url), { recursive: true });
   writeFileSync(url, html);
 };
+if (process.argv.includes('--al-centro-preview-only')) {
+  const slug = 'al-centro';
+  const projectIndex = projects.findIndex(project => project.slug === slug);
+  const path = `work/${slug}/index.html`;
+  const html = readFileSync(new URL(path, OUT), 'utf8');
+  const previewTag = /<img class="project-next-visual-image"[^>]*>/;
+  const preview = projectPage(projects[projectIndex], projectIndex).match(previewTag)?.[0];
+  if (!preview || !previewTag.test(html)) throw new Error('Cannot locate the Al Centro Next Project image.');
+  write(path, html.replace(previewTag, () => preview));
+  console.log('Updated the Al Centro Next Project image.');
+  process.exit(0);
+}
+
 const aboutServicesOnly = process.argv.includes('--about-services-only');
 if (aboutServicesOnly) {
   const aboutPath = 'about/index.html';
