@@ -364,6 +364,7 @@ function aboutPage() {
         </figure>
         <div class="about-detail-copy">
           ${site.about.slice(1).map(p => `<p>${esc(p)}</p>`).join('\n          ')}
+          <a class="about-cta" href="${root}assets/Alejandra_Rico_CV.pdf" download>DOWNLOAD CV <span aria-hidden="true">↓</span></a>
         </div>
       </div>
     </div>
