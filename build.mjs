@@ -200,6 +200,27 @@ function picture(im, alt, { sizes = '100vw', eager = false, cls = '', style = ''
   return `<img class="${cls}" src="${im.src.startsWith('img/') ? '{ROOT}' + im.src : im.src}" width="${im.w}" height="${im.h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"${style ? ` style="${style}"` : ''}>`;
 }
 
+function servicesSection(modifier = "") {
+  return `<section class="services-section${modifier}" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="services-heading">
+      <span class="services-eyebrow">What I bring to every project</span>
+      <h2 class="services-title about-drawn-title" id="services-title"><span>WHATT I DOO</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
+    </div>
+    <div class="services-grid">
+      ${site.capabilities.map((capability, i) => `<article class="service-card service-card--${i % 6}">
+        <span class="service-number">${String(i + 1).padStart(2, '0')}</span>
+        ${capabilityIcon(i)}
+        <div class="service-content">
+          <h3 class="service-name">${esc(capability.title)}</h3>
+          <p class="service-description">${esc(capability.text)}</p>
+        </div>
+      </article>`).join('\n      ')}
+    </div>
+  </div>
+</section>`;
+}
+
 // ---------------- Home ----------------
 function home(existingHtml = '') {
   const root = '';
@@ -316,24 +337,7 @@ ${rows}
     </div>
   </div>
 </section>
-<section class="services-section" id="services" aria-labelledby="services-title">
-  <div class="wrap">
-    <div class="services-heading">
-      <span class="services-eyebrow">What I bring to every project</span>
-      <h2 class="services-title about-drawn-title" id="services-title"><span>WHATT I DOO</span><svg class="about-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 12 C 41 3, 71 17, 105 10 S 168 6, 198 10 S 259 15, 296 7" pathLength="100" /></svg></h2>
-    </div>
-    <div class="services-grid">
-      ${site.capabilities.map((capability, i) => `<article class="service-card service-card--${i % 6}">
-        <span class="service-number">${String(i + 1).padStart(2, '0')}</span>
-        ${capabilityIcon(i)}
-        <div class="service-content">
-          <h3 class="service-name">${esc(capability.title)}</h3>
-          <p class="service-description">${esc(capability.text)}</p>
-        </div>
-      </article>`).join('\n      ')}
-    </div>
-  </div>
-</section>
+${servicesSection()}
 
 ${skillsMarquee()}`;
   const generated = layout({ root, body, bodyClass: 'is-home' }).replaceAll('{ROOT}', root);
@@ -415,7 +419,7 @@ function aboutPage() {
   </section>
 
   </section>`;
-  return layout({ title: 'About', description: site.about.join(' '), root, body, bodyClass: 'is-about' }).replaceAll('{ROOT}', root);
+  return layout({ title: 'About', description: site.about.join(' '), root, body: body + '\n\n' + servicesSection(' about-services'), bodyClass: 'is-about' }).replaceAll('{ROOT}', root);
 }
 
 // ---------------- Project page ----------------
@@ -756,6 +760,20 @@ const write = (rel, html) => {
   mkdirSync(new URL('./', url), { recursive: true });
   writeFileSync(url, html);
 };
+const aboutServicesOnly = process.argv.includes('--about-services-only');
+if (aboutServicesOnly) {
+  const aboutPath = 'about/index.html';
+  const html = readFileSync(new URL(aboutPath, OUT), 'utf8');
+  const existingSection = /<section class="services-section about-services"[^>]*>[\s\S]*?<\/section>/;
+  const section = servicesSection(' about-services');
+  if (!html.includes('</main>')) throw new Error('Cannot locate the About page main content.');
+  write(aboutPath, existingSection.test(html)
+    ? html.replace(existingSection, () => section)
+    : html.replace('</main>', () => section + '\n</main>'));
+  console.log('Built WHATT I DOO in /about/.');
+  process.exit(0);
+}
+
 // Release this section without regenerating the approved, checked-in project pages.
 const videosOnly = process.argv.includes('--videos-only');
 const homeOnly = process.argv.includes('--home-only');
