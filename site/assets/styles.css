@@ -3325,22 +3325,22 @@ a { color: inherit; }
     color: #F3E5D7;
     padding-block: clamp(3.2rem, 9vw, 4.75rem);
   }
-  .services-section .services-heading {
+  :where(.is-home) .services-section .services-heading {
     border-top-color: rgba(243, 229, 215, .5);
     margin-bottom: clamp(1.75rem, 5vw, 2.5rem);
   }
-  .services-section .services-eyebrow,
+  :where(.is-home) .services-section .services-eyebrow,
   .services-section #services-title {
     color: #F3E5D7;
   }
   .services-section #services-title .about-underline path {
     stroke: #F3E5D7;
   }
-  .services-section .services-grid {
+  :where(.is-home) .services-section .services-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: clamp(14px, 3vw, 22px);
   }
-  .services-section .service-card {
+  :where(.is-home) .services-section .service-card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -3351,35 +3351,35 @@ a { color: inherit; }
     color: #281B16;
     background: #FFAD19;
   }
-  .services-section .service-card--1 { background: #54281F; color: #F3E5D7; }
-  .services-section .service-card--2 { background: #FFF45A; color: #281B16; }
-  .services-section .service-card--3 { background: #B8F3DA; color: #1F543B; }
-  .services-section .service-card--4 { background: #F3E5D7; color: #1F543B; }
-  .services-section .service-card--5 { background: #1AAA71; color: #122E21; }
-  .services-section .service-number,
-  .services-section .service-name,
-  .services-section .service-description,
-  .services-section .service-art {
+  :where(.is-home) .services-section .service-card--1 { background: #54281F; color: #F3E5D7; }
+  :where(.is-home) .services-section .service-card--2 { background: #FFF45A; color: #281B16; }
+  :where(.is-home) .services-section .service-card--3 { background: #B8F3DA; color: #1F543B; }
+  :where(.is-home) .services-section .service-card--4 { background: #F3E5D7; color: #1F543B; }
+  :where(.is-home) .services-section .service-card--5 { background: #1AAA71; color: #122E21; }
+  :where(.is-home) .services-section .service-number,
+  :where(.is-home) .services-section .service-name,
+  :where(.is-home) .services-section .service-description,
+  :where(.is-home) .services-section .service-art {
     color: inherit;
   }
-  .services-section .service-number {
+  :where(.is-home) .services-section .service-number {
     font-size: clamp(.9rem, 3.6vw, 1.05rem);
   }
-  .services-section .service-art {
+  :where(.is-home) .services-section .service-art {
     width: clamp(80px, 19vw, 112px);
     height: clamp(80px, 19vw, 112px);
     margin-block: clamp(30px, 8vw, 48px);
   }
-  .services-section .service-content {
+  :where(.is-home) .services-section .service-content {
     width: 100%;
     margin-top: auto;
   }
-  .services-section .service-name {
+  :where(.is-home) .services-section .service-name {
     font-size: clamp(1.6rem, 5.9vw, 2.05rem);
     line-height: 1.16;
     margin-bottom: clamp(15px, 3vw, 22px);
   }
-  .services-section .service-description {
+  :where(.is-home) .services-section .service-description {
     max-width: 36ch;
     font-size: clamp(1rem, 4vw, 1.2rem);
     line-height: 1.48;
@@ -3389,10 +3389,10 @@ a { color: inherit; }
 /* Refined mobile services palette: forest green remains the anchor.
    Secondary colors are vivid and energetic, with accessible foreground contrast. */
 @media (max-width: 760px) {
-  .services-section .services-grid {
+  :where(.is-home) .services-section .services-grid {
     gap: 13px;
   }
-  .services-section .service-card {
+  :where(.is-home) .services-section .service-card {
     min-height: 265px;
     height: auto;
     padding: clamp(19px, 4.5vw, 26px);
@@ -3400,36 +3400,36 @@ a { color: inherit; }
     background: #FF8000;
     color: #1F2F23;
   }
-  .services-section .service-card--1 {
+  :where(.is-home) .services-section .service-card--1 {
     background: #FF7966;
     color: #27201C;
   }
-  .services-section .service-card--2 {
+  :where(.is-home) .services-section .service-card--2 {
     background: #8BDA69;
     color: #173D2B;
   }
-  .services-section .service-card--3 {
+  :where(.is-home) .services-section .service-card--3 {
     background: #FFD447;
     color: #27201C;
   }
-  .services-section .service-card--4 {
+  :where(.is-home) .services-section .service-card--4 {
     background: #A52D60;
     color: #FFFFFF;
   }
-  .services-section .service-card--5 {
+  :where(.is-home) .services-section .service-card--5 {
     background: #36D9A1;
     color: #173D2B;
   }
-  .services-section .service-art {
+  :where(.is-home) .services-section .service-art {
     width: clamp(56px, 14vw, 72px);
     height: clamp(56px, 14vw, 72px);
     margin-block: 16px 20px;
   }
-  .services-section .service-name {
+  :where(.is-home) .services-section .service-name {
     font-size: clamp(1.35rem, 5.15vw, 1.8rem);
     margin-bottom: 10px;
   }
-  .services-section .service-description {
+  :where(.is-home) .services-section .service-description {
     font-size: clamp(.94rem, 3.55vw, 1.08rem);
     line-height: 1.42;
   }
@@ -4043,17 +4043,17 @@ a { color: inherit; }
 /* Compact mobile WHAT I DO: forest-green outlines, cream background and
    minimal line-art icons. Scoped to mobile; desktop remains unchanged. */
 @media (max-width:760px){
-  .services-section .services-grid{
+  :where(.is-home) .services-section .services-grid{
     grid-template-columns:minmax(0,1fr) !important;
     gap:12px;
   }
-  .services-section .service-card,
-  .services-section .service-card--0,
-  .services-section .service-card--1,
-  .services-section .service-card--2,
-  .services-section .service-card--3,
-  .services-section .service-card--4,
-  .services-section .service-card--5{
+  :where(.is-home) .services-section .service-card,
+  :where(.is-home) .services-section .service-card--0,
+  :where(.is-home) .services-section .service-card--1,
+  :where(.is-home) .services-section .service-card--2,
+  :where(.is-home) .services-section .service-card--3,
+  :where(.is-home) .services-section .service-card--4,
+  :where(.is-home) .services-section .service-card--5{
     position:relative;
     display:flex;
     flex-direction:row;
@@ -4069,7 +4069,7 @@ a { color: inherit; }
     color:#1F543B !important;
     box-shadow:none;
   }
-  .services-section .service-card::before{
+  :where(.is-home) .services-section .service-card::before{
     content:"";
     display:block;
     width:70px;
@@ -4079,11 +4079,11 @@ a { color: inherit; }
     background-position:center;
     background-size:contain;
   }
-  .services-section .service-art,
-  .services-section .service-art-file{
+  :where(.is-home) .services-section .service-art,
+  :where(.is-home) .services-section .service-art-file{
     display:none !important;
   }
-  .services-section .service-number{
+  :where(.is-home) .services-section .service-number{
     position:absolute;
     top:12px;
     right:16px;
@@ -4092,13 +4092,13 @@ a { color: inherit; }
     color:#1F543B !important;
     opacity:.72;
   }
-  .services-section .service-content{
+  :where(.is-home) .services-section .service-content{
     flex:1;
     min-width:0;
     margin-top:0;
     padding-right:12px;
   }
-  .services-section .service-name{
+  :where(.is-home) .services-section .service-name{
     margin:0 0 .35rem;
     font-family:'Obviously',sans-serif;
     font-size:clamp(1rem,4.3vw,1.23rem);
@@ -4106,26 +4106,26 @@ a { color: inherit; }
     line-height:1.17;
     color:#1F543B !important;
   }
-  .services-section .service-description{
+  :where(.is-home) .services-section .service-description{
     margin:0;
     max-width:none;
     font-size:clamp(.82rem,3.45vw,.97rem);
     line-height:1.4;
     color:#1F543B !important;
   }
-  .services-section .service-card--0::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22m3%2021%203-7%2010-10%206%206-10%2010-7%203-2-2Z%22%2F%3E%3Cpath%20d%3D%22m14%206%206%206M3%2021l5-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
-.services-section .service-card--1::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M12%206c-3-2-6-2-10-1v15c4-1%207-1%2010%201%203-2%206-2%2010-1V5c-4-1-7-1-10%201Z%22%2F%3E%3Cpath%20d%3D%22M12%206v15M5%209l4%201M15%2010l4-1%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
-.services-section .service-card--2::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Crect%20x%3D%225%22%20y%3D%221.5%22%20width%3D%2214%22%20height%3D%2223%22%20rx%3D%223%22%2F%3E%3Cpath%20d%3D%22M9%205h6%22%2F%3E%3Cpath%20d%3D%22M12%2011c-3-3-6%201%200%205%206-4%203-8%200-5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
-.services-section .service-card--3::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M3%209h19v14H3zM3%209%201%204%2019%201l2%205L3%209ZM7%204l3%205M14%203l3%205M10%2013l6%203-6%203Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
-.services-section .service-card--4::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M5%203h14v19H5zM2%206h3M8%208h8M8%2012h8M8%2016h5M19%209h3v15H8v-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
-.services-section .service-card--5::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%2222%22%20height%3D%2217%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M2%208h22M7%2024h12M13%2020v4M6%205.5h1M10%205.5h1%22%2F%3E%3Cpath%20d%3D%22m16%2011%205%205-3-.5-1%203-2-7Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+  :where(.is-home) .services-section .service-card--0::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22m3%2021%203-7%2010-10%206%206-10%2010-7%203-2-2Z%22%2F%3E%3Cpath%20d%3D%22m14%206%206%206M3%2021l5-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+:where(.is-home) .services-section .service-card--1::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M12%206c-3-2-6-2-10-1v15c4-1%207-1%2010%201%203-2%206-2%2010-1V5c-4-1-7-1-10%201Z%22%2F%3E%3Cpath%20d%3D%22M12%206v15M5%209l4%201M15%2010l4-1%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+:where(.is-home) .services-section .service-card--2::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Crect%20x%3D%225%22%20y%3D%221.5%22%20width%3D%2214%22%20height%3D%2223%22%20rx%3D%223%22%2F%3E%3Cpath%20d%3D%22M9%205h6%22%2F%3E%3Cpath%20d%3D%22M12%2011c-3-3-6%201%200%205%206-4%203-8%200-5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+:where(.is-home) .services-section .service-card--3::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M3%209h19v14H3zM3%209%201%204%2019%201l2%205L3%209ZM7%204l3%205M14%203l3%205M10%2013l6%203-6%203Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+:where(.is-home) .services-section .service-card--4::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Cpath%20d%3D%22M5%203h14v19H5zM2%206h3M8%208h8M8%2012h8M8%2016h5M19%209h3v15H8v-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
+:where(.is-home) .services-section .service-card--5::before{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%231F543B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%2F%3E%3Cg%20transform%3D%22translate(19%2019)%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%2222%22%20height%3D%2217%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M2%208h22M7%2024h12M13%2020v4M6%205.5h1M10%205.5h1%22%2F%3E%3Cpath%20d%3D%22m16%2011%205%205-3-.5-1%203-2-7Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");}
 }
 @media(max-width:360px){
-  .services-section .service-card{gap:11px;padding:19px 15px}
-  .services-section .service-card::before{width:58px;height:58px;flex-basis:58px}
+  :where(.is-home) .services-section .service-card{gap:11px;padding:19px 15px}
+  :where(.is-home) .services-section .service-card::before{width:58px;height:58px;flex-basis:58px}
 }
 @media (hover:hover) and (max-width:760px) and (prefers-reduced-motion:no-preference){
-  .services-section .service-card:hover{transform:translateY(-2px)}
+  :where(.is-home) .services-section .service-card:hover{transform:translateY(-2px)}
 }
 
 /* Shared project-page opening transition.
@@ -4757,4 +4757,49 @@ body.is-project .project-loader.is-active {
 .is-jca .project-story .story-title { font-weight: 900; }
 @media (max-width: 760px) {
   .is-jca { --palette-columns: 2; }
+}
+
+
+/* More About Me services cards */
+.about-services .services-grid {
+  gap: 12px;
+  grid-auto-rows: 1fr;
+}
+.about-services .service-card {
+  gap: 12px;
+  min-height: 0;
+  padding: clamp(16px, 1.4vw, 24px);
+}
+.about-services .service-art {
+  width: clamp(48px, 3.6vw, 62px);
+  height: clamp(48px, 3.6vw, 62px);
+  margin: 0;
+}
+.about-services .service-content {
+  margin-top: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.about-services .service-name {
+  margin-bottom: .5rem;
+  font-size: clamp(1.05rem, 1.15vw, 1.3rem);
+}
+.about-services .service-description {
+  font-size: clamp(.85rem, .9vw, 1rem);
+  line-height: 1.45;
+}
+@media (min-width: 641px) {
+  .about-services .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .about-services .services-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 1440px) {
+  .about-services .services-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
 }

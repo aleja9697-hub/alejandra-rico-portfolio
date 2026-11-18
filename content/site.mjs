@@ -79,6 +79,7 @@ export const site = {
     { title: 'Social media', text: 'Post systems and campaigns for public institutions, clinics, food brands and agencies.' },
     { title: 'Video and motion', text: 'Editing interviews, reels and campaign videos in Premiere Pro, After Effects and CapCut.' },
     { title: 'Print and POP', text: 'Event pieces, posters, merchandise and large format for the street.' },
+    { title: 'Web and UX', text: 'Interface design for public service websites that simplify a process.' },
   ],
 
   tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects', 'Adobe Lightroom', 'Figma', 'CapCut', 'Canva', 'Microsoft Office'],
